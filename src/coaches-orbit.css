@@ -1,0 +1,519 @@
+/* ==========================================================================
+   COACHES ORBITAL STAGE — Inspired by Art Circles UI
+   Tripartite Unified Center Card flanked by Dual Orbital Rings
+   ========================================================================== */
+
+/* ── Wrapper: natural continuous page section ── */
+.coaches-orbit-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  padding: 110px 0 90px;
+  background: var(--bg-black);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* ── Inner stage: centered orbital card stage ── */
+.coaches-orbit-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Background subtle ambient glow */
+.coaches-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160, 121, 142, 0.14) 0%, rgba(44, 16, 28, 0.22) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Heading area (top center, elevated) ── */
+.coaches-stage-heading {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  pointer-events: none;
+  text-align: center;
+}
+
+.coaches-meta-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--studio-amber);
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.coaches-headline {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text-white);
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.coaches-headline em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--studio-amber);
+}
+
+/* ── Side Labels (Editorial Vertical Typography) ── */
+.orbit-side-label {
+  position: absolute;
+  top: 54%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  writing-mode: vertical-rl;
+  pointer-events: none;
+  z-index: 5;
+  user-select: none;
+}
+
+.orbit-label-left {
+  left: 32px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.orbit-label-right {
+  right: 32px;
+  transform: translateY(-50%);
+}
+
+/* ── DUAL ORBITAL SVG GUIDE PATHS ── */
+.orbit-path-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── ORBIT RINGS & NODES ── */
+.coaches-orbit-left,
+.coaches-orbit-right {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.orbit-node {
+  position: absolute;
+  transform-origin: center center;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.orbit-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid rgba(160, 121, 142, 0.35);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.65);
+  background: var(--bg-dark);
+  transition: all 0.3s ease;
+}
+
+.orbit-thumb.dance-thumb {
+  border-color: rgba(56, 225, 255, 0.35);
+}
+
+.orbit-node:hover .orbit-thumb {
+  transform: scale(1.18);
+  border-color: var(--studio-amber);
+  box-shadow: 0 0 18px rgba(160, 121, 142, 0.55);
+}
+
+.orbit-node:hover .orbit-thumb.dance-thumb {
+  border-color: var(--studio-cyan);
+  box-shadow: 0 0 18px rgba(56, 225, 255, 0.55);
+}
+
+.orbit-node.orbit-active .orbit-thumb {
+  border-color: var(--studio-amber);
+  box-shadow: 0 0 0 2px rgba(160, 121, 142, 0.4), 0 12px 28px rgba(160, 121, 142, 0.35);
+}
+
+.orbit-node.orbit-active .orbit-thumb.dance-thumb {
+  border-color: var(--studio-cyan);
+  box-shadow: 0 0 0 2px rgba(56, 225, 255, 0.4), 0 12px 28px rgba(56, 225, 255, 0.35);
+}
+
+.orbit-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* ── CENTER UNIFIED FOCAL CARD (Tight Tripartite Card) ── */
+.coaches-focal-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 60px);
+  max-width: 860px;
+  background: rgba(14, 16, 24, 0.86);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 16px 20px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 45px rgba(44, 16, 28, 0.6), 0 0 25px rgba(160, 121, 142, 0.15);
+  z-index: 10;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+/* 1. Left: Coach Portrait */
+.focal-card-portrait {
+  flex-shrink: 0;
+  position: relative;
+  width: 200px;
+  height: 260px;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.portrait-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(160, 121, 142, 0.28);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75);
+  background: var(--bg-surface);
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.portrait-mask-top {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,7,9,0.3) 0%, transparent 28%);
+  pointer-events: none;
+}
+
+.portrait-mask-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(6,7,9,0.7) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+.portrait-index-label {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #A0798E 0%, #2C101C 100%);
+  color: #ffffff;
+  border: 1px solid rgba(160, 121, 142, 0.45);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(44, 16, 28, 0.7), 0 0 14px rgba(160, 121, 142, 0.4);
+  z-index: 4;
+}
+
+/* 2. Center: Coach Information */
+.focal-card-info {
+  flex: 1;
+  min-width: 260px;
+  max-width: 350px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+}
+
+.coach-discipline-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d4a8c1;
+  border: 1px solid rgba(160, 121, 142, 0.45);
+  background: rgba(44, 16, 28, 0.7);
+  border-radius: 100px;
+  padding: 3px 14px;
+  margin-bottom: 10px;
+}
+
+.coach-info-name {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-white);
+  line-height: 1.1;
+  margin: 0 0 10px;
+}
+
+.coach-info-bio {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.coach-info-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.coach-meta-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.coach-meta-divider {
+  width: 1px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--studio-amber);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Pill CTA Button (Inspired by "VIEW COLLECTION" in Art Circles) */
+.coach-pill-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 100px;
+  padding: 8px 22px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.coach-pill-cta:hover {
+  background: linear-gradient(135deg, #A0798E 0%, #2C101C 100%);
+  color: #ffffff;
+  border-color: #A0798E;
+  box-shadow: 0 0 25px rgba(160, 121, 142, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Progress dots */
+.coach-progress-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  justify-content: center;
+}
+
+.coach-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.coach-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.coach-dot.active {
+  background: var(--studio-amber);
+  transform: scale(1.6);
+  box-shadow: 0 0 10px rgba(160, 121, 142, 0.6);
+}
+
+/* 3. Right: Dance Form Action Photo */
+.focal-card-danceform {
+  flex-shrink: 0;
+  position: relative;
+  width: 200px;
+  height: 260px;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.danceform-frame-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75);
+  background: var(--bg-surface);
+}
+
+.danceform-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.danceform-label {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(6, 7, 9, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 3px 10px;
+}
+
+/* ── Responsive Styling ── */
+@media (max-width: 991px) {
+  .coaches-focal-card {
+    max-width: 700px;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .focal-card-portrait,
+  .focal-card-danceform {
+    width: 160px;
+    height: 220px;
+  }
+
+  .orbit-thumb {
+    width: 42px;
+    height: 42px;
+  }
+
+  .orbit-side-label {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .coaches-orbit-wrapper {
+    height: 380vh;
+  }
+
+  .coaches-stage-heading {
+    top: 20px;
+  }
+
+  .coaches-focal-card {
+    flex-direction: column;
+    width: calc(100% - 32px);
+    max-width: 360px;
+    padding: 18px 16px;
+    margin-top: 70px;
+    gap: 12px;
+  }
+
+  .focal-card-portrait {
+    width: 140px;
+    height: 170px;
+  }
+
+  .focal-card-danceform {
+    display: none; /* Keep clean on small mobile */
+  }
+
+  .coach-info-bio {
+    -webkit-line-clamp: 3;
+    margin-bottom: 12px;
+  }
+
+  .coaches-orbit-left,
+  .coaches-orbit-right,
+  .orbit-path-svg,
+  .orbit-side-label {
+    display: none;
+  }
+}

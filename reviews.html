@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dancer Reviews & Acclaim — The Performerz Academy</title>
+    <!-- Google Fonts: Outfit, Space Grotesk, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/Academy-Logo-Final.png" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Subtle Architectural Background Grid -->
+    <div class="editorial-grid-overlay" aria-hidden="true">
+      <div class="grid-line" data-coord="/01"></div>
+      <div class="grid-line" data-coord="/02"></div>
+      <div class="grid-line" data-coord="/03"></div>
+      <div class="grid-line" data-coord="/04"></div>
+      <div class="grid-line" data-coord="/05"></div>
+    </div>
+
+    <!-- Ambient Stage Cursor Glow -->
+    <div class="cursor-ambient-glow" id="cursor-glow"></div>
+
+    <!-- Header/Navbar -->
+    <header class="navbar">
+      <div class="navbar-container">
+        <a href="/" class="logo">
+          <img src="/Academy-Logo-Final.png" alt="The Performerz Academy Logo" />
+        </a>
+        <nav class="nav-menu">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/about.html" class="nav-link">About Us</a>
+          <a href="/classes.html" class="nav-link">Classes</a>
+          <a href="/events.html" class="nav-link">Events</a>
+          <a href="/blog.html" class="nav-link">Blog</a>
+          <a href="/reviews.html" class="nav-link active">Reviews</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="/index.html#contact" class="btn btn-primary">Book A Demo Class</a>
+          <button class="menu-toggle" aria-label="Toggle Menu">
+            <img src="https://framerusercontent.com/images/cO7jjqQhf9qcbyCE8yr3lxCNf8.svg" alt="Menu" />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-drawer">
+      <div class="drawer-header">
+        <a href="/" class="logo">
+          <img src="/Academy-Logo-Final.png" alt="The Performerz Academy Logo" />
+        </a>
+        <button class="drawer-close" aria-label="Close Menu">&times;</button>
+      </div>
+      <nav class="drawer-menu">
+        <a href="/" class="drawer-link">Home</a>
+        <a href="/about.html" class="drawer-link">About Us</a>
+        <a href="/classes.html" class="drawer-link">Classes</a>
+        <a href="/events.html" class="drawer-link">Events</a>
+        <a href="/blog.html" class="drawer-link">Blog</a>
+        <a href="/reviews.html" class="drawer-link">Reviews</a>
+        <a href="/index.html#contact" class="btn btn-amber drawer-btn">Book A Demo Class</a>
+      </nav>
+    </div>
+
+    <main style="padding-top: 100px;">
+      <!-- Page Header -->
+      <section class="container py-large text-center" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+        <span class="meta-bracket">01 // COMMUNITY &bull; ACCLAIM &bull; STUDENT VOICES</span>
+        <h1 class="section-title" style="margin-top: 16px;">
+          VOICES OF THE <span class="serif-italic">ATELIER</span>
+        </h1>
+        <p class="section-desc" style="text-align: center; margin: 0 auto; max-width: 680px;">
+          Authentic reflections, handwritten notes, and personal artistic journeys shared by our company performers and recreation dancers.
+        </p>
+      </section>
+
+      <!-- Student Reviews & Handwritten Notes Atelier Grid -->
+      <section class="container section-divider" style="padding-bottom: 120px;">
+        <div class="reviews-grid-section">
+          
+          <!-- SECTION A: HANDWRITTEN NOTES SPOTLIGHT -->
+          <div>
+            <div style="margin-bottom: 28px;">
+              <span class="meta-bracket">HANDWRITTEN TESTIMONIALS</span>
+              <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; color: #fff; margin-top: 6px;">
+                Notes From The Heart
+              </h2>
+            </div>
+
+            <div class="handwritten-notes-row">
+              <!-- ZOEY SHAH -->
+              <article class="handwritten-card reveal">
+                <div class="handwritten-img-wrapper" data-open-review-modal data-modal-category="HANDWRITTEN NOTE" data-modal-title="How Dancing Has Built My Confidence" data-modal-author="✦ Zoey Shah" data-modal-img="/review_zoey_shah.jpg" data-modal-content-id="content-zoey">
+                  <span class="handwritten-badge">Zoey Shah &bull; 5/9/26</span>
+                  <img src="/review_zoey_shah.jpg" alt="Zoey Shah Handwritten Note" />
+                  <div class="zoom-hint-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    Expand Note &rarr;
+                  </div>
+                </div>
+                <div class="handwritten-card-body">
+                  <div>
+                    <h3 class="handwritten-title">How Dancing Has Built My Confidence</h3>
+                    <p class="handwritten-quote-snippet">
+                      "When I first started my contemporary class I felt very nervous. Then when I learned many techniques, how dancing can express stories... I started gaining confidence..."
+                    </p>
+                  </div>
+                  <div class="author-meta-row">
+                    <div>
+                      <div class="author-name-tag">Zoey Shah</div>
+                      <div class="author-role-tag">// Contemporary Student</div>
+                    </div>
+                    <button class="essay-read-cta" data-open-review-modal data-modal-category="HANDWRITTEN NOTE" data-modal-title="How Dancing Has Built My Confidence" data-modal-author="✦ Zoey Shah" data-modal-img="/review_zoey_shah.jpg" data-modal-content-id="content-zoey">Read Note</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- MYRA PURI -->
+              <article class="handwritten-card reveal">
+                <div class="handwritten-img-wrapper" data-open-review-modal data-modal-category="HANDWRITTEN NOTE" data-modal-title="What Makes a Good Dance Teacher" data-modal-author="✦ Myra Puri" data-modal-img="/review_myra_puri.jpg" data-modal-content-id="content-myra">
+                  <span class="handwritten-badge">Myra Puri &bull; Handwritten</span>
+                  <img src="/review_myra_puri.jpg" alt="Myra Puri Handwritten Note" />
+                  <div class="zoom-hint-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    Expand Note &rarr;
+                  </div>
+                </div>
+                <div class="handwritten-card-body">
+                  <div>
+                    <h3 class="handwritten-title">What Makes a Good Dance Teacher ❤️</h3>
+                    <p class="handwritten-quote-snippet">
+                      "A good dance teacher does more than just teach steps and routines, they build confidence, develop discipline and understand why dance matters... They are not only our teachers, they're our second parents."
+                    </p>
+                  </div>
+                  <div class="author-meta-row">
+                    <div>
+                      <div class="author-name-tag">Myra Puri</div>
+                      <div class="author-role-tag">// Performerz Student</div>
+                    </div>
+                    <button class="essay-read-cta" data-open-review-modal data-modal-category="HANDWRITTEN NOTE" data-modal-title="What Makes a Good Dance Teacher" data-modal-author="✦ Myra Puri" data-modal-img="/review_myra_puri.jpg" data-modal-content-id="content-myra">Read Note</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- SECTION B: STUDENT ESSAYS GRID -->
+          <div style="margin-top: 30px;">
+            <div style="margin-bottom: 28px;">
+              <span class="meta-bracket">REFLECTIVE ESSAYS</span>
+              <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; color: #fff; margin-top: 6px;">
+                Dancer Journal &amp; Perspectives
+              </h2>
+            </div>
+
+            <div class="essays-grid-row">
+              <!-- BOSKY -->
+              <article class="essay-editorial-card reveal">
+                <div>
+                  <div class="essay-card-header">
+                    <span class="essay-category-tag">EXPRESSION &bull; PERFORMANCE</span>
+                    <h3 class="essay-card-title">What I Wish Someone Had Told Me Before Starting Dance</h3>
+                  </div>
+                  <p class="essay-card-excerpt">
+                    "Dance happens in the mind, not in the body. You must not have loved and lost but still be able to express the emotions of love, longing and pain... Technically correct movement is only part of what makes a performance memorable."
+                  </p>
+                </div>
+                <div class="author-meta-row" style="border-top: none; padding-top: 0;">
+                  <div>
+                    <div class="author-name-tag">Bosky</div>
+                    <div class="author-role-tag">// Performerz Artist</div>
+                  </div>
+                  <button class="essay-read-cta" data-open-review-modal data-modal-category="EXPRESSION & PERFORMANCE" data-modal-title="What I Wish Someone Had Told Me Before Starting Dance" data-modal-author="✦ Bosky" data-modal-content-id="content-bosky">Read Full Essay &rarr;</button>
+                </div>
+              </article>
+
+              <!-- SANVIKA -->
+              <article class="essay-editorial-card reveal">
+                <div>
+                  <div class="essay-card-header">
+                    <span class="essay-category-tag">CONFIDENCE &bull; PERSONAL JOURNEY</span>
+                    <h3 class="essay-card-title">How Dance Made Me More Confident</h3>
+                  </div>
+                  <p class="essay-card-excerpt">
+                    "I was 4. The lights flash, blinding me, as I look out into the abyss that is the auditorium... With each performance, the stage felt like a friend instead of an inanimate object. At Performerz, we're allowed to express ourselves however we want."
+                  </p>
+                </div>
+                <div class="author-meta-row" style="border-top: none; padding-top: 0;">
+                  <div>
+                    <div class="author-name-tag">Sanvika</div>
+                    <div class="author-role-tag">// Contemporary Student</div>
+                  </div>
+                  <button class="essay-read-cta" data-open-review-modal data-modal-category="CONFIDENCE & PERSONAL JOURNEY" data-modal-title="How Dance Made Me More Confident" data-modal-author="✦ Sanvika" data-modal-content-id="content-sanvika">Read Full Essay &rarr;</button>
+                </div>
+              </article>
+
+              <!-- MINAKSHI -->
+              <article class="essay-editorial-card reveal">
+                <div>
+                  <div class="essay-card-header">
+                    <span class="essay-category-tag">ARTIST MINDSET &bull; STAGE CRAFT</span>
+                    <h3 class="essay-card-title">Dealing With Stage Fear</h3>
+                  </div>
+                  <p class="essay-card-excerpt">
+                    "Over time, I have learned to look at stage fear differently. When we reframe anxiety as excitement, our perception of the situation can change... You do not have to stop being afraid to step onto the stage. Sometimes, you just have to step onto it with the fear—and dance anyway."
+                  </p>
+                </div>
+                <div class="author-meta-row" style="border-top: none; padding-top: 0;">
+                  <div>
+                    <div class="author-name-tag">Minakshi</div>
+                    <div class="author-role-tag">// Performing Artist</div>
+                  </div>
+                  <button class="essay-read-cta" data-open-review-modal data-modal-category="ARTIST MINDSET & STAGE CRAFT" data-modal-title="Dealing With Stage Fear" data-modal-author="✦ Minakshi" data-modal-content-id="content-minakshi">Read Full Essay &rarr;</button>
+                </div>
+              </article>
+
+              <!-- ANUSHKA PAI -->
+              <article class="essay-editorial-card reveal">
+                <div>
+                  <div class="essay-card-header">
+                    <span class="essay-category-tag">CONTEMPORARY DISCOVERY</span>
+                    <h3 class="essay-card-title">What Contemporary Means to Me</h3>
+                  </div>
+                  <p class="essay-card-excerpt">
+                    "Contemporary dance taught me that uncertainty doesn’t always need to be solved. There are things I cannot say, but I can move them... Instead of constantly asking myself, 'How do I look?' I started asking, 'What do I want to express?'"
+                  </p>
+                </div>
+                <div class="author-meta-row" style="border-top: none; padding-top: 0;">
+                  <div>
+                    <div class="author-name-tag">Anushka Pai</div>
+                    <div class="author-role-tag">// Contemporary Dancer</div>
+                  </div>
+                  <button class="essay-read-cta" data-open-review-modal data-modal-category="CONTEMPORARY DISCOVERY" data-modal-title="What Contemporary Means to Me" data-modal-author="✦ Anushka Pai" data-modal-content-id="content-anushka">Read Full Essay &rarr;</button>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HIDDEN ESSAY FULL CONTENT TEMPLATES FOR MODAL -->
+      <div id="content-zoey" style="display:none;">
+        <p>When I first started my contemporary class I felt very nervous. Then when I learned many technics, how dancing can express stories, and how we can express movement through dance, I started gaining confidence, I realized that every step does not have to be perfect or over-the-top. The way you express it is the way you do it. Like your character has to match to the music, I tend to choose the characters of style. Nanci mam has been really kind and she is my favourite teacher.</p>
+        <blockquote style="margin-top: 20px; font-weight: 700; color: var(--studio-gold);">&mdash; Written by Zoey (5/9/26)</blockquote>
+      </div>
+
+      <div id="content-myra" style="display:none;">
+        <p>A good dance teacher does more than just teach steps and routines, they build confidence, develop discipline and understand why dance matters. They create a positive learning environment where every student feels welcome, respected &amp; encouraged to improve!</p>
+        <p>A good dance teacher is kind, patient and cares for his/her students. They are not only our teachers, they're our second parents. They care for us when we get hurt, they explain things clearly and are patient when we make silly mistakes like forgetting which foot is left!</p>
+        <p>They teach us steps, confidence, and how to get rid stage fright, while inspiring us. My dance teacher are not only my teachers, they are my entire world.</p>
+        <blockquote style="margin-top: 20px; font-weight: 700; color: var(--studio-gold);">&mdash; Myra Puri</blockquote>
+      </div>
+
+      <div id="content-bosky" style="display:none;">
+        <p>There can be drills for better pointed feet. But can expressions be taught to improve your stage presence and performance quality?</p>
+        <p>Faces are the most prominent object in most performances. Eyes, micro-expressions, the question of whether the emotion was of happiness or sadness. Processing all of it takes ability, and that ability has to come from somewhere. Dance happens in the mind, not in the body. You must not have loved and lost but still be able to express the emotions of love, longing and pain. One must stay present in what is being said and the audience should be able to connect with the character. You can also use your breath to amplify the emotional narrative rather than relying solely on the face.</p>
+        <p>You are always told dance to express and not impress. But the faces watching you sometimes make that even harder. Where your eyes are directed matters. Technically correct movement is only part of what makes a performance memorable. What matters most is that you are able to convey your intention and story through your movements and expressions.</p>
+        <p>When someone watches contemporary, they are looking beyond clean technique. They are watching how the dancer moves, uses the eyes, connects to the music, and communicates through the entire body.</p>
+      </div>
+
+      <div id="content-sanvika" style="display:none;">
+        <p>I was 4. The lights flash, blinding me, as I look out into the abyss that is the auditorium and I hear dozens of people screaming my name. In that moment, I knew I wanted to be a dancer.</p>
+        <p>Every time I stepped on that stage since then, I got a surge of energy, emotion, and confidence. The thought that these people have come to see me perform, the thought that they’ve made time out of their busy schedules for watching my dance, the thought that they cheer every time I do something, it was all so beautiful and overwhelming at the same time.</p>
+        <p>But I realised something. With each performance, with each step on the stage, the overwhelming feeling kept reducing. All it was was exciting, and the amount of energy I got on the stage, was worth all the toiling and the hard work put in.</p>
+        <p>And suddenly, even in my personal life, I started to talk to more people, make conversations and be more confident in myself. Those performances helped me put myself more out there in real life, and people around me started to appreciate my self love and confidence, all because of dance.</p>
+        <p>If I never had the confidence to dance in front of hundreds of people, I would’ve never thought to talk to people and become the extrovert that I am.</p>
+        <p>Then came Ms. Nansi.</p>
+        <p>Ever since I started contemporary, and I started doing movements which flowed and focused on flexibility I started to become much more relaxed and calm in my dance and myself. Ms Nansi always pushes me to my full potential, and more.<br>
+        “Sanvika, point your toes!”<br>
+        “Sanvika, back straight!”<br>
+        “Sanvika, tailbone in!”<br>
+        We started to do so many more performances and shows, and each time, the stage felt like a friend instead of an inanimate object.</p>
+        <p>At Performerz, we’re allowed to express ourselves however we want, and that pushes us forward in our personal lives too, no matter what’s going on behind the curtains.</p>
+        <p>There is nothing better than the moment of applause from several people as you strike your last pose. And that moment? It’s the reason that dance is my favourite thing ever.</p>
+        <blockquote style="margin-top: 20px; font-weight: 700; color: var(--studio-gold);">&mdash; Written by Sanvika</blockquote>
+      </div>
+
+      <div id="content-minakshi" style="display:none;">
+        <p>Ever since I can remember, I have experienced stage fright. On many occasions, I have even declined opportunities to perform just to avoid that feeling. It often made me feel underprepared and underconfident, which would then reflect in my performances.</p>
+        <p>As someone who has grown up doing dance and taking part in different kinds of artistic performances, stage fear is something I have constantly had to deal with. What helped me the most, however, was understanding that stage fear is not an isolated experience. Every artist, whether amateur or experienced, feels some form of fear right before getting on stage. In fact, it is a universal experience and an almost unavoidable part of being a performer.</p>
+        <p>People often assume that it is the crowd that makes someone anxious before getting on stage. However, I have found that regardless of how many people are sitting in front of you, the anxiety can still be there. It is actually the thoughts running through your mind that often control the situation.</p>
+        <p>For me, these thoughts are often: <em>“What if I forget my steps? What if I go offbeat? What if I fall?”</em> and so on. Adequate training and practice, positive affirmations, and breathing exercises can definitely help reduce the intensity of these thoughts. However, completely getting rid of stage fear is often not possible.</p>
+        <p>Over time, I have learned to look at stage fear differently. Instead of seeing it only as something negative, I have started to see it as a driving force and a source of motivation before a performance. When we reframe anxiety as excitement, our perception of the situation can change. The same feeling that once made us nervous can become the energy that helps us perform.</p>
+        <p>So, to all my fellow dancers and artists who struggle with stage fear, I would say, own the feeling instead of fighting it. Let the nervousness remind you that you care about what you are about to do, and use that energy to fuel your performance.</p>
+        <p>At the end of the day, the whole point of dancing is to express yourself, share your craft, and keep getting better at it. When difficult thoughts come in and make you question your abilities, try to shift your focus away from everything that could go wrong and back towards the art itself.</p>
+        <p>You do not have to stop being afraid to step onto the stage. Sometimes, you just have to step onto it with the fear—and dance anyway.</p>
+        <blockquote style="margin-top: 20px; font-weight: 700; color: var(--studio-gold);">&mdash; By Minakshi</blockquote>
+      </div>
+
+      <div id="content-anushka" style="display:none;">
+        <p>I still remember being a kid, sitting in front of the television, watching reality dance shows. I would watch the dancers move across the stage, sometimes falling, sometimes jumping, sometimes doing movements that looked almost impossible. But what fascinated me most was how different each dancer looked. It felt like the dance belonged to them.</p>
+        <p>I remember thinking, <em>How can the same dance form look so different on every person?</em></p>
+        <p>Then the judges would say, “That was contemporary.”</p>
+        <p>I didn’t really understand what that meant at the time. When I looked up the word, I found that it meant “what is happening right now.” I couldn’t quite understand how that connected to the dance I had just watched, but I knew I wanted to learn it.</p>
+        <p>Fast-forward to when I was 26, and I finally found Performerz Academy.</p>
+        <p>Before that, I had learnt choreography in semi-classical, Bharatanatyam, freestyle, and other dance forms. For me, dancing had always been about hitting the right step on the right beat. The music decided the beat, and someone else had already decided the steps.</p>
+        <p>So, when I walked into my first contemporary class, I thought I knew what dancing was supposed to feel like. I was wrong.</p>
+        <p>I still remember looking at my teacher and thinking, <em>Why does that movement look so beautiful on them and so awkward on me?</em></p>
+        <p>The floor movements felt strange. The jumps felt forced. Even the simplest movements made me conscious of how I looked. But I kept going.</p>
+        <p>And somewhere along the way, something started to change.</p>
+        <p>I began to feel more comfortable with the basic movements my body could make. Slowly, the things that had once felt weird started to feel natural. I began to understand that I didn’t always have to tell my body how to move. Sometimes, I could let my body tell me what to feel.</p>
+        <p>That was when I started to understand what contemporary really meant to me. It was about being present. It was about listening to my body instead of constantly correcting it. It was about moving without worrying whether every movement looked perfect. And it was about discovering that I could express something even when I didn’t have the words for it.</p>
+        <p>Contemporary dance taught me that uncertainty doesn’t always need to be solved. There are things I cannot say, but I can move them.</p>
+        <p>Maybe that is what makes contemporary so personal. The movement is not just about the dancer. It is also about what the dancer is feeling in that moment. And maybe, just like the dancers I watched as a kid, I am still learning how to make the dance my own.</p>
+        <p>Contemporary dance changed my relationship with being seen. Instead of constantly asking myself, “How do I look?” I started asking, “What do I want to express?”</p>
+        <p>And that, to me, is what contemporary means. It is not just about learning how to move. It is about learning how to feel, how to express, and how to be present.</p>
+        <blockquote style="margin-top: 20px; font-weight: 700; color: var(--studio-gold);">&mdash; Written by Anushka Pai</blockquote>
+      </div>
+
+      <!-- REVIEWS MODAL OVERLAY -->
+      <div class="review-modal-backdrop" id="review-modal-backdrop" aria-hidden="true">
+        <div class="review-modal-box">
+          <button class="review-modal-close" id="review-modal-close" aria-label="Close modal">&times;</button>
+          <img id="modal-img" class="modal-handwritten-img" src="" alt="Handwritten Note" style="display:none;" />
+          <div class="modal-header-meta" id="modal-category">STUDENT REFLECTION</div>
+          <h2 class="modal-story-title" id="modal-title">Story Title</h2>
+          <div class="modal-author-badge" id="modal-author">✦ Author Name</div>
+          <div class="modal-story-body" id="modal-body"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Callout -->
+      <section class="bottom-cta-deluxe" id="contact">
+        <div class="cta-deluxe-box reveal">
+          <span class="meta-bracket">JOIN THE COMMUNITY</span>
+          <h2 class="cta-deluxe-title">Experience It Yourself Today</h2>
+          <p class="section-desc" style="margin: 0 auto 28px; color: #fff;">
+            Connect with our team or schedule your trial class directly.
+          </p>
+          <div class="contact-direct-grid" style="margin-bottom: 28px;">
+            <a href="tel:+918169729704" class="contact-badge-deluxe" aria-label="Call +91 816 972 9704">
+              <span class="contact-badge-icon">📞</span>
+              <span class="contact-badge-meta">
+                <span class="contact-badge-label">Direct Hotline</span>
+                <strong class="contact-badge-value">+91 816 972 9704</strong>
+              </span>
+            </a>
+            <a href="mailto:performerzacademy@gmail.com" class="contact-badge-deluxe" aria-label="Email performerzacademy@gmail.com">
+              <span class="contact-badge-icon">✉</span>
+              <span class="contact-badge-meta">
+                <span class="contact-badge-label">Admissions Email</span>
+                <strong class="contact-badge-value">performerzacademy@gmail.com</strong>
+              </span>
+            </a>
+          </div>
+          <a href="/index.html#contact" class="btn btn-amber">Book A Demo Class &rarr;</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-editorial">
+      <div class="container footer-main-grid">
+        <div>
+          <a href="/" class="logo" style="margin-bottom: 20px;">
+            <img src="/Academy-Logo-Final.png" alt="The Performerz Academy" />
+          </a>
+          <p style="font-size: 14px; color: var(--text-gray); line-height: 1.6; max-width: 290px;">
+            Where rhythm meets gravity. An internationally accredited sanctuary for performing arts and bold human expression.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-heading-tag">Directory</h4>
+          <ul class="footer-links-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About Atelier</a></li>
+            <li><a href="/classes.html">Dance Classes</a></li>
+            <li><a href="/events.html">Live Events</a></li>
+            <li><a href="/blog.html">Editorial Blog</a></li>
+            <li><a href="/reviews.html">Dancer Reviews</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading-tag">Disciplines</h4>
+          <ul class="footer-links-list">
+            <li><a href="/classes.html">Gymnastics &amp; Tumbling</a></li>
+            <li><a href="/classes.html">Contemporary Release</a></li>
+            <li><a href="/classes.html">Aerial Silk &amp; Poise</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading-tag">Direct Contact</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <a href="tel:+918169729704" class="footer-contact-link">
+                <span class="footer-contact-icon">📞</span> +91 816 972 9704
+              </a>
+            </li>
+            <li>
+              <a href="mailto:performerzacademy@gmail.com" class="footer-contact-link">
+                <span class="footer-contact-icon">✉</span> performerzacademy@gmail.com
+              </a>
+            </li>
+          </ul>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--studio-amber); letter-spacing: 0.1em; margin-top: 14px;">
+            STUDIO HOURS: MON &mdash; SAT / 07:00 &mdash; 22:00
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom-bar">
+        <span>&copy; <span id="year">2026</span> THE PERFORMERZ ACADEMY. ALL RIGHTS RESERVED.</span>
+        <span>DESIGNED AS AN ATELIER OF MOTION</span>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

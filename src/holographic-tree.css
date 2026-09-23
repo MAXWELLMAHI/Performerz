@@ -1,0 +1,430 @@
+/* ==========================================================================
+   HOLOGRAPHIC TREE SECTION — TECHNICAL BIOLUMINESCENT SCHEMATIC
+   Replaces legacy card grids with an architectural data-node tree diagram
+   ========================================================================== */
+
+.holographic-tree-section {
+  position: relative;
+  width: 100%;
+  background: #050505;
+  color: var(--text-white);
+  padding: 120px 0 160px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Atmospheric bioluminescent radial glows */
+.holo-ambient-canopy {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(56, 225, 255, 0.06) 0%, rgba(224, 68, 255, 0.03) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.holo-ambient-roots {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 1100px;
+  height: 650px;
+  background: radial-gradient(ellipse at center, rgba(199, 139, 168, 0.07) 0%, rgba(228, 255, 84, 0.02) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Section Headers ── */
+.holo-header-top {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 10;
+}
+
+.manifesto-header-banner.holo-banner {
+  margin-bottom: 20px;
+}
+
+/* Mid-trunk Transition Milestone Headline */
+.holo-mid-headline-wrap {
+  text-align: center;
+  margin: 60px auto 40px;
+  position: relative;
+  z-index: 10;
+}
+
+.holo-mid-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--studio-cyan);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.holo-mid-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-white);
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.25), 0 0 60px rgba(56, 225, 255, 0.2);
+}
+
+.holo-mid-title span {
+  color: var(--studio-amber);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ── Interactive Hologram Container ── */
+.holo-diagram-container {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 1480px; /* Generous height for tall scroll-through tree */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Procedural SVG Tree Canvas ── */
+.holo-tree-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* SVG filaments and glow classes */
+.holo-filament {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+}
+
+.holo-filament.trunk-core {
+  stroke: url(#trunkGradient);
+  stroke-width: 9;
+  filter: url(#holoGlowStrong);
+}
+
+.holo-filament.trunk-sheath {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 3.5;
+  stroke-dasharray: 8 6;
+}
+
+.holo-filament.branch-main {
+  stroke: url(#canopyGradient);
+  stroke-width: 3;
+  filter: url(#holoGlowSoft);
+}
+
+.holo-filament.branch-sub {
+  stroke: rgba(56, 225, 255, 0.45);
+  stroke-width: 1.5;
+}
+
+.holo-filament.root-main {
+  stroke: url(#rootGradient);
+  stroke-width: 3.5;
+  filter: url(#holoGlowAmber);
+}
+
+.holo-filament.root-sub {
+  stroke: rgba(199, 139, 168, 0.45);
+  stroke-width: 1.5;
+}
+
+/* Animated leader lines */
+.holo-leader-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  transition: stroke 0.35s ease, stroke-width 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+}
+
+.holo-leader-line.active {
+  stroke: var(--studio-amber);
+  stroke-width: 1.8;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 8px rgba(199, 139, 168, 0.8));
+  opacity: 1;
+}
+
+.holo-leader-line.active-cyan {
+  stroke: var(--studio-cyan);
+  stroke-width: 1.8;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 8px rgba(56, 225, 255, 0.8));
+  opacity: 1;
+}
+
+/* Glowing Nodes on Tree */
+.holo-tree-node {
+  pointer-events: auto;
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.holo-tree-node:hover,
+.holo-tree-node.active {
+  transform: scale(1.4);
+}
+
+/* ── Floating Technical Callout Cards ── */
+.holo-cards-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* children re-enable pointer-events */
+  z-index: 5;
+}
+
+.holo-data-card {
+  position: absolute;
+  pointer-events: auto;
+  width: 330px;
+  background: rgba(10, 12, 18, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-cinematic), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  user-select: none;
+}
+
+/* Futuristic corner reticles */
+.holo-data-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid var(--card-accent, rgba(255, 255, 255, 0.35));
+  border-left: 2px solid var(--card-accent, rgba(255, 255, 255, 0.35));
+  border-top-left-radius: 14px;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.holo-data-card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid var(--card-accent, rgba(255, 255, 255, 0.35));
+  border-right: 2px solid var(--card-accent, rgba(255, 255, 255, 0.35));
+  border-bottom-right-radius: 14px;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.holo-data-card:hover,
+.holo-data-card.active {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--card-accent, var(--studio-amber));
+  background: rgba(16, 19, 28, 0.92);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--card-glow, rgba(199, 139, 168, 0.25));
+}
+
+.holo-card-cyan {
+  --card-accent: var(--studio-cyan);
+  --card-glow: rgba(56, 225, 255, 0.25);
+}
+
+.holo-card-amber {
+  --card-accent: var(--studio-amber);
+  --card-glow: rgba(199, 139, 168, 0.28);
+}
+
+.holo-card-violet {
+  --card-accent: var(--studio-magenta);
+  --card-glow: rgba(224, 68, 255, 0.25);
+}
+
+.holo-card-neon {
+  --card-accent: var(--studio-neon);
+  --card-glow: rgba(228, 255, 84, 0.22);
+}
+
+.holo-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.holo-card-code {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--card-accent, var(--studio-amber));
+}
+
+.holo-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+}
+
+.holo-card-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--card-accent, var(--studio-amber));
+  box-shadow: 0 0 6px var(--card-accent, var(--studio-amber));
+}
+
+.holo-card-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-white);
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.holo-card-tone {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.holo-card-desc {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Spatial Positioning for the 10 Data Cards (Desktop Layout) ── */
+/* Canopy Group (Upper Half, 5 cards fan out around upper branches) */
+.card-canopy-1 { top: 70px;  left: 3%; }      /* Fluid Power */
+.card-canopy-2 { top: 40px;  right: 4%; }     /* Defying Limits */
+.card-canopy-3 { top: 260px; left: 1%; }      /* Engineered Expression */
+.card-canopy-4 { top: 240px; right: 2%; }     /* Weightless Control */
+.card-canopy-5 { top: 440px; left: 4%; }      /* Raw Grace */
+
+/* Roots / Pillars Group (Lower Half, 5 cards fan out down trunk & roots) */
+.card-pillar-1 { top: 620px;  right: 3%; }    /* 01 Boundless Form */
+.card-pillar-2 { top: 790px;  left: 2%; }     /* 02 Fluid Power */
+.card-pillar-3 { top: 880px;  right: 2%; }    /* 03 Pure Gravity */
+.card-pillar-4 { top: 1080px; left: 3%; }     /* 04 Disciplined Flow */
+.card-pillar-5 { top: 1140px; right: 3%; }    /* 05 Weightless Edge */
+
+/* ── Responsive Behavior ── */
+@media (max-width: 1280px) {
+  .holo-data-card {
+    width: 290px;
+    padding: 16px 18px;
+  }
+  .holo-card-title {
+    font-size: 17px;
+  }
+  .holo-card-desc {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .holo-diagram-container {
+    min-height: 1600px;
+  }
+  .holo-data-card {
+    width: 260px;
+    padding: 14px 16px;
+  }
+}
+
+/* Mobile & Small Screen (<768px): Abandon absolute radial layout */
+@media (max-width: 767px) {
+  .holographic-tree-section {
+    padding: 80px 0 100px;
+  }
+
+  .holo-diagram-container {
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  /* Compact central trunk hologram graphic */
+  .holo-tree-svg {
+    position: relative;
+    height: 380px;
+    margin: 0 auto 30px;
+  }
+
+  .holo-cards-layer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding: 0 16px;
+    pointer-events: auto;
+  }
+
+  /* Reset absolute positions into clear vertical flow */
+  .holo-data-card {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100%;
+  }
+
+  /* Category headers for mobile groups */
+  .holo-mobile-group-title {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--studio-amber);
+    margin: 30px 0 10px;
+    padding-left: 6px;
+    border-left: 2px solid var(--studio-amber);
+  }
+
+  .holo-mid-headline-wrap {
+    margin: 40px auto 20px;
+  }
+
+  .holo-mid-title {
+    font-size: 24px;
+  }
+}

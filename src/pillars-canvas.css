@@ -1,0 +1,555 @@
+/* ==========================================================================
+   OUR FOUR PILLARS OF MOTION — FULL-WIDTH TRANSPARENT CANVAS SCRUB
+   Edge-to-edge transparent dancer scrub sequence with left-aligned editorial stack
+   ========================================================================== */
+
+.four-pillars-section {
+  position: relative;
+  width: 100%;
+  height: 220vh; /* Calibrated crisp scroll travel distance without empty space */
+  background: #060606;
+  color: #ffffff;
+  z-index: 10;
+  contain: paint;
+}
+
+/* Sticky Viewport Stage (100vh) */
+.pillars-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 60% 40%, rgba(228, 255, 84, 0.04) 0%, transparent 65%),
+              radial-gradient(circle at 20% 80%, rgba(255, 94, 58, 0.035) 0%, transparent 55%),
+              #070707;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Subtle architectural grid pattern in background */
+.pillars-bg-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  z-index: 0;
+}
+
+/* Fullscreen Transparent Canvas (Directly on dark page background, behind text) */
+.dancer-fullscreen-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Sits behind the text stack */
+  display: block;
+}
+
+/* Fallback static image for reduced motion */
+.dancer-static-poster {
+  display: none;
+  position: absolute;
+  right: 8%;
+  bottom: 14%;
+  height: 72vh;
+  max-width: 50vw;
+  object-fit: contain;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Full-Width Stage Baseline Line */
+.pillars-stage-baseline {
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 8%,
+    rgba(228, 255, 84, 0.3) 45%,
+    rgba(255, 94, 58, 0.25) 75%,
+    rgba(255, 255, 255, 0.06) 92%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.baseline-glow {
+  position: absolute;
+  top: -1px;
+  left: 30%;
+  width: 40%;
+  height: 3px;
+  background: rgba(228, 255, 84, 0.15);
+  filter: blur(2px);
+}
+
+/* Section Watermark / Top Header */
+.pillars-top-header {
+  position: absolute;
+  top: 2.25rem;
+  left: 4rem;
+  right: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pillars-eyebrow-main {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #e4ff54;
+  text-transform: uppercase;
+}
+
+.pillars-methodology-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+/* Stage Container (Centers Left-Aligned Text Stack) */
+.pillars-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 5; /* In front of canvas */
+  pointer-events: none; /* Let scroll events pass smoothly */
+}
+
+/* LEFT COLUMN: Content & Panels */
+.pillars-content-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 560px;
+  width: 100%;
+  height: 480px;
+  pointer-events: auto; /* CTAs, dots, tabs are clickable */
+}
+
+/* Segmented Pillar Progress Indicator */
+.pillars-progress-rail {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.pillars-index-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.pillars-curr-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e4ff54;
+}
+
+.pillars-slash {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.pillars-total-num {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pillars-progress-segments {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 240px;
+}
+
+.pillar-segment-dot {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.pillar-segment-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #e4ff54;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.pillar-segment-dot.is-active::after {
+  transform: scaleX(1);
+}
+
+.pillar-segment-dot.is-passed {
+  background: rgba(228, 255, 84, 0.6);
+}
+
+/* Reduced Motion Tabs Bar */
+.pillars-reduced-motion-nav {
+  display: none;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.reduced-motion-tab {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reduced-motion-tab.is-active {
+  background: #e4ff54;
+  color: #000;
+  border-color: #e4ff54;
+  font-weight: 700;
+}
+
+/* Panels Container */
+.pillars-panels-stage {
+  position: relative;
+  width: 100%;
+  height: 380px;
+}
+
+.pillar-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(28px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.5s;
+}
+
+.pillar-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.pillar-panel-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.pillar-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: #e4ff54;
+  font-weight: 700;
+}
+
+.pillar-tone-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pillar-title {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 1.25rem 0;
+  color: #ffffff;
+  /* Shadow for crystal-clear readability when dancer passes behind */
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.pillar-body {
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.76);
+  max-width: 500px;
+  margin: 0 0 2rem 0;
+  /* Shadow for readability */
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+.pillar-cta-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.pillar-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #e4ff54;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.pillar-cta-btn span {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.pillar-cta-btn .cta-arrow {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.pillar-cta-btn:hover {
+  border-color: #e4ff54;
+  box-shadow: 0 0 24px rgba(228, 255, 84, 0.25);
+}
+
+.pillar-cta-btn:hover::before {
+  transform: translateY(0);
+}
+
+.pillar-cta-btn:hover span,
+.pillar-cta-btn:hover .cta-arrow {
+  color: #000000;
+}
+
+.pillar-cta-btn:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Loading State Overlay */
+.pillars-loader-overlay {
+  position: absolute;
+  inset: 0;
+  background: #070707;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  z-index: 50;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.pillars-loader-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pillars-spinner-ring {
+  width: 46px;
+  height: 46px;
+  border: 2px solid rgba(228, 255, 84, 0.15);
+  border-top-color: #e4ff54;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.pillars-loader-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+}
+
+#pillars-loader-pct {
+  color: #e4ff54;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   PREFERS-REDUCED-MOTION FALLBACK
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .four-pillars-section {
+    height: auto !important;
+  }
+  
+  .pillars-sticky-viewport {
+    position: relative !important;
+    height: auto !important;
+    min-height: 90vh;
+    padding: 4rem 0;
+  }
+
+  .dancer-fullscreen-canvas {
+    display: none !important;
+  }
+
+  .dancer-static-poster {
+    display: block !important;
+  }
+
+  .pillars-reduced-motion-nav {
+    display: flex !important;
+  }
+
+  .pillars-progress-rail {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .pillars-stage-container {
+    padding: 0 2.5rem;
+  }
+
+  .pillars-content-col {
+    max-width: 520px;
+  }
+
+  .pillars-panels-stage {
+    height: 320px;
+  }
+
+  .pillars-top-header {
+    left: 2.5rem;
+    right: 2.5rem;
+    top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .four-pillars-section {
+    height: 320vh; /* Smooth, agile navigation on mobile */
+  }
+
+  .pillars-sticky-viewport {
+    padding: 4rem 1.5rem 2rem;
+    justify-content: center;
+  }
+
+  .pillars-top-header {
+    top: 1.25rem;
+    left: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .pillars-stage-container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .pillars-content-col {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .pillars-progress-rail {
+    margin-bottom: 1.25rem;
+  }
+
+  .pillars-panels-stage {
+    height: 290px;
+  }
+
+  .pillar-title {
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar-body {
+    font-size: 0.94rem;
+    line-height: 1.58;
+    margin-bottom: 1.5rem;
+  }
+
+  .pillar-cta-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .pillars-stage-baseline {
+    bottom: 12%;
+  }
+}

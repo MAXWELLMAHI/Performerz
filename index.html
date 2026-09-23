@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Performerz Academy — Atelier of Motion & Haute Choreography</title>
+    <!-- Google Fonts: Outfit, Space Grotesk, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/Academy-Logo-Final.png" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Subtle Architectural Background Grid (Mint & Marble) -->
+    <div class="editorial-grid-overlay" aria-hidden="true">
+      <div class="grid-line" data-coord="/01"></div>
+      <div class="grid-line" data-coord="/02"></div>
+      <div class="grid-line" data-coord="/03"></div>
+      <div class="grid-line" data-coord="/04"></div>
+      <div class="grid-line" data-coord="/05"></div>
+    </div>
+
+    <!-- Ambient Stage Cursor Glow -->
+    <div class="cursor-ambient-glow" id="cursor-glow"></div>
+
+    <!-- Storytelling Narrative Rail (Chapters 01 - 08) -->
+    <aside class="story-nav-rail" id="story-rail" aria-label="Story Progress">
+      <a href="#overture" class="story-pip active" data-target="overture" title="Chapter 01: The Overture">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">01 // The Overture</span>
+      </a>
+      <a href="#marquee" class="story-pip" data-target="marquee" title="Chapter 02: Kinetic Pulse">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">02 // Kinetic Pulse</span>
+      </a>
+      <a href="#about" class="story-pip" data-target="about" title="Chapter 03: The Manifesto">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">03 // The Manifesto</span>
+      </a>
+      <a href="#disciplines" class="story-pip" data-target="disciplines" title="Chapter 04: Disciplines">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">04 // Disciplines</span>
+      </a>
+      <a href="#coaches" class="story-pip" data-target="coaches" title="Chapter 05: Faculty Mentors">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">05 // Master Faculty</span>
+      </a>
+      <a href="#honors" class="story-pip" data-target="honors" title="Chapter 06: Accolades">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">06 // Accolades</span>
+      </a>
+      <a href="#stage" class="story-pip" data-target="stage" title="Chapter 07: Live Theatre Stage">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">07 // Visceral Stage</span>
+      </a>
+      <a href="#contact" class="story-pip" data-target="contact" title="Chapter 08: Book A Demo Class">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">08 // Book Demo</span>
+      </a>
+    </aside>
+
+    <!-- Header / Haute-Couture Navbar -->
+    <header class="navbar">
+      <div class="navbar-container">
+        <a href="/" class="logo">
+          <img src="/Academy-Logo-Final.png" alt="The Performerz Academy Logo" />
+        </a>
+        <nav class="nav-menu">
+          <a href="/" class="nav-link active">Home</a>
+          <a href="/about.html" class="nav-link">About Us</a>
+          <a href="/classes.html" class="nav-link">Classes</a>
+          <a href="/events.html" class="nav-link">Events</a>
+          <a href="/blog.html" class="nav-link">Blog</a>
+          <a href="/reviews.html" class="nav-link">Reviews</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="#contact" class="btn btn-primary btn-claim-pass">Book A Demo Class</a>
+          <button class="menu-toggle" aria-label="Toggle Menu">
+            <img src="https://framerusercontent.com/images/cO7jjqQhf9qcbyCE8yr3lxCNf8.svg" alt="Menu" />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer">
+      <div class="drawer-header">
+        <a href="/" class="logo">
+          <img src="/Academy-Logo-Final.png" alt="The Performerz Academy Logo" />
+        </a>
+        <button class="drawer-close" aria-label="Close Menu">&times;</button>
+      </div>
+      <nav class="drawer-menu">
+        <a href="/" class="drawer-link">Home</a>
+        <a href="/about.html" class="drawer-link">About Us</a>
+        <a href="/classes.html" class="drawer-link">Classes</a>
+        <a href="/events.html" class="drawer-link">Events</a>
+        <a href="/blog.html" class="drawer-link">Blog</a>
+        <a href="/reviews.html" class="drawer-link">Reviews</a>
+        <a href="#contact" class="btn btn-amber drawer-btn">Book A Demo Class</a>
+      </nav>
+    </div>
+
+    <main>
+      <!-- ==========================================================================
+           SECTION 01: THE OVERTURE HERO (Full-Bleed Cinema Stage & Floating Glass HUD)
+           ========================================================================== -->
+      <section class="hero-editorial" id="overture">
+        <!-- Cinematic Background Video Stage -->
+        <div class="hero-bg-video-wrapper">
+          <video class="hero-bg-video" id="hero-bg-video" src="/C31E030D-1DA6-4553-912B-81A00E13D073 (1).mp4" loop autoplay muted playsinline></video>
+          <div class="hero-video-scrim"></div>
+        </div>
+
+        <!-- Center Stage Grand Typography & Overture -->
+        <div class="container hero-content-stage reveal">
+          <span class="meta-bracket">01 // OVERTURE &bull; ATELIER OF MOTION</span>
+          <h1 class="hero-headline-split">
+            WHERE RHYTHM MEETS GRAVITY
+          </h1>
+          <p class="hero-subtext-lead">
+            The Performerz Academy is an internationally acclaimed sanctuary for dancers, choreographers, and visionaries. Refined classical discipline meets raw, unapologetic creative expression.
+          </p>
+          <div class="hero-btn-row">
+            <a href="#disciplines" class="btn btn-amber">Explore Disciplines</a>
+            <a href="#coaches" class="btn btn-outline">Meet Faculty</a>
+          </div>
+        </div>
+
+        <!-- Sleek Floating Hero HUD Bar (Centered Glass Audio Dock) -->
+        <div class="hero-hud-dock">
+          <!-- Compact Audio HUD Player -->
+          <div class="music-beat-widget-docked">
+            <div class="dock-track-thumb" id="dock-track-thumb"></div>
+            <div class="dock-track-info">
+              <span class="dock-track-title">STARBOY / CHOREO</span>
+              <span class="dock-track-meta">// BPM 128 &bull; STAGE 01</span>
+            </div>
+            <div class="dock-equalizer" aria-label="Equalizer">
+              <div class="dock-eq-bar active"></div>
+              <div class="dock-eq-bar active"></div>
+              <div class="dock-eq-bar active"></div>
+              <div class="dock-eq-bar active"></div>
+            </div>
+            <button class="dock-btn-audio" id="audio-play-btn" title="Play / Pause Beat">▶</button>
+            <a href="#contact" class="dock-pill-link">Try Free &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 02: OPPOSING DUAL KINETIC MARQUEE (Awwwards Grade Motion)
+           ========================================================================== -->
+      <section class="kinetic-marquee-section" id="marquee">
+        <!-- Top Track: Glides Left -->
+        <div class="marquee-track-outer">
+          <div class="marquee-track-inner track-slide-left">
+            <span class="marquee-item">PASSION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">FLUIDITY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">PRECISION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">ARTISTRY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">DISCIPLINE</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">ELEVATION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">RHYTHM</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">PASSION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">FLUIDITY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">PRECISION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">ARTISTRY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">DISCIPLINE</span><span class="marquee-star">&#10022;</span>
+          </div>
+        </div>
+
+        <!-- Bottom Track: Glides Right -->
+        <div class="marquee-track-outer" style="margin-top: 10px;">
+          <div class="marquee-track-inner track-slide-right">
+            <span class="marquee-item solid-amber">CONTEMPORARY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">AERIAL SILK</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">GYMNASTICS</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">STAGE MOTION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">STAGECRAFT</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">BROADWAY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">ACROBATICS</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">CONTEMPORARY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">AERIAL SILK</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">GYMNASTICS</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">BALLET EXCELLENCE</span><span class="marquee-star">&#10022;</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 03: "THE MOVEMENT LINE" — v2 (Fixed Timing + Compact Scroll)
+           Total scroll budget: ~220vh desktop / ~280vh mobile
+           ========================================================================== -->
+      <section class="movement-line-section" id="about">
+        
+        <!-- SECTION A: COMPACT HERO (60-70vh) WITH SYNCHRONIZED WE ARE / WE DO -->
+        <div class="movement-hero-compact">
+          <!-- Subtle duotone background (~14% opacity) -->
+          <div class="movement-hero-bg" aria-hidden="true"></div>
+
+          <!-- Eyebrow Tag -->
+          <div class="movement-hero-meta reveal">
+            <span class="movement-hero-eyebrow">[ 03 // ABOUT US &bull; PHILOSOPHY &amp; CORE PILLARS ]</span>
+            <span class="movement-hero-sub">ARCHITECTURAL INTENTION &bull; FLUID EXPRESSION</span>
+          </div>
+
+          <!-- Kinetic Bar: Synced WE ARE / WE DO on shared progress -->
+          <div class="movement-hero-kinetic-bar">
+            <span class="movement-word word-left" id="word-we-are">WE ARE</span>
+            
+            <div class="movement-hero-line-track">
+              <svg class="movement-hero-svg-line" viewBox="0 0 600 12" preserveAspectRatio="none">
+                <line class="movement-hero-line-path" id="hero-line-path" x1="0" y1="6" x2="600" y2="6" />
+              </svg>
+            </div>
+
+            <span class="movement-word word-right" id="word-we-do">WE DO</span>
+          </div>
+        </div>
+
+        <!-- SECTION A: 7 HORIZONTAL PHILOSOPHY STROKE CARDS (ALL IN ONE LINE) -->
+        <div class="philosophy-horizontal-section">
+          
+          <div class="philosophy-section-header">
+            <div class="phil-header-left">
+              <span class="phil-header-eyebrow">[ 03.1 // CORE PHILOSOPHY ]</span>
+              <h2 class="phil-header-title">THE SEVEN <span>KINETIC BEATS</span></h2>
+            </div>
+            <div class="phil-nav-controls">
+              <div class="phil-progress-container">
+                <div class="phil-scroll-progress-bar">
+                  <div class="phil-scroll-progress-fill" id="phil-progress-fill"></div>
+                </div>
+                <span class="phil-beat-counter" id="phil-beat-counter">01 / 07</span>
+              </div>
+              <button class="phil-nav-btn" id="phil-prev-btn" aria-label="Previous Beat">&larr;</button>
+              <button class="phil-nav-btn" id="phil-next-btn" aria-label="Next Beat">&rarr;</button>
+            </div>
+          </div>
+
+          <div class="philosophy-stroke-track-wrap">
+            <div class="philosophy-stroke-rail" id="philosophy-stroke-rail">
+              
+              <!-- CARD 1: Fluid Power (Yellow) -->
+              <article class="stroke-philosophy-card card-theme-yellow" data-beat="01">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 01</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Flowing fluid ribbon -->
+                    <path class="dance-stroke anim-fluid-ribbon" d="M 22 75 Q 45 25 90 32 T 140 68 Q 148 105 105 122 T 40 98 Q 20 80 30 60" />
+                    <!-- Dancer figure in fluid arch -->
+                    <path class="dance-stroke anim-fluid-figure" d="M 55 80 C 65 60 78 52 88 56 C 96 60 90 76 76 86 C 64 96 52 112 36 122" />
+                    <circle class="dance-stroke" cx="92" cy="46" r="6" />
+                    <path class="dance-stroke-accent" d="M 102 38 Q 118 42 125 54" />
+                    <circle cx="126" cy="34" r="2" fill="var(--card-ink)" />
+                    <circle cx="28" cy="115" r="2" fill="var(--card-ink)" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Fluid Power<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Control without stiffness; raw gymnastics force blended into effortless contemporary dance flow.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">01 / FLOW</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Fluid Power">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 01 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Fluid Power</h4>
+                  <p class="expanded-drawer-body">
+                    Control without stiffness; energy without limits. At Performerz Academy, we strip away rigid boundaries to blend the raw force of gymnastics with the effortless flow of contemporary dance. Master the balance between explosive propulsion and featherlight landings.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>Floorwork Transitions &amp; Weight Release</li>
+                    <li>Momentum Conservation Mechanics</li>
+                    <li>Dual Mat-to-Stage Conditioning</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+              <!-- CARD 2: Defying Limits (Coral Red) -->
+              <article class="stroke-philosophy-card card-theme-coral" data-beat="02">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 02</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Tumbling Arc & Gymnast in Back Layout Flip -->
+                    <g class="anim-tumble-spin">
+                      <path class="dance-stroke" d="M 38 105 C 44 68 74 44 108 48 C 132 52 142 82 128 110" />
+                      <circle class="dance-stroke" cx="122" cy="118" r="6" />
+                      <path class="dance-stroke-accent" d="M 70 32 A 45 45 0 0 1 125 40" />
+                    </g>
+                    <!-- Speed dash bursts -->
+                    <path class="dance-stroke anim-spark-burst" d="M 28 45 L 38 52 M 22 62 L 34 64 M 135 30 L 125 38" />
+                    <circle cx="138" cy="48" r="2.5" fill="var(--card-ink)" />
+                    <circle cx="34" cy="118" r="2.5" fill="var(--card-ink)" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Defying Limits<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Precision isn't accidental &mdash; it's practiced. Sharp tumbling mechanics meeting musicality.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">02 / FLIP</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Defying Limits">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 02 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Defying Limits</h4>
+                  <p class="expanded-drawer-body">
+                    Precision isn't accidental &mdash; it's practiced. We train bodies to execute sharp tumbling mechanics while cultivating the musicality and storytelling essential for modern movement. Overcome fear through biomechanical mastery and spatial awareness.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>Spatial Orientation Inversions</li>
+                    <li>Dynamic Tumbling &amp; Spotting Drills</li>
+                    <li>Power Rebound Propulsion</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+              <!-- CARD 3: Engineered Expression (Pink) -->
+              <article class="stroke-philosophy-card card-theme-pink" data-beat="03">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 03</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Vertical core axis -->
+                    <line class="dance-stroke-accent" x1="80" y1="20" x2="80" y2="125" />
+                    <!-- Expressive arm waves & anatomical torso -->
+                    <g class="anim-arm-wave">
+                      <path class="dance-stroke" d="M 80 62 Q 55 48 30 55 M 80 62 Q 105 48 130 55" />
+                      <path class="dance-stroke" d="M 80 50 L 80 92 L 68 122 M 80 92 L 92 122" />
+                      <circle class="dance-stroke" cx="80" cy="40" r="6.5" />
+                    </g>
+                    <!-- Musicality concentric circles -->
+                    <circle class="dance-stroke-accent anim-vector-rings" cx="80" cy="62" r="24" />
+                    <path class="dance-stroke" d="M 25 45 Q 32 38 40 45 M 120 45 Q 128 38 135 45" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Engineered Expression<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Anatomical discipline and core strength paired with emotive choreography into natural instinct.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">03 / AXIS</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Engineered Expression">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 03 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Engineered Expression</h4>
+                  <p class="expanded-drawer-body">
+                    The human body is built to move boldly. By pairing anatomical discipline and core strength with emotive, fluid choreography, we turn technical training into natural instinct. Every muscle engagement is engineered for breathtaking stage presence.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>Neuromuscular Alignment Architecture</li>
+                    <li>Dynamic Resistance Choreography</li>
+                    <li>Kinesthetic Storytelling Instinct</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+              <!-- CARD 4: Weightless Control (Mint) -->
+              <article class="stroke-philosophy-card card-theme-mint" data-beat="04">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 04</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Ground Horizon Reference Line -->
+                    <line class="dance-stroke" x1="30" y1="120" x2="130" y2="120" />
+                    <!-- Handstand Pose balanced on palm -->
+                    <g class="anim-handstand-hover">
+                      <path class="dance-stroke" d="M 80 120 L 80 75 C 74 65 68 50 64 35 M 80 75 C 86 65 96 50 102 38" />
+                      <circle class="dance-stroke" cx="80" cy="82" r="6.5" />
+                    </g>
+                    <!-- Gravity suspension rings -->
+                    <ellipse class="dance-stroke-accent anim-orbit-expand" cx="80" cy="55" rx="34" ry="14" />
+                    <circle cx="120" cy="50" r="2" fill="var(--card-ink)" />
+                    <circle cx="42" cy="60" r="2" fill="var(--card-ink)" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Weightless Control<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Movement begins on the mat and finds its voice in suspended flight between impulse and execution.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">04 / SUSPEND</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Weightless Control">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 04 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Weightless Control</h4>
+                  <p class="expanded-drawer-body">
+                    Movement begins on the mat and finds its voice in performance. We bridge structural acrobatics and expressive contemporary dance. Discover the exhilarating sensation of suspended time between impulse and execution.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>Centered Axis Hand Balancing</li>
+                    <li>Suspended Partnering Drills</li>
+                    <li>Deceleration &amp; Silent Landings</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+              <!-- CARD 5: Raw Grace (Lavender) -->
+              <article class="stroke-philosophy-card card-theme-lavender" data-beat="05">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 05</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Grand Jeté Split Leap in Motion -->
+                    <g class="anim-jete-sweep">
+                      <path class="dance-stroke" d="M 28 82 Q 78 96 138 66" />
+                      <path class="dance-stroke" d="M 76 88 Q 82 60 92 42 M 86 56 Q 116 46 132 36" />
+                      <circle class="dance-stroke" cx="96" cy="34" r="6.5" />
+                    </g>
+                    <!-- Speed sweep streaks -->
+                    <path class="dance-stroke-accent anim-speed-streak" d="M 20 95 Q 60 110 110 90 M 35 110 Q 75 120 120 105" />
+                    <circle cx="142" cy="62" r="2.5" fill="var(--card-ink)" />
+                    <circle cx="120" cy="28" r="2" fill="var(--card-ink)" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Raw Grace<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Real grace takes grit. The tension between athletic impact and continuous soft momentum.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">05 / GRACE</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Raw Grace">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 05 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Raw Grace</h4>
+                  <p class="expanded-drawer-body">
+                    Real grace takes grit. It lives in the tension between pure athletic impact and soft, continuous momentum. Learn how to fall without sound, rise without hesitation, and command stillness just as powerfully as speed.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>High-Impact Landing Dissipation</li>
+                    <li>Continuous Velocity Sequences</li>
+                    <li>Micro-Artistic Stillness Control</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+              <!-- CARD 6: Visceral Impact (Tangerine - NEW CARD) -->
+              <article class="stroke-philosophy-card card-theme-tangerine" data-beat="06">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 06</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Floor Slide / Freeze Stance -->
+                    <g class="anim-floor-bounce">
+                      <path class="dance-stroke" d="M 32 112 L 68 96 L 94 106 L 126 116 M 68 96 L 78 66" />
+                      <circle class="dance-stroke" cx="84" cy="56" r="6.5" />
+                    </g>
+                    <!-- Explosive impact shards and shockwave -->
+                    <path class="dance-stroke anim-shockwave" d="M 40 50 L 52 60 M 30 75 L 45 78 M 120 70 L 105 78 M 130 90 L 115 95" />
+                    <circle class="dance-stroke-accent anim-shockwave" cx="75" cy="98" r="28" />
+                    <circle cx="48" cy="44" r="2.5" fill="var(--card-ink)" />
+                    <circle cx="118" cy="58" r="2.5" fill="var(--card-ink)" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Visceral Impact<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Explosive stage presence. Power tumbling channeled into evocative choreographic grit.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">06 / IMPACT</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Visceral Impact">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 06 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Visceral Impact</h4>
+                  <p class="expanded-drawer-body">
+                    Dynamic artistry requires unapologetic force. Visceral Impact fuses power tumbling mechanics, high-velocity sweeps, and floorwork transitions that make audiences catch their breath. Built for commercial stages, cinematic productions, and competition arenas.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>Kip-Ups, Sweeps &amp; Ground Flares</li>
+                    <li>Commercial &amp; Cinematic Stage Grit</li>
+                    <li>Unapologetic Kinetic Energy</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+              <!-- CARD 7: Infinite Flight (Cyan - NEW CARD) -->
+              <article class="stroke-philosophy-card card-theme-cyan" data-beat="07">
+                <div class="stroke-card-top">
+                  <span class="stroke-card-brand">
+                    <svg class="stroke-brand-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="4"/></svg>
+                    PERFORMERZ
+                  </span>
+                  <span class="stroke-card-beat-num">BEAT // 07</span>
+                </div>
+
+                <div class="stroke-dance-stage">
+                  <svg class="stroke-dance-svg" viewBox="0 0 160 140">
+                    <!-- Aerial suspension arch -->
+                    <g class="anim-flight-glide">
+                      <path class="dance-stroke" d="M 28 78 Q 68 46 114 62 Q 134 70 144 56 M 104 60 Q 118 42 134 32" />
+                      <circle class="dance-stroke" cx="110" cy="50" r="6.5" />
+                    </g>
+                    <!-- Flowing air streams & cloud arcs -->
+                    <path class="dance-stroke-accent anim-wind-flow" d="M 15 50 Q 40 40 70 48 M 85 30 Q 110 20 140 28 M 25 105 Q 65 95 115 105" />
+                    <circle cx="146" cy="38" r="2.5" fill="var(--card-ink)" />
+                    <circle cx="22" cy="70" r="2" fill="var(--card-ink)" />
+                  </svg>
+                </div>
+
+                <div class="stroke-card-content">
+                  <h3 class="stroke-card-title">Infinite Flight<sup>*</sup></h3>
+                  <p class="stroke-card-teaser">Defying gravity through spatial awareness, daring inversions, and soaring flight.</p>
+                </div>
+
+                <div class="stroke-card-footer">
+                  <span class="stroke-card-stat">07 / AERIAL</span>
+                  <button class="card-readmore-btn" aria-label="Read More about Infinite Flight">Read More &nearr;</button>
+                </div>
+
+                <!-- Expandable Drawer Overlay -->
+                <div class="stroke-card-expanded-overlay">
+                  <div class="expanded-drawer-header">
+                    <span class="expanded-drawer-tag">BEAT // 07 &bull; DEEP DIVE</span>
+                    <button class="expanded-drawer-close" aria-label="Close">&times;</button>
+                  </div>
+                  <h4 class="expanded-drawer-title">Infinite Flight</h4>
+                  <p class="expanded-drawer-body">
+                    Where acrobatics transcends gravity. Infinite Flight pushes movers beyond their perceived aerial limits through advanced spatial orientation, suspended partnering drills, and sweeping grand jetés that linger in the air.
+                  </p>
+                  <ul class="expanded-curriculum-bullets">
+                    <li>Aerial Awareness &amp; Mid-Air Twists</li>
+                    <li>Grand Jeté Suspension Mechanics</li>
+                    <li>Boundless Vertical Exploration</li>
+                  </ul>
+                  <a href="/classes.html" class="expanded-drawer-cta">Explore Curriculum &rarr;</a>
+                </div>
+              </article>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 04: OUR FOUR PILLARS OF MOTION — PINNED CANVAS SCRUB SECTION
+           Scroll-scrubbed hand-drawn dancer frame sequence synchronized via requestAnimationFrame
+           ========================================================================== -->
+      <section class="four-pillars-section" id="pillars">
+        
+        <!-- Pinned 100vh Viewport Stage -->
+        <div class="pillars-sticky-viewport">
+          
+          <!-- Background Grid Texture -->
+          <div class="pillars-bg-grid" aria-hidden="true"></div>
+
+          <!-- Fullscreen Transparent Canvas (Directly on dark background, behind text) -->
+          <canvas id="dancer-scrub-canvas" class="dancer-fullscreen-canvas"></canvas>
+          <img id="dancer-static-poster" class="dancer-static-poster" src="/frames/poster.webp" alt="Dancer Movement Sequence" />
+
+          <!-- Full-Width Ground Baseline Line -->
+          <div class="pillars-stage-baseline" aria-hidden="true">
+            <div class="baseline-glow"></div>
+          </div>
+
+          <!-- Section Watermark & Navigation Bar -->
+          <header class="pillars-top-header">
+            <span class="pillars-eyebrow-main">[ OUR FOUR PILLARS OF MOTION &bull; KINETIC ATELIER ]</span>
+            <span class="pillars-methodology-tag">// SPECIFICATION: 04 ARCHITECTURAL PILLARS</span>
+          </header>
+
+          <!-- Stage Container: Left-Aligned Editorial Text Stack -->
+          <div class="pillars-stage-container">
+            <div class="pillars-content-col">
+              
+              <!-- Segmented Progress Indicator Bar -->
+              <div class="pillars-progress-rail" aria-label="Pillar Navigation">
+                <div class="pillars-index-display">
+                  <span class="pillars-curr-num" id="pillars-curr-num">01</span>
+                  <span class="pillars-slash">/</span>
+                  <span class="pillars-total-num">04</span>
+                </div>
+                <div class="pillars-progress-segments" role="tablist" aria-label="Brand Pillars">
+                  <button class="pillar-segment-dot is-active" aria-label="Pillar 01: Boundless Form" title="Pillar 01: Boundless Form"></button>
+                  <button class="pillar-segment-dot" aria-label="Pillar 02: Fluid Power" title="Pillar 02: Fluid Power"></button>
+                  <button class="pillar-segment-dot" aria-label="Pillar 03: Pure Gravity" title="Pillar 03: Pure Gravity"></button>
+                  <button class="pillar-segment-dot" aria-label="Pillar 04: Disciplined Flow" title="Pillar 04: Disciplined Flow"></button>
+                </div>
+              </div>
+
+              <!-- Reduced Motion Interactive Tabs -->
+              <div class="pillars-reduced-motion-nav" role="tablist" aria-label="Pillar Selector">
+                <button class="reduced-motion-tab is-active" data-index="0">01 Boundless Form</button>
+                <button class="reduced-motion-tab" data-index="1">02 Fluid Power</button>
+                <button class="reduced-motion-tab" data-index="2">03 Pure Gravity</button>
+                <button class="reduced-motion-tab" data-index="3">04 Disciplined Flow</button>
+              </div>
+
+              <!-- Crossfading Text Panels -->
+              <div class="pillars-panels-stage">
+
+                <!-- 01 // Boundless Form -->
+                <article class="pillar-panel is-active" data-pillar="1">
+                  <div class="pillar-panel-eyebrow-row">
+                    <span class="pillar-badge">01 // BRAND PILLAR</span>
+                    <span class="pillar-tone-tag">Architectural, sleek, contemporary-first</span>
+                  </div>
+                  <h3 class="pillar-title">Boundless Form</h3>
+                  <p class="pillar-body">
+                    We strip movement down to its purest elements: intention and release. Uniting the structural alignment of gymnastics with the fluid architecture of contemporary dance. Here, the floor is both your anchor and your canvas.
+                  </p>
+                  <div class="pillar-cta-wrap">
+                    <a href="/classes.html" class="pillar-cta-btn">
+                      <span>Explore Disciplines</span>
+                      <span class="cta-arrow">&rarr;</span>
+                    </a>
+                  </div>
+                </article>
+
+                <!-- 02 // Fluid Power -->
+                <article class="pillar-panel" data-pillar="2">
+                  <div class="pillar-panel-eyebrow-row">
+                    <span class="pillar-badge">02 // BRAND PILLAR</span>
+                    <span class="pillar-tone-tag">Athletic, explosive, performance-driven</span>
+                  </div>
+                  <h3 class="pillar-title">Fluid Power</h3>
+                  <p class="pillar-body">
+                    Power isn't rigid; it flows. Fluid Power captures the collision of dynamic tumbling, deep core control, and seamless choreographic transitions. We train performers to channel raw athletic grit into magnetic, effortless movement.
+                  </p>
+                  <div class="pillar-cta-wrap">
+                    <a href="/classes.html" class="pillar-cta-btn">
+                      <span>Explore Disciplines</span>
+                      <span class="cta-arrow">&rarr;</span>
+                    </a>
+                  </div>
+                </article>
+
+                <!-- 03 // Pure Gravity -->
+                <article class="pillar-panel" data-pillar="3">
+                  <div class="pillar-panel-eyebrow-row">
+                    <span class="pillar-badge">03 // BRAND PILLAR</span>
+                    <span class="pillar-tone-tag">Raw, grounded, dynamic</span>
+                  </div>
+                  <h3 class="pillar-title">Pure Gravity</h3>
+                  <p class="pillar-body">
+                    Every jump must land; every sweep begins on the floor. Pure Gravity honors the physics of human movement &mdash; teaching you how to fall safely, rise decisively, and command the space between the mat and the air.
+                  </p>
+                  <div class="pillar-cta-wrap">
+                    <a href="/classes.html" class="pillar-cta-btn">
+                      <span>Explore Disciplines</span>
+                      <span class="cta-arrow">&rarr;</span>
+                    </a>
+                  </div>
+                </article>
+
+                <!-- 04 // Disciplined Flow -->
+                <article class="pillar-panel" data-pillar="4">
+                  <div class="pillar-panel-eyebrow-row">
+                    <span class="pillar-badge">04 // BRAND PILLAR</span>
+                    <span class="pillar-tone-tag">Precise, disciplined, expressive</span>
+                  </div>
+                  <h3 class="pillar-title">Disciplined Flow</h3>
+                  <p class="pillar-body">
+                    Artistry without technique is chaos; technique without art is mechanics. Disciplined Flow defines how we train &mdash; instilling the meticulous drills of gymnastic mechanics so your contemporary expression can move without constraint.
+                  </p>
+                  <div class="pillar-cta-wrap">
+                    <a href="/classes.html" class="pillar-cta-btn">
+                      <span>Explore Disciplines</span>
+                      <span class="cta-arrow">&rarr;</span>
+                    </a>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading State Overlay -->
+          <div class="pillars-loader-overlay" id="pillars-loader">
+            <div class="pillars-spinner-ring"></div>
+            <span class="pillars-loader-text">LOADING MOTION SEQUENCE <span id="pillars-loader-pct">0%</span></span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 3.5: 3D COVERFLOW SWIPER REEL CAROUSEL (TOP 8 INSTAGRAM REELS)
+           ========================================================================== -->
+      <section class="social-reels-section" id="social-reels">
+        <div class="container">
+          <div class="social-reels-header reveal">
+            <span class="meta-bracket">03.5 // INSTAGRAM REELS &bull; @PERFORMERZACADEMY</span>
+            <h2 class="social-reels-headline">
+              Selected and popular<br>
+              posts on the social <span class="serif-italic">right now</span>
+            </h2>
+          </div>
+
+          <!-- Swiper 3D Coverflow Container for Top 8 Reels -->
+          <div class="swiper swiper-top-reels reveal">
+            <div class="swiper-wrapper">
+              <!-- Reel 1 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/DVq-9vGjV8z/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_1.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 2 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/Dc4CFX2NJ5m/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_2.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 3 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/Dcyx_RUtKbh/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_3.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 4 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/DcrF0VUNf40/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_4.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 5 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/DcivIHONvGp/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_5.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 6 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/DcZFihyxZWi/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_6.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 7 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/DVq-9vGjV8z/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_3.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 8 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/Dc4CFX2NJ5m/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_4.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 9 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/Dcyx_RUtKbh/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_5.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+
+              <!-- Reel 10 — @performerzacademy -->
+              <div class="swiper-slide reel-coverflow-slide" onclick="window.open('https://www.instagram.com/reel/DcivIHONvGp/', '_blank')">
+                <div class="reel-pure-card">
+                  <video src="/ig_reel_2.mp4" muted loop playsinline preload="metadata"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Controls -->
+          <div class="carousel-nav-bar reveal">
+            <button class="carousel-btn reels-swiper-prev" aria-label="Previous Reel">&larr;</button>
+            <a href="https://www.instagram.com/performerzacademy/?hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-amber">
+              Follow @performerzacademy On Instagram &rarr;
+            </a>
+            <button class="carousel-btn reels-swiper-next" aria-label="Next Reel">&rarr;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 04: "TRY DIFFERENT DANCE STYLES" (Step Up Dance Club Reference)
+           ========================================================================== -->
+      <section class="disciplines-section section-divider" id="disciplines">
+        <div class="container disciplines-header reveal">
+          <div>
+            <span class="meta-bracket">03 // SYLLABUS &bull; DISCIPLINES</span>
+            <h2 class="section-title">
+              Try <span class="serif-italic">Different</span> Dance Styles
+            </h2>
+            <p class="section-desc">
+              We will teach you how to dance to any rhythm, any music, as well as any style. From classical precision to heart-stopping acrobatic flights.
+            </p>
+          </div>
+          <a href="/classes.html" class="btn btn-outline">All Class Schedules &rarr;</a>
+        </div>
+
+        <div class="container disciplines-grid-luxury reveal">
+          <!-- Discipline Card 1: Contemporary Dance -->
+          <div class="discipline-card-deluxe">
+            <div class="discipline-img-holder">
+              <img src="/dance_contemporary.jpg" alt="Contemporary Dance" />
+              <span class="discipline-tag-pill">Jazz ◆◆ &bull; Expressive</span>
+            </div>
+            <div class="discipline-info-deluxe">
+              <div>
+                <h3 class="discipline-title-deluxe">Contemporary Dance</h3>
+                <p class="discipline-desc-deluxe">Technique meets unfiltered emotion. Master fluid floor work, breath suspension, explosive weight transfer, and authentic intention.</p>
+              </div>
+              <div class="discipline-footer-meta">
+                <span class="discipline-level">Level: Open to Pro</span>
+                <a href="/classes.html" class="discipline-arrow-link"><span>Explore</span> &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Discipline Card 2: Gymnastics & Tumbling -->
+          <div class="discipline-card-deluxe">
+            <div class="discipline-img-holder">
+              <img src="/dance_gymnastics.jpg" alt="Gymnastics & Tumbling" />
+              <span class="discipline-tag-pill">Acrobatics ◆◆ &bull; Power</span>
+            </div>
+            <div class="discipline-info-deluxe">
+              <div>
+                <h3 class="discipline-title-deluxe">Gymnastics & Tumbling</h3>
+                <p class="discipline-desc-deluxe">Develop superhuman core strength, aerial spatial awareness, inverted tumbling balance, and gravity-defying control.</p>
+              </div>
+              <div class="discipline-footer-meta">
+                <span class="discipline-level">Level: All Tiers</span>
+                <a href="/classes.html" class="discipline-arrow-link"><span>Explore</span> &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Discipline Card 3: Aerial Silk & Poise -->
+          <div class="discipline-card-deluxe">
+            <div class="discipline-img-holder">
+              <img src="https://framerusercontent.com/images/RHd0yaLWnnyK7yve0hM2pjBlYuM.jpg" alt="Aerial Silk Artistry" />
+              <span class="discipline-tag-pill coming-soon-pill-blue">COMING SOON</span>
+            </div>
+            <div class="discipline-info-deluxe">
+              <div>
+                <div class="coming-soon-badge-blue">COMING SOON</div>
+                <h3 class="discipline-title-deluxe">Aerial Silk & Poise</h3>
+                <p class="discipline-desc-deluxe">Soar suspended above the studio stage. Build exceptional upper body endurance, vertical flexibility, and breathtaking drops.</p>
+              </div>
+              <div class="discipline-footer-meta">
+                <span class="discipline-level">Level: Int &mdash; Master</span>
+                <a href="/classes.html" class="discipline-arrow-link"><span>Explore</span> &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 05: "MEET OUR TEAM" — Interactive Orbital Coaches Stage
+           Scroll-pinned 400vh experience with circular orbit & GSAP ScrollTrigger
+           ========================================================================== -->
+      <section class="coaches-orbit-wrapper" id="coaches">
+        <!-- The sticky stage — pinned by GSAP, scroll drives coach transitions -->
+        <div class="coaches-orbit-stage" id="coaches-orbit-stage">
+
+          <!-- Ambient Orbital Background Glow -->
+          <div class="coaches-ambient-glow" aria-hidden="true"></div>
+
+          <!-- Heading (top center) -->
+          <div class="coaches-stage-heading">
+            <span class="coaches-meta-label">05 // FACULTY &bull; MASTER MENTORS</span>
+            <h2 class="coaches-headline">
+              MEET OUR TEAM<br><em>OF COACHES</em>
+            </h2>
+          </div>
+
+          <!-- Vertical Editorial Side Labels (like CURATORS / COLLECTIONS in Art Circles) -->
+          <div class="orbit-side-label orbit-label-left" aria-hidden="true">FACULTY MENTORS</div>
+          <div class="orbit-side-label orbit-label-right" aria-hidden="true">DISCIPLINES</div>
+
+          <!-- Dual Circular Orbital SVG Guide Paths -->
+          <svg class="orbit-path-svg" id="coaches-orbit-svg" viewBox="0 0 1400 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle id="orbit-svg-left" cx="280" cy="440" r="230"
+              fill="none" stroke="rgba(255, 128, 56, 0.15)" stroke-width="1.5"
+              stroke-dasharray="6 10" />
+            <circle id="orbit-svg-right" cx="1120" cy="440" r="230"
+              fill="none" stroke="rgba(56, 225, 255, 0.15)" stroke-width="1.5"
+              stroke-dasharray="6 10" />
+          </svg>
+
+          <!-- LEFT ORBIT: 4 Faculty Coach Thumbnail Nodes -->
+          <div class="coaches-orbit-left" id="coaches-orbit-left">
+            <div class="orbit-node node-coach" data-index="0">
+              <div class="orbit-thumb"><img src="/coach_nansi.jpg" alt="Nansi" /></div>
+            </div>
+            <div class="orbit-node node-coach" data-index="1">
+              <div class="orbit-thumb"><img src="/coach_sohil.jpg" alt="Sohil" /></div>
+            </div>
+            <div class="orbit-node node-coach" data-index="2">
+              <div class="orbit-thumb"><img src="/coach_ganesh.jpg" alt="Ganesh" /></div>
+            </div>
+            <div class="orbit-node node-coach" data-index="3">
+              <div class="orbit-thumb"><img src="/coach_poonam.jpg" alt="Poonam" /></div>
+            </div>
+          </div>
+
+          <!-- RIGHT ORBIT: 4 Dance Discipline Action Thumbnail Nodes -->
+          <div class="coaches-orbit-right" id="coaches-orbit-right">
+            <div class="orbit-node node-dance" data-index="0">
+              <div class="orbit-thumb dance-thumb"><img src="/dance_contemporary.jpg" alt="Contemporary" /></div>
+            </div>
+            <div class="orbit-node node-dance" data-index="1">
+              <div class="orbit-thumb dance-thumb"><img src="https://framerusercontent.com/images/RHd0yaLWnnyK7yve0hM2pjBlYuM.jpg" alt="Aerial Silk" /></div>
+            </div>
+            <div class="orbit-node node-dance" data-index="2">
+              <div class="orbit-thumb dance-thumb"><img src="/dance_acrobatics.jpg" alt="Acrobatics" /></div>
+            </div>
+            <div class="orbit-node node-dance" data-index="3">
+              <div class="orbit-thumb dance-thumb"><img src="/dance_classical.jpg" alt="Classical" /></div>
+            </div>
+          </div>
+
+          <!-- CENTER UNIFIED FOCAL CARD (Tripartite: [Portrait] [Info] [Dance Photo]) -->
+          <div class="coaches-focal-card" id="coaches-focal-card">
+            <!-- 1. Left: Coach Portrait -->
+            <div class="focal-card-portrait">
+              <div class="portrait-img-wrapper" id="coaches-portrait-frame">
+                <img class="portrait-img" id="coach-portrait-img" src="/coach_nansi.jpg" alt="Nansi Shahri" />
+                <div class="portrait-mask-top"></div>
+                <div class="portrait-mask-bottom"></div>
+              </div>
+              <div class="portrait-index-label" id="coach-index-label">01</div>
+            </div>
+
+            <!-- 2. Center: Coach Information & Action CTA -->
+            <div class="focal-card-info" id="coach-info-inner">
+              <span class="coach-discipline-tag" id="coach-discipline">Contemporary</span>
+              <h3 class="coach-info-name" id="coach-name">Nansi Shahri</h3>
+              <p class="coach-info-bio" id="coach-bio">
+                Founder and artistic director of Performerz Academy. A touring soloist whose choreographic language merges architectural stillness with explosive release. Trained across Mumbai, London, and New York.
+              </p>
+              <div class="coach-info-meta">
+                <div class="coach-meta-stat">
+                  <span class="stat-number" id="coach-years">14</span>
+                  <span class="stat-label">Years Teaching</span>
+                </div>
+                <div class="coach-meta-divider"></div>
+                <div class="coach-meta-stat">
+                  <span class="stat-number" id="coach-students">800+</span>
+                  <span class="stat-label">Students Trained</span>
+                </div>
+              </div>
+              <a href="/about.html" class="coach-pill-cta" id="coach-cta">
+                VIEW FULL PROFILE
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <!-- Progress indicator dots -->
+              <div class="coach-progress-dots" id="coach-progress-dots">
+                <span class="coach-dot active" data-index="0"></span>
+                <span class="coach-dot" data-index="1"></span>
+                <span class="coach-dot" data-index="2"></span>
+                <span class="coach-dot" data-index="3"></span>
+              </div>
+            </div>
+
+            <!-- 3. Right: Dance Form Action Photograph -->
+            <div class="focal-card-danceform">
+              <div class="danceform-frame-wrapper" id="coaches-danceform-frame">
+                <img class="danceform-img" id="coach-danceform-img" src="/dance_contemporary.jpg" alt="Contemporary Dance" />
+                <div class="danceform-label" id="coach-danceform-label">Contemporary</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 06: "TROPHIES FOLLOW US" (Mint & Marble Reference)
+           ========================================================================== -->
+      <section class="trophies-section" id="honors">
+        <div class="container trophies-header-block reveal">
+          <span class="meta-bracket">05 // HONORS &bull; TROPHIES &amp; TRIUMPHS</span>
+          <h2 class="section-title">
+            TROPHIES FOLLOW US. <span class="serif-italic">IT'S A THING</span>.
+          </h2>
+          <p class="section-desc" style="margin: 0 auto;">
+            Recognized across premier national championships, global stages, and landmark annual productions.
+          </p>
+        </div>
+
+        <div class="container trophies-pills-cluster reveal">
+          <!-- Outlined Pill 1: NR Show -->
+          <div class="trophy-pill" title="Nritya Raaga Annual Show">
+            <span class="pill-rotated-label">// NR SHOW</span>
+          </div>
+
+          <!-- Outlined Pill 2: Nritya Raaga -->
+          <div class="trophy-pill" title="Nritya Raaga Production">
+            <span class="pill-rotated-label">// NRITYA RAAGA</span>
+          </div>
+
+          <!-- Center Focal Solid Circle Badge (GIBC National Champions) -->
+          <div class="trophy-circle-focal">
+            <span class="focal-eyebrow">NATIONAL CHAMPIONSHIP &bull; BALLET</span>
+            <h3 class="focal-honor-title">THE GREAT INDIAN BALLET COMPETITION</h3>
+            <div class="focal-winner-pill">&star; GIBC WINNER &star;</div>
+            <div class="focal-winners-list">
+              <div class="focal-winner-item">
+                <span>1 Solo Winner</span>
+                Nivi Acharya
+              </div>
+              <div class="focal-winner-item">
+                <span>1 Group Trio Winners</span>
+                Mishka, Nivriti &amp; Zoey
+              </div>
+            </div>
+            <div class="focal-years-bracket">&star; GIBC LAUREATES &star;</div>
+          </div>
+
+          <!-- Outlined Pill 3: TPDS Show -->
+          <div class="trophy-pill" title="The Phoenix Dance Studio Show">
+            <span class="pill-rotated-label">// TPDS SHOW</span>
+          </div>
+
+          <!-- Outlined Pill 4: The Phoenix Dance Studio -->
+          <div class="trophy-pill" title="The Phoenix Dance Studio Production">
+            <span class="pill-rotated-label">// PHOENIX DANCE STUDIO</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 07: CINEMATIC FULL-WIDTH STAGE CALLOUT (High Contrast Pedestal)
+           ========================================================================== -->
+      <section class="video-callout-deluxe" id="stage">
+        <div class="video-callout-media">
+          <video src="/6953B0F8-5C74-48F0-96A9-C94CC3DB4849.mp4" loop autoplay muted playsinline></video>
+        </div>
+        <div class="video-callout-shade"></div>
+        <div class="container reveal">
+          <div class="video-callout-card">
+            <span class="meta-bracket">06 // VISCERAL STAGE &bull; LIVE REHEARSAL</span>
+            <h2 class="video-callout-title">
+              WATCH THE <span class="serif-italic">MOTION</span> IN REAL-TIME
+            </h2>
+            <p class="video-callout-desc">
+              Step into an ecosystem where discipline ignites artistry. Watch our resident company prepare for the upcoming national theatre tour.
+            </p>
+            <a href="#contact" class="btn btn-primary">Book Studio Visit &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 08: BENEFITS & EDITORIAL STATS
+           ========================================================================== -->
+      <section class="benefits-section-deluxe section-divider">
+        <div class="container benefits-layout-grid">
+          <div class="reveal">
+            <span class="meta-bracket">07 // ADVANTAGE &bull; THE ACADEMY STANDARD</span>
+            <h2 class="section-title">
+              CREATING DANCE <span class="serif-italic">PERFECTION</span>
+            </h2>
+            <p class="section-desc" style="margin-bottom: 36px;">
+              From high-impact sprung flooring to personal artistic mentorship, every square foot of The Performerz Academy is engineered to elevate your potential without compromise.
+            </p>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+              <a href="/classes.html" class="btn btn-amber">Explore Curriculums</a>
+              <a href="/about.html" class="btn btn-outline">Our Facilities</a>
+            </div>
+          </div>
+
+          <div class="stats-stack-deluxe reveal">
+            <div class="stat-item-deluxe">
+              <div class="stat-number-wrap">
+                <span class="stat-number-deluxe">45+</span>
+              </div>
+              <div class="stat-info-wrap">
+                <h4 class="stat-title-deluxe">Active Dancers</h4>
+                <p class="stat-desc-deluxe">Passionate performers across studio &amp; company tiers</p>
+              </div>
+              <div class="stat-badge-pill">✦ ATELIER</div>
+            </div>
+
+            <div class="stat-item-deluxe">
+              <div class="stat-number-wrap">
+                <span class="stat-number-deluxe">4+</span>
+              </div>
+              <div class="stat-info-wrap">
+                <h4 class="stat-title-deluxe">Expert Teachers</h4>
+                <p class="stat-desc-deluxe">National medalists &amp; master pedagogy faculty</p>
+              </div>
+              <div class="stat-badge-pill">✦ FACULTY</div>
+            </div>
+
+            <div class="stat-item-deluxe">
+              <div class="stat-number-wrap">
+                <span class="stat-number-deluxe">2+</span>
+              </div>
+              <div class="stat-info-wrap">
+                <h4 class="stat-title-deluxe">Dance Studios</h4>
+                <p class="stat-desc-deluxe">Sprung flooring &amp; stage-calibrated spaces</p>
+              </div>
+              <div class="stat-badge-pill">✦ VENUES</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 09: TESTIMONIALS SLIDER DELUXE
+           ========================================================================== -->
+      <section class="testimonials-section-deluxe section-divider" id="testimonials">
+        <div class="container reveal">
+          <div style="text-align: center; margin-bottom: 50px;">
+            <span class="meta-bracket">08 // VOICES &bull; DANCER EXPERIENCES</span>
+            <h2 class="section-title">What Our Dancers Say</h2>
+            <p style="color: var(--text-gray); font-size: 15px; max-width: 600px; margin: 12px auto 0;">
+              Real handwritten notes and reflective essays written by our students at Performerz Academy.
+            </p>
+          </div>
+
+          <div class="testimonial-frame-deluxe">
+            <img src="https://framerusercontent.com/images/RSaZhuAHT9ZAxmCiAvYX0W9msxE.svg" alt="Quotes" class="quote-mark-icon" />
+
+            <!-- Slide 1: Zoey Shah (Handwritten) -->
+            <div class="slide active">
+              <blockquote class="testimonial-quote-text">
+                "When I first started my contemporary class I felt very nervous. Then when I learned how dancing can express stories, I started gaining confidence. I realized every step does not have to be perfect or over-the-top."
+              </blockquote>
+              <div class="client-author-row">
+                <div class="client-meta-combo">
+                  <img src="/review_zoey_shah.jpg" alt="Zoey Shah" class="client-portrait-circle" style="object-fit: cover; object-position: top center;" />
+                  <div>
+                    <div class="client-name-title">Zoey Shah</div>
+                    <div class="client-sub-label">// Handwritten Note &bull; Contemporary Student</div>
+                  </div>
+                </div>
+                <a href="/reviews.html" class="essay-read-cta">Read Handwritten Note &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Slide 2: Myra Puri (Handwritten) -->
+            <div class="slide">
+              <blockquote class="testimonial-quote-text">
+                "A good dance teacher does more than just teach steps and routines, they build confidence, develop discipline and understand why dance matters. They are not only our teachers, they're our second parents."
+              </blockquote>
+              <div class="client-author-row">
+                <div class="client-meta-combo">
+                  <img src="/review_myra_puri.jpg" alt="Myra Puri" class="client-portrait-circle" style="object-fit: cover; object-position: top center;" />
+                  <div>
+                    <div class="client-name-title">Myra Puri</div>
+                    <div class="client-sub-label">// Handwritten Note &bull; Performerz Student</div>
+                  </div>
+                </div>
+                <a href="/reviews.html" class="essay-read-cta">Read Handwritten Note &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Slide 3: Bosky -->
+            <div class="slide">
+              <blockquote class="testimonial-quote-text">
+                "Dance happens in the mind, not in the body. Technically correct movement is only part of what makes a performance memorable. What matters most is that you are able to convey your intention and story."
+              </blockquote>
+              <div class="client-author-row">
+                <div class="client-meta-combo">
+                  <div style="width: 54px; height: 54px; border-radius: 50%; background: rgba(240, 192, 96, 0.2); border: 2px solid var(--studio-amber); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; color: var(--studio-gold);">B</div>
+                  <div>
+                    <div class="client-name-title">Bosky</div>
+                    <div class="client-sub-label">// Reflective Essay &bull; Performerz Artist</div>
+                  </div>
+                </div>
+                <a href="/reviews.html" class="essay-read-cta">Read Full Essay &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Slide 4: Sanvika -->
+            <div class="slide">
+              <blockquote class="testimonial-quote-text">
+                "Every time I stepped on that stage, I got a surge of energy, emotion, and confidence. At Performerz, each time, the stage felt like a friend instead of an inanimate object."
+              </blockquote>
+              <div class="client-author-row">
+                <div class="client-meta-combo">
+                  <div style="width: 54px; height: 54px; border-radius: 50%; background: rgba(240, 192, 96, 0.2); border: 2px solid var(--studio-amber); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; color: var(--studio-gold);">S</div>
+                  <div>
+                    <div class="client-name-title">Sanvika</div>
+                    <div class="client-sub-label">// Reflective Essay &bull; Contemporary Student</div>
+                  </div>
+                </div>
+                <a href="/reviews.html" class="essay-read-cta">Read Full Essay &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Slide 5: Minakshi -->
+            <div class="slide">
+              <blockquote class="testimonial-quote-text">
+                "When we reframe anxiety as excitement, our perception of the situation can change. You do not have to stop being afraid to step onto the stage. Sometimes, you just have to step onto it with the fear—and dance anyway."
+              </blockquote>
+              <div class="client-author-row">
+                <div class="client-meta-combo">
+                  <div style="width: 54px; height: 54px; border-radius: 50%; background: rgba(240, 192, 96, 0.2); border: 2px solid var(--studio-amber); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; color: var(--studio-gold);">M</div>
+                  <div>
+                    <div class="client-name-title">Minakshi</div>
+                    <div class="client-sub-label">// Reflective Essay &bull; Performing Artist</div>
+                  </div>
+                </div>
+                <a href="/reviews.html" class="essay-read-cta">Read Full Essay &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Slide 6: Anushka Pai -->
+            <div class="slide">
+              <blockquote class="testimonial-quote-text">
+                "Contemporary dance changed my relationship with being seen. Instead of constantly asking myself, 'How do I look?' I started asking, 'What do I want to express?'"
+              </blockquote>
+              <div class="client-author-row">
+                <div class="client-meta-combo">
+                  <div style="width: 54px; height: 54px; border-radius: 50%; background: rgba(240, 192, 96, 0.2); border: 2px solid var(--studio-amber); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; color: var(--studio-gold);">A</div>
+                  <div>
+                    <div class="client-name-title">Anushka Pai</div>
+                    <div class="client-sub-label">// Reflective Essay &bull; Contemporary Dancer</div>
+                  </div>
+                </div>
+                <a href="/reviews.html" class="essay-read-cta">Read Full Essay &rarr;</a>
+              </div>
+            </div>
+
+            <div class="slider-controls" style="margin-top: 36px;">
+              <button class="slider-nav prev-btn" aria-label="Previous Slide">&larr;</button>
+              <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <button class="slider-nav next-btn" aria-label="Next Slide">&rarr;</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+              <a href="/reviews.html" class="btn btn-outline" style="font-size: 12px; padding: 12px 28px;">
+                View All Student Reviews &amp; Handwritten Notes &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 10: GRAND FINALE BOTTOM CTA & DIRECT CONTACT
+           ========================================================================== -->
+      <section class="bottom-cta-deluxe" id="contact">
+        <div class="cta-deluxe-box reveal">
+          <span class="meta-bracket">09 // ENROLLMENT &bull; DIRECT CONTACT &amp; ADMISSIONS</span>
+          <h2 class="cta-deluxe-title">
+            "LET THE RHYTHM MOVE YOU. <br>TRAIN AT <span class="serif-italic">PERFORMERZ</span>."
+          </h2>
+          <p class="section-desc" style="margin: 0 auto 32px; color: #fff;">
+            Schedule your personalized demo trial class or connect directly with our admissions team via WhatsApp.
+          </p>
+
+          <!-- Direct Interactive Contact Hub -->
+          <div class="contact-direct-grid">
+            <a href="tel:+918169729704" class="contact-badge-deluxe" aria-label="Call +91 816 972 9704">
+              <span class="contact-badge-icon">📞</span>
+              <span class="contact-badge-meta">
+                <span class="contact-badge-label">Direct Admissions Call</span>
+                <strong class="contact-badge-value">+91 816 972 9704</strong>
+              </span>
+            </a>
+            <a href="mailto:performerzacademy@gmail.com" class="contact-badge-deluxe" aria-label="Email performerzacademy@gmail.com">
+              <span class="contact-badge-icon">✉</span>
+              <span class="contact-badge-meta">
+                <span class="contact-badge-label">Official Atelier Email</span>
+                <strong class="contact-badge-value">performerzacademy@gmail.com</strong>
+              </span>
+            </a>
+          </div>
+
+          <!-- Interactive Demo Class Booking Form (Direct WhatsApp Linkage) -->
+          <form id="demo-booking-form" class="demo-booking-card">
+            <div class="demo-form-grid">
+              <div class="demo-form-group">
+                <label for="demo-name" class="demo-form-label">Performer / Parent Name *</label>
+                <input type="text" id="demo-name" required placeholder="e.g. Maya Sharma" class="demo-form-input" />
+              </div>
+              <div class="demo-form-group">
+                <label for="demo-contact" class="demo-form-label">Phone / WhatsApp Number *</label>
+                <input type="tel" id="demo-contact" required placeholder="e.g. +91 98765 43210" class="demo-form-input" />
+              </div>
+              <div class="demo-form-group full-width">
+                <label for="demo-discipline" class="demo-form-label">Preferred Discipline *</label>
+                <select id="demo-discipline" required class="demo-form-select">
+                  <option value="Gymnastics & Tumbling">Gymnastics &amp; Tumbling</option>
+                  <option value="Contemporary Release">Contemporary Release</option>
+                  <option value="Aerial Silk & Poise">Aerial Silk &amp; Poise</option>
+                  <option value="General Atelier Consultation">General Atelier Consultation / Custom Program</option>
+                </select>
+              </div>
+              <div class="demo-form-group full-width">
+                <label for="demo-message" class="demo-form-label">Your Message or Goal (Optional)</label>
+                <textarea id="demo-message" placeholder="Tell us about your background, preferred timing, or questions..." class="demo-form-textarea" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="demo-form-footer">
+              <span class="demo-form-hint">
+                <span>✦ Directly sends to WhatsApp:</span>
+                <strong>+91 816 972 9704</strong>
+              </span>
+              <button type="submit" class="btn btn-amber demo-submit-btn">
+                <span>Book A Demo Class On WhatsApp</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Haute-Couture Footer -->
+    <footer class="footer-editorial">
+      <div class="container footer-main-grid">
+        <!-- Col 1: Brand Manifesto -->
+        <div>
+          <a href="/" class="logo" style="margin-bottom: 20px;">
+            <img src="/Academy-Logo-Final.png" alt="The Performerz Academy" />
+          </a>
+          <p style="font-size: 14px; color: var(--text-gray); line-height: 1.6; max-width: 290px;">
+            Where rhythm meets gravity. An internationally accredited sanctuary for performing arts and bold human expression.
+          </p>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div>
+          <h4 class="footer-heading-tag">Directory</h4>
+          <ul class="footer-links-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About Atelier</a></li>
+            <li><a href="/classes.html">Dance Classes</a></li>
+            <li><a href="/events.html">Live Events</a></li>
+            <li><a href="/blog.html">Editorial Blog</a></li>
+            <li><a href="/reviews.html">Dancer Reviews</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Disciplines -->
+        <div>
+          <h4 class="footer-heading-tag">Disciplines</h4>
+          <ul class="footer-links-list">
+            <li><a href="/classes.html">Gymnastics &amp; Tumbling</a></li>
+            <li><a href="/classes.html">Contemporary Release</a></li>
+            <li><a href="/classes.html">Aerial Silk &amp; Poise</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Dispatch & Direct Contact -->
+        <div>
+          <h4 class="footer-heading-tag">Direct Contact</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <a href="tel:+918169729704" class="footer-contact-link">
+                <span class="footer-contact-icon">📞</span> +91 816 972 9704
+              </a>
+            </li>
+            <li>
+              <a href="mailto:performerzacademy@gmail.com" class="footer-contact-link">
+                <span class="footer-contact-icon">✉</span> performerzacademy@gmail.com
+              </a>
+            </li>
+          </ul>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--studio-amber); letter-spacing: 0.1em; margin-top: 14px;">
+            STUDIO HOURS: MON &mdash; SAT / 07:00 &mdash; 22:00
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-bottom-bar">
+        <span>&copy; <span id="year">2026</span> THE PERFORMERZ ACADEMY. ALL RIGHTS RESERVED.</span>
+        <span>DESIGNED AS AN ATELIER OF MOTION</span>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
