@@ -213,7 +213,26 @@ export function initPillarsCanvas() {
     }
 
     updatePillarsUI(currentProgress);
-    rafId = requestAnimationFrame(loop);
+    if (isSectionVisible && !document.hidden) {
+      rafId = requestAnimationFrame(loop);
+    } else {
+      rafId = null;
+    }
+  }
+
+  let isSectionVisible = false;
+
+  function resumeLoopIfNeeded() {
+    if (isReady && isSectionVisible && !document.hidden && !rafId) {
+      rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  function pauseLoop() {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
   }
 
   function setupScrollScrub() {
@@ -227,6 +246,7 @@ export function initPillarsCanvas() {
       scrub: true,
       onUpdate(self) {
         targetProgress = self.progress;
+        resumeLoopIfNeeded();
       }
     });
 
@@ -239,13 +259,30 @@ export function initPillarsCanvas() {
       });
     });
 
+    // Viewport visibility observer to avoid running 60fps rAF offscreen
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isSectionVisible = entry.isIntersecting;
+        if (isSectionVisible) {
+          resumeLoopIfNeeded();
+        } else {
+          pauseLoop();
+        }
+      });
+    }, { threshold: 0.01 });
+
+    visibilityObserver.observe(section);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        pauseLoop();
+      } else {
+        resumeLoopIfNeeded();
+      }
+    });
+
     // Initialize first state
     updatePillarsUI(0);
     renderFrame(0, 0);
-
-    // Start rAF loop
-    if (!rafId) {
-      rafId = requestAnimationFrame(loop);
-    }
   }
 }

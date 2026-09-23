@@ -155,8 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let isPlaying = false;
   let soundInterval = null;
 
+  const stopSynthesizedChoreoBeats = () => {
+    if (soundInterval) {
+      clearInterval(soundInterval);
+      soundInterval = null;
+    }
+  };
+
   const playSynthesizedChoreoBeats = () => {
     try {
+      stopSynthesizedChoreoBeats(); // Guard against interval stacking
       if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
       }
@@ -169,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let step = 0;
 
       soundInterval = setInterval(() => {
-        if (!isPlaying || !audioContext) return;
+        if (!isPlaying || !audioContext || audioContext.state === 'closed') return;
         const now = audioContext.currentTime;
 
         // Sub 808 Kick on every 4th beat
@@ -184,6 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
           kickGain.connect(audioContext.destination);
           kickOsc.start(now);
           kickOsc.stop(now + 0.26);
+          setTimeout(() => {
+            try {
+              kickOsc.disconnect();
+              kickGain.disconnect();
+            } catch (_) {}
+          }, 300);
         }
 
         // Melodic synth pluck
@@ -200,6 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         osc.start(now);
         osc.stop(now + 0.33);
+        setTimeout(() => {
+          try {
+            osc.disconnect();
+            gain.disconnect();
+          } catch (_) {}
+        }, 360);
 
         step++;
       }, 220);
@@ -208,11 +228,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const stopSynthesizedChoreoBeats = () => {
-    if (soundInterval) {
-      clearInterval(soundInterval);
-      soundInterval = null;
+  const pauseAudioPlayback = () => {
+    isPlaying = false;
+    if (audioBtn) {
+      audioBtn.innerHTML = '▶';
+      audioBtn.setAttribute('title', 'Play Beat Preview');
     }
+    dockThumb?.classList.remove('playing');
+    eqBars.forEach(bar => {
+      bar.style.animationPlayState = 'paused';
+    });
+    stopSynthesizedChoreoBeats();
   };
 
   audioBtn?.addEventListener('click', () => {
@@ -226,13 +252,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       playSynthesizedChoreoBeats();
     } else {
-      audioBtn.innerHTML = '▶';
-      audioBtn.setAttribute('title', 'Play Beat Preview');
-      dockThumb?.classList.remove('playing');
-      eqBars.forEach(bar => {
-        bar.style.animationPlayState = 'paused';
-      });
-      stopSynthesizedChoreoBeats();
+      pauseAudioPlayback();
+    }
+  });
+
+  // Resource & battery conservation: pause on tab background / page unload
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && isPlaying) {
+      pauseAudioPlayback();
+    }
+  });
+
+  window.addEventListener('pagehide', () => {
+    stopSynthesizedChoreoBeats();
+    if (audioContext && audioContext.state !== 'closed') {
+      audioContext.close().catch(() => {});
     }
   });
 
@@ -479,14 +513,27 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      11. DEMO CLASS WHATSAPP BOOKING & NEWSLETTER INTERACTIONS
      ========================================================================== */
+  const sanitizeText = (str, maxLen = 200) => {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[\u0000-\u001F\u007F-\u009F]/g, '').trim().slice(0, maxLen);
+  };
+
   const demoBookingForm = document.getElementById('demo-booking-form');
   demoBookingForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = document.getElementById('demo-name')?.value.trim() || '';
-    const contact = document.getElementById('demo-contact')?.value.trim() || '';
-    const discipline = document.getElementById('demo-discipline')?.value.trim() || '';
-    const message = document.getElementById('demo-message')?.value.trim() || '';
+    const rawName = document.getElementById('demo-name')?.value || '';
+    const rawContact = document.getElementById('demo-contact')?.value || '';
+    const rawDiscipline = document.getElementById('demo-discipline')?.value || '';
+    const rawMessage = document.getElementById('demo-message')?.value || '';
     const submitBtn = demoBookingForm.querySelector('.demo-submit-btn');
+
+    // Strict validation & defensive length bounding (mitigates URI buffer overflow / injection)
+    const name = sanitizeText(rawName, 80);
+    const contact = sanitizeText(rawContact, 40);
+    const discipline = sanitizeText(rawDiscipline, 60);
+    const message = sanitizeText(rawMessage, 600);
+
+    if (!name || !contact) return;
 
     const formattedMessage = `Hello The Performerz Academy!\nI would like to book a demo class.\n\n✦ Name: ${name}\n✦ Contact: ${contact}\n✦ Preferred Discipline: ${discipline}\n✦ Message: ${message || 'I would like to schedule a demo class trial.'}`;
     const whatsappUrl = `https://wa.me/918169729704?text=${encodeURIComponent(formattedMessage)}`;
@@ -498,13 +545,13 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.style.color = '#ffffff';
 
       setTimeout(() => {
-        window.open(whatsappUrl, '_blank');
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
         submitBtn.innerHTML = originalHTML;
         submitBtn.style.background = '';
         submitBtn.style.color = '';
-      }, 400);
+      }, 350);
     } else {
-      window.open(whatsappUrl, '_blank');
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
   });
 
@@ -526,6 +573,16 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.style.background = '';
       submitBtn.style.color = '';
     }, 3500);
+  });
+
+  // Secure Delegated Click Handler for Instagram Reels (replaces inline onclick)
+  document.querySelectorAll('.reel-coverflow-slide').forEach(slide => {
+    slide.addEventListener('click', () => {
+      const reelUrl = slide.getAttribute('data-reel-url');
+      if (reelUrl && reelUrl.startsWith('https://www.instagram.com/reel/')) {
+        window.open(reelUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
   });
 
   const yearSpan = document.getElementById('year');
@@ -552,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPillarsCanvas();
 
   /* ==========================================================================
-     16. STUDENT REVIEWS & ESSAYS MODAL ENGINE
+     16. STUDENT REVIEWS & ESSAYS MODAL ENGINE (Strict Whitelist & Safe Sanitization)
      ========================================================================== */
   const modalBackdrop = document.getElementById('review-modal-backdrop');
   const modalCloseBtn = document.getElementById('review-modal-close');
@@ -562,32 +619,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalAuthor = document.getElementById('modal-author');
   const modalBody = document.getElementById('modal-body');
 
+  const ALLOWED_CONTENT_IDS = new Set([
+    'content-zoey',
+    'content-myra',
+    'content-bosky',
+    'content-sanvika',
+    'content-minakshi',
+    'content-anushka'
+  ]);
+
   const openReviewModal = (triggerEl) => {
     if (!modalBackdrop) return;
-    const cat = triggerEl.getAttribute('data-modal-category') || 'STUDENT REFLECTION';
-    const title = triggerEl.getAttribute('data-modal-title') || '';
-    const author = triggerEl.getAttribute('data-modal-author') || '';
-    const imgUrl = triggerEl.getAttribute('data-modal-img') || '';
+    const cat = sanitizeText(triggerEl.getAttribute('data-modal-category') || 'STUDENT REFLECTION', 50);
+    const title = sanitizeText(triggerEl.getAttribute('data-modal-title') || '', 100);
+    const author = sanitizeText(triggerEl.getAttribute('data-modal-author') || '', 60);
+    const rawImgUrl = triggerEl.getAttribute('data-modal-img') || '';
     const contentId = triggerEl.getAttribute('data-modal-content-id');
 
     if (modalCategory) modalCategory.textContent = cat;
     if (modalTitle) modalTitle.textContent = title;
     if (modalAuthor) modalAuthor.textContent = author;
 
+    // Secure Image URL validation (prevents javascript: protocol injection)
     if (modalImg) {
-      if (imgUrl) {
-        modalImg.src = imgUrl;
+      if (rawImgUrl && (rawImgUrl.startsWith('/') || rawImgUrl.startsWith('https://'))) {
+        modalImg.src = rawImgUrl;
         modalImg.style.display = 'block';
       } else {
         modalImg.style.display = 'none';
-        modalImg.src = '';
+        modalImg.removeAttribute('src');
       }
     }
 
-    if (modalBody && contentId) {
-      const sourceEl = document.getElementById(contentId);
-      if (sourceEl) {
-        modalBody.innerHTML = sourceEl.innerHTML;
+    // Strict Whitelist Validation before DOM population
+    if (modalBody) {
+      modalBody.innerHTML = '';
+      if (contentId && ALLOWED_CONTENT_IDS.has(contentId)) {
+        const sourceEl = document.getElementById(contentId);
+        if (sourceEl) {
+          modalBody.innerHTML = sourceEl.innerHTML;
+        }
       }
     }
 

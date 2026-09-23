@@ -114,29 +114,40 @@ export const TOP_8_INSTAGRAM_REELS = TOP_10_INSTAGRAM_REELS.slice(0, 8);
  * Fetches top 10 reels by engagement (views/likes), falling back to mock array if no access token.
  */
 export async function fetchTop10InstagramReels(accessToken = null) {
-  if (!accessToken) {
+  if (!accessToken || typeof accessToken !== 'string') {
     return TOP_10_INSTAGRAM_REELS;
   }
   try {
-    const response = await fetch(`${INSTAGRAM_CONFIG.GRAPH_API_ENDPOINT}?fields=id,caption,media_type,media_url,permalink,thumbnail_url,like_count,comments_count&access_token=${accessToken}`);
+    const url = new URL(INSTAGRAM_CONFIG.GRAPH_API_ENDPOINT);
+    url.searchParams.set('fields', 'id,caption,media_type,media_url,permalink,thumbnail_url,like_count,comments_count');
+    url.searchParams.set('access_token', accessToken.trim());
+
+    const response = await fetch(url.toString(), {
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) {
+      return TOP_10_INSTAGRAM_REELS;
+    }
+
     const data = await response.json();
     
-    if (!data || !data.data) {
+    if (!data || !Array.isArray(data.data)) {
       return TOP_10_INSTAGRAM_REELS;
     }
 
     const fetchedReels = data.data
-      .filter(item => item.media_type === 'VIDEO' || item.media_type === 'REELS')
+      .filter(item => item && (item.media_type === 'VIDEO' || item.media_type === 'REELS'))
       .sort((a, b) => ((b.like_count || 0) + (b.comments_count || 0)) - ((a.like_count || 0) + (a.comments_count || 0)))
       .slice(0, 10)
       .map(item => ({
-        id: item.id,
-        url: item.permalink || INSTAGRAM_CONFIG.PROFILE_URL,
-        videoUrl: item.media_url,
-        poster: item.thumbnail_url || '/about_boundless_form.jpg',
-        title: item.caption ? item.caption.split('\n')[0] : 'Top Instagram Reel',
-        views: `${Math.floor((item.like_count || 100) * 12.5 / 1000)}K`,
-        likes: `${item.like_count || 500}`
+        id: String(item.id || ''),
+        url: typeof item.permalink === 'string' && item.permalink.startsWith('https://') ? item.permalink : INSTAGRAM_CONFIG.PROFILE_URL,
+        videoUrl: typeof item.media_url === 'string' ? item.media_url : '',
+        poster: typeof item.thumbnail_url === 'string' ? item.thumbnail_url : '/about_boundless_form.jpg',
+        title: typeof item.caption === 'string' ? item.caption.split('\n')[0].slice(0, 120) : 'Top Instagram Reel',
+        views: `${Math.floor((Number(item.like_count) || 100) * 12.5 / 1000)}K`,
+        likes: `${Number(item.like_count) || 500}`
       }));
 
     return fetchedReels.length > 0 ? fetchedReels : TOP_10_INSTAGRAM_REELS;
@@ -147,3 +158,4 @@ export async function fetchTop10InstagramReels(accessToken = null) {
 }
 
 export const fetchTop8InstagramReels = fetchTop10InstagramReels;
+

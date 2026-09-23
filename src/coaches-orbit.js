@@ -329,11 +329,22 @@ export function initCoachesOrbit() {
   wrapperSection.addEventListener('mouseenter', () => { isHovered = true; });
   wrapperSection.addEventListener('mouseleave', () => { isHovered = false; });
 
+  let isSectionInView = false;
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoCycle();
+    } else if (isSectionInView && !isHovered) {
+      startAutoCycle();
+    }
+  });
+
   // IntersectionObserver for entrance & auto-cycle activation
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        startAutoCycle();
+      isSectionInView = entry.isIntersecting;
+      if (isSectionInView) {
+        if (!document.hidden) startAutoCycle();
         gsap.fromTo(focalCard,
           { opacity: 0, y: 30, scale: 0.96 },
           { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' }
