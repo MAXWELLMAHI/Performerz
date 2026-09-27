@@ -230,7 +230,11 @@ export function initPillarsCanvas() {
     }
 
     updatePillarsUI(currentProgress);
-    if (isSectionVisible && !document.hidden) {
+
+    // Keep running if progress hasn't fully settled OR section is visible
+    // This ensures reverse-scroll animation plays back correctly
+    const hasPendingWork = Math.abs(targetProgress - currentProgress) > 0.0004;
+    if (!document.hidden && (hasPendingWork || isSectionVisible)) {
       rafId = requestAnimationFrame(loop);
     } else {
       rafId = null;
@@ -240,7 +244,16 @@ export function initPillarsCanvas() {
   let isSectionVisible = false;
 
   function resumeLoopIfNeeded() {
+    // Standard resume: requires visible + ready
     if (isReady && isSectionVisible && !document.hidden && !rafId) {
+      rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  // Called directly from ScrollTrigger onUpdate — bypasses visibility check
+  // so reverse-scroll always triggers the animation loop
+  function forceResumeLoop() {
+    if (isReady && !document.hidden && !rafId) {
       rafId = requestAnimationFrame(loop);
     }
   }
@@ -284,7 +297,9 @@ export function initPillarsCanvas() {
       invalidateOnRefresh: true,
       onUpdate(self) {
         targetProgress = self.progress;
-        resumeLoopIfNeeded();
+        // forceResumeLoop bypasses the isSectionVisible gate so
+        // reverse-scroll (scrolling back up) always re-triggers the animation
+        forceResumeLoop();
       }
     });
 
