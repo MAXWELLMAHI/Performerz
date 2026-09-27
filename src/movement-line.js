@@ -89,104 +89,66 @@ export function initMovementLine() {
   const counterEl = document.querySelector('#phil-beat-counter');
 
   if (philSection && strokeRail && trackWrap && strokeCards.length > 0) {
-    const isMobile = () => window.innerWidth < 768;
-
-    const getScrollDistance = () => {
-      const railWidth = strokeRail.scrollWidth;
-      const wrapWidth = trackWrap.clientWidth || window.innerWidth;
-      const extraPad = Math.min(80, window.innerWidth * 0.06);
-      return Math.max(0, railWidth - wrapWidth + extraPad);
-    };
-
     let horizontalTrigger = null;
 
-    const setupHorizontalScroll = () => {
-      if (horizontalTrigger) {
-        horizontalTrigger.kill();
-        horizontalTrigger = null;
-      }
+    if (!prefersReducedMotion) {
+      // Horizontal scrub animation
+      const horizontalTween = gsap.to(strokeRail, {
+        x: () => -getScrollDistance(),
+        ease: 'none',
+      });
 
-      if (!prefersReducedMotion && !isMobile()) {
-        // Desktop: Pinned horizontal GSAP scrub animation
-        const horizontalTween = gsap.to(strokeRail, {
-          x: () => -getScrollDistance(),
-          ease: 'none',
-        });
+      horizontalTrigger = ScrollTrigger.create({
+        id: 'kineticBeatsHorizontalScroll',
+        trigger: philSection,
+        start: 'top top',
+        end: () => `+=${Math.max(1200, getScrollDistance() * 1.15)}`,
+        pin: true,
+        anticipatePin: 1,
+        scrub: 0.8,
+        animation: horizontalTween,
+        invalidateOnRefresh: true,
+        onUpdate(self) {
+          const p = self.progress;
+          if (progressFill) {
+            progressFill.style.width = `${(p * 100).toFixed(1)}%`;
+          }
+          if (counterEl) {
+            const currentBeat = Math.min(Math.floor(p * strokeCards.length) + 1, strokeCards.length);
+            counterEl.textContent = `0${currentBeat} / 0${strokeCards.length}`;
+          }
+        },
+      });
 
-        horizontalTrigger = ScrollTrigger.create({
-          id: 'kineticBeatsHorizontalScroll',
-          trigger: philSection,
-          start: 'top top',
-          end: () => `+=${Math.max(1200, getScrollDistance() * 1.15)}`,
-          pin: true,
-          anticipatePin: 1,
-          scrub: 0.8,
-          animation: horizontalTween,
-          invalidateOnRefresh: true,
-          onUpdate(self) {
-            const p = self.progress;
-            if (progressFill) {
-              progressFill.style.width = `${(p * 100).toFixed(1)}%`;
-            }
-            if (counterEl) {
-              const currentBeat = Math.min(Math.floor(p * strokeCards.length) + 1, strokeCards.length);
-              counterEl.textContent = `0${currentBeat} / 0${strokeCards.length}`;
-            }
-          },
-        });
-      } else {
-        // Mobile / Reduced Motion: reset transform and rely on native touch scroll
-        gsap.set(strokeRail, { clearProps: 'transform,x' });
-      }
-    };
-
-    setupHorizontalScroll();
-
-    // Mobile touch scroll tracking for progress bar and counter
-    strokeRail.addEventListener('scroll', () => {
-      if (!isMobile()) return;
-      const maxScroll = strokeRail.scrollWidth - strokeRail.clientWidth;
-      if (maxScroll <= 0) return;
-      const current = strokeRail.scrollLeft;
-      const p = Math.min(1, Math.max(0, current / maxScroll));
-      if (progressFill) {
-        progressFill.style.width = `${(p * 100).toFixed(1)}%`;
-      }
-      if (counterEl) {
-        const currentBeat = Math.min(Math.floor(p * strokeCards.length) + 1, strokeCards.length);
-        counterEl.textContent = `0${currentBeat} / 0${strokeCards.length}`;
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', () => {
-      setupHorizontalScroll();
-      ScrollTrigger.refresh();
-    }, { passive: true });
+      window.addEventListener('resize', () => {
+        ScrollTrigger.refresh();
+      }, { passive: true });
+    }
 
     // Arrow navigation
     const getStepDistance = () => {
-      if (!horizontalTrigger) return 300;
+      if (!horizontalTrigger) return 340;
       const scrollRange = horizontalTrigger.end - horizontalTrigger.start;
       return scrollRange / (strokeCards.length - 1);
     };
 
     prevBtn?.addEventListener('click', (e) => {
       e.preventDefault();
-      if (horizontalTrigger && !isMobile()) {
+      if (horizontalTrigger) {
         const step = getStepDistance();
         window.scrollBy({ top: -step, behavior: 'smooth' });
       } else {
-        strokeRail.scrollBy({ left: -300, behavior: 'smooth' });
+        strokeRail.scrollBy({ left: -340, behavior: 'smooth' });
       }
     });
 
     nextBtn?.addEventListener('click', (e) => {
       e.preventDefault();
-      if (horizontalTrigger && !isMobile()) {
+      if (horizontalTrigger) {
         const step = getStepDistance();
         window.scrollBy({ top: step, behavior: 'smooth' });
       } else {
-        strokeRail.scrollBy({ left: 300, behavior: 'smooth' });
+        strokeRail.scrollBy({ left: 340, behavior: 'smooth' });
       }
     });
 

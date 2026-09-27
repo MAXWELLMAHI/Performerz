@@ -1070,36 +1070,21 @@
   .philosophy-stroke-track-wrap {
     width: 100%;
     overflow: hidden;
-    padding: 0;
+    padding: 0.5rem 0 1.5rem;
   }
 
   .philosophy-stroke-rail {
     display: flex;
     flex-wrap: nowrap;
-    gap: 14px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 8px 16px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    scrollbar-width: none;
-    transform: none !important;
-  }
-
-  .philosophy-stroke-rail::-webkit-scrollbar {
-    display: none;
+    gap: 1.25rem;
+    width: max-content;
+    overflow: visible;
+    padding: 0.5rem 0.5rem 1.5rem;
   }
 
   .stroke-philosophy-card {
-    flex: 0 0 min(285px, 82vw);
-    max-width: 320px;
-    min-height: 400px;
-    height: auto;
-    border-radius: 20px;
-    padding: 1.25rem 1.15rem;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
+    flex: 0 0 270px;
+    min-height: 440px;
   }
 
   .stroke-dance-stage {

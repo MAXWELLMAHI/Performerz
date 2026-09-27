@@ -237,63 +237,27 @@ export function initPillarsCanvas() {
 
   function setupScrollScrub() {
     const viewport = section.querySelector('.pillars-sticky-viewport');
-    const isMobile = () => window.innerWidth < 768;
+    if (!viewport) return;
 
-    function setActiveTabPillar(index) {
-      panels.forEach((p, i) => {
-        p.classList.toggle('is-active', i === index);
-      });
-      reducedMotionTabs.forEach((tab, i) => {
-        tab.classList.toggle('is-active', i === index);
-      });
-      if (currNumSpan) {
-        currNumSpan.textContent = `0${index + 1}`;
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+      onUpdate(self) {
+        targetProgress = self.progress;
+        resumeLoopIfNeeded();
       }
-      targetProgress = (index + 0.1) / 4;
-      currentProgress = targetProgress;
-      currentFrameIndex = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.floor(currentProgress * (TOTAL_FRAMES - 1))));
-      renderFrame(currentFrameIndex, currentProgress);
-    }
-
-    reducedMotionTabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => setActiveTabPillar(i));
     });
-
-    let st = null;
-    if (!isMobile()) {
-      st = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-        onUpdate(self) {
-          targetProgress = self.progress;
-          resumeLoopIfNeeded();
-        }
-      });
-    }
 
     // Make segment dots clickable to smoothly jump to that pillar
     segmentDots.forEach((dot, idx) => {
       dot.addEventListener('click', () => {
-        if (st) {
-          const targetP = (idx + 0.12) / 4;
-          const targetScroll = st.start + targetP * (st.end - st.start);
-          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-        } else {
-          setActiveTabPillar(idx);
-        }
+        const targetP = (idx + 0.12) / 4;
+        const targetScroll = st.start + targetP * (st.end - st.start);
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
       });
     });
-
-    window.addEventListener('resize', () => {
-      if (isMobile() && st) {
-        st.kill();
-        st = null;
-      } else if (!isMobile() && !st) {
-        setupScrollScrub();
-      }
-    }, { passive: true });
 
     // Viewport visibility observer to avoid running 60fps rAF offscreen
     const visibilityObserver = new IntersectionObserver((entries) => {

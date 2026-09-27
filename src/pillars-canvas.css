@@ -501,43 +501,23 @@
 
 @media (max-width: 768px) {
   .four-pillars-section {
-    height: auto !important; /* Eliminate excessive empty scroll space on mobile */
-    min-height: auto;
-    padding: 0;
+    height: 320vh; /* Smooth, agile navigation on mobile */
   }
 
   .pillars-sticky-viewport {
-    position: relative !important;
-    height: auto !important;
-    min-height: 540px;
-    padding: 2.5rem 1.25rem 2rem;
-    justify-content: flex-start;
-  }
-
-  .dancer-fullscreen-canvas {
-    opacity: 0.32; /* Subtle background presence on mobile behind text */
+    padding: 4rem 1.5rem 2rem;
+    justify-content: center;
   }
 
   .pillars-top-header {
-    position: static;
-    margin-bottom: 1.25rem;
-    text-align: left;
-    width: 100%;
-  }
-
-  .pillars-eyebrow-main {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-  }
-
-  .pillars-methodology-tag {
-    display: none;
+    top: 1.25rem;
+    left: 1.5rem;
+    right: 1.5rem;
   }
 
   .pillars-stage-container {
     padding: 0;
     max-width: 100%;
-    z-index: 10;
   }
 
   .pillars-content-col {
@@ -546,59 +526,30 @@
   }
 
   .pillars-progress-rail {
-    display: none !important;
-  }
-
-  .pillars-reduced-motion-nav {
-    display: flex !important;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 1.5rem;
-    z-index: 10;
-  }
-
-  .reduced-motion-tab {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-gray);
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .reduced-motion-tab.is-active {
-    background: rgba(240, 192, 96, 0.2);
-    border-color: var(--studio-amber);
-    color: #ffffff;
-    font-weight: 700;
+    margin-bottom: 1.25rem;
   }
 
   .pillars-panels-stage {
-    height: auto;
-    min-height: 240px;
+    height: 290px;
   }
 
   .pillar-title {
-    font-size: clamp(24px, 6vw, 32px);
-    margin-bottom: 0.6rem;
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
   }
 
   .pillar-body {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-    color: var(--text-gray);
+    font-size: 0.94rem;
+    line-height: 1.58;
+    margin-bottom: 1.5rem;
   }
 
   .pillar-cta-btn {
-    padding: 0.75rem 1.4rem;
-    font-size: 0.78rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
   }
 
   .pillars-stage-baseline {
-    display: none;
+    bottom: 12%;
   }
 }
