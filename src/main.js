@@ -14,6 +14,44 @@ import { initPillarsCanvas } from './pillars-canvas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
+     0. HAUTE PRELOADER CALIBRATION & REVEAL
+     ========================================================================== */
+  const preloader = document.getElementById('site-preloader');
+  if (preloader) {
+    const bar = document.getElementById('preloader-bar');
+    const counter = document.getElementById('preloader-counter');
+    let progress = 0;
+    
+    const updateProgress = () => {
+      progress += Math.floor(Math.random() * 18) + 12;
+      if (progress > 100) progress = 100;
+      if (bar) bar.style.width = `${progress}%`;
+      if (counter) counter.textContent = `${String(progress).padStart(2, '0')}%`;
+      
+      if (progress < 100) {
+        setTimeout(updateProgress, 50);
+      } else {
+        setTimeout(() => {
+          preloader.classList.add('loaded');
+          setTimeout(() => {
+            try { preloader.remove(); } catch (_) {}
+          }, 850);
+        }, 200);
+      }
+    };
+    
+    updateProgress();
+    
+    window.addEventListener('load', () => {
+      if (bar) bar.style.width = '100%';
+      if (counter) counter.textContent = '100%';
+      setTimeout(() => {
+        preloader?.classList.add('loaded');
+      }, 180);
+    }, { once: true });
+  }
+
+  /* ==========================================================================
      1. STICKY NAVBAR & ROUTE HIGHLIGHTING
      ========================================================================== */
   const navbar = document.querySelector('.navbar');
@@ -145,129 +183,115 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     4. INTERACTIVE MUSIC BEAT WIDGET & SOUND SYNTHESIS (Step Up Club)
+     4. INTERACTIVE CLASSICAL BALLET & OPERA MUSIC (Ponchielli: La Gioconda)
      ========================================================================== */
   const audioBtn = document.getElementById('audio-play-btn');
   const eqBars = document.querySelectorAll('.eq-bar, .dock-eq-bar');
   const dockThumb = document.getElementById('dock-track-thumb');
   const tryPassBtn = document.querySelectorAll('.btn-try-pill, .btn-claim-pass, .dock-pill-link');
-  let audioContext = null;
+
   let isPlaying = false;
-  let soundInterval = null;
+  let hasUserStopped = false; // Tracks if user manually clicked pause/stop
 
-  const stopSynthesizedChoreoBeats = () => {
-    if (soundInterval) {
-      clearInterval(soundInterval);
-      soundInterval = null;
-    }
-  };
+  // Original Grand Symphonic Orchestra recording (Ponchielli: La Gioconda - Danza delle Ore)
+  const balletAudio = new Audio();
+  balletAudio.src = '/dance_of_the_hours_lso.mp3';
+  balletAudio.preload = 'auto';
+  balletAudio.loop = true;
+  balletAudio.volume = 0.7;
 
-  const playSynthesizedChoreoBeats = () => {
-    try {
-      stopSynthesizedChoreoBeats(); // Guard against interval stacking
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
+  // The iconic Allegro Vivacissimo Galop hook starts at 6:42 (402s)
+  const BALLET_HOOK_START = 402;
+  let hasCuedHook = false;
 
-      // Melodic arpeggio simulation (A minor 7th)
-      const notes = [220, 261.63, 329.63, 392, 440, 523.25];
-      let step = 0;
-
-      soundInterval = setInterval(() => {
-        if (!isPlaying || !audioContext || audioContext.state === 'closed') return;
-        const now = audioContext.currentTime;
-
-        // Sub 808 Kick on every 4th beat
-        if (step % 4 === 0) {
-          const kickOsc = audioContext.createOscillator();
-          const kickGain = audioContext.createGain();
-          kickOsc.frequency.setValueAtTime(150, now);
-          kickOsc.frequency.exponentialRampToValueAtTime(38, now + 0.15);
-          kickGain.gain.setValueAtTime(0.35, now);
-          kickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-          kickOsc.connect(kickGain);
-          kickGain.connect(audioContext.destination);
-          kickOsc.start(now);
-          kickOsc.stop(now + 0.26);
-          setTimeout(() => {
-            try {
-              kickOsc.disconnect();
-              kickGain.disconnect();
-            } catch (_) {}
-          }, 300);
-        }
-
-        // Melodic synth pluck
-        const osc = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(notes[step % notes.length], now);
-
-        gain.gain.setValueAtTime(0.1, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
-
-        osc.connect(gain);
-        gain.connect(audioContext.destination);
-
-        osc.start(now);
-        osc.stop(now + 0.33);
-        setTimeout(() => {
-          try {
-            osc.disconnect();
-            gain.disconnect();
-          } catch (_) {}
-        }, 360);
-
-        step++;
-      }, 220);
-    } catch (err) {
-      console.warn('Audio playback note:', err);
-    }
-  };
-
-  const pauseAudioPlayback = () => {
-    isPlaying = false;
+  const updateAudioUI = (playing) => {
+    isPlaying = playing;
     if (audioBtn) {
-      audioBtn.innerHTML = '▶';
-      audioBtn.setAttribute('title', 'Play Beat Preview');
+      audioBtn.innerHTML = playing ? '❚❚' : '▶';
+      audioBtn.setAttribute('title', playing ? 'Pause Ballet Music' : 'Play Ballet Theme (Ponchielli: Danza delle Ore)');
+      audioBtn.setAttribute('aria-label', playing ? 'Pause Ballet Music' : 'Play Ballet Music');
     }
-    dockThumb?.classList.remove('playing');
+    if (dockThumb) {
+      if (playing) {
+        dockThumb.classList.add('playing');
+      } else {
+        dockThumb.classList.remove('playing');
+      }
+    }
     eqBars.forEach(bar => {
-      bar.style.animationPlayState = 'paused';
+      bar.style.animationPlayState = playing ? 'running' : 'paused';
     });
-    stopSynthesizedChoreoBeats();
   };
 
-  audioBtn?.addEventListener('click', () => {
-    isPlaying = !isPlaying;
+  const playBalletMusic = async () => {
+    try {
+      if (!hasCuedHook && balletAudio.currentTime < 10) {
+        balletAudio.currentTime = BALLET_HOOK_START;
+        hasCuedHook = true;
+      }
+      await balletAudio.play();
+      updateAudioUI(true);
+    } catch (err) {
+      // Browser autoplay policy requires user gesture before playing unmuted sound
+      updateAudioUI(false);
+    }
+  };
+
+  const pauseBalletMusic = () => {
+    try {
+      balletAudio.pause();
+    } catch (_) {}
+    updateAudioUI(false);
+  };
+
+  // Toggle button click
+  audioBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (isPlaying) {
-      audioBtn.innerHTML = '❚❚';
-      audioBtn.setAttribute('title', 'Pause Beat');
-      dockThumb?.classList.add('playing');
-      eqBars.forEach(bar => {
-        bar.style.animationPlayState = 'running';
-      });
-      playSynthesizedChoreoBeats();
+      hasUserStopped = true;
+      pauseBalletMusic();
     } else {
-      pauseAudioPlayback();
+      hasUserStopped = false;
+      playBalletMusic();
     }
   });
+
+  // Attempt initial playback on load, with smart gesture fallback for browser autoplay policies
+  const initBalletAutoplay = () => {
+    // 1. Immediate play attempt
+    playBalletMusic();
+
+    // 2. Browser autoplay fallback: activate on very first user interaction
+    const onFirstUserGesture = () => {
+      if (!isPlaying && !hasUserStopped) {
+        playBalletMusic();
+      }
+      cleanupGestureListeners();
+    };
+
+    const gestureEvents = ['pointerdown', 'touchstart', 'scroll', 'keydown'];
+    const cleanupGestureListeners = () => {
+      gestureEvents.forEach(evt => {
+        window.removeEventListener(evt, onFirstUserGesture, { passive: true });
+      });
+    };
+
+    gestureEvents.forEach(evt => {
+      window.addEventListener(evt, onFirstUserGesture, { passive: true, once: true });
+    });
+  };
+
+  initBalletAutoplay();
 
   // Resource & battery conservation: pause on tab background / page unload
   document.addEventListener('visibilitychange', () => {
     if (document.hidden && isPlaying) {
-      pauseAudioPlayback();
+      pauseBalletMusic();
     }
   });
 
   window.addEventListener('pagehide', () => {
-    stopSynthesizedChoreoBeats();
-    if (audioContext && audioContext.state !== 'closed') {
-      audioContext.close().catch(() => {});
-    }
+    pauseBalletMusic();
   });
 
   tryPassBtn.forEach(btn => {
@@ -585,8 +609,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const yearSpan = document.getElementById('year');
-  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+  document.querySelectorAll('#year, .current-year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
 
   /* ==========================================================================
      12. INTERACTIVE COACHES ORBITAL CAROUSEL (GSAP SCROLLTRIGGER)

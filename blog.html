@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editorial Journal & Dispatch — The Performerz Academy</title>
+    <meta name="description" content="Explore choreography dispatches, biomechanics insights, dancer spotlights, and performance stagecraft from The Performerz Academy faculty." />
     <!-- Google Fonts: Outfit, Space Grotesk, Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +13,30 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
+    <!-- Haute Preloader & Kinetic Logo Calibration Overlay -->
+    <div class="haute-preloader" id="site-preloader" aria-hidden="true">
+      <div class="preloader-backdrop-glow"></div>
+      <div class="preloader-content">
+        <div class="preloader-logo-wrap">
+          <div class="preloader-orbit ring-1"></div>
+          <div class="preloader-orbit ring-2"></div>
+          <div class="preloader-orbit ring-3"></div>
+          <div class="preloader-pulse-glow"></div>
+          <img src="/Academy-Logo-Final.png" alt="The Performerz Academy Logo" class="preloader-logo-img" />
+        </div>
+        
+        <div class="preloader-meta">
+          <div class="preloader-title">THE PERFORMERZ ACADEMY</div>
+          <div class="preloader-subtitle">// CALIBRATING ATELIER OF MOTION</div>
+        </div>
+
+        <div class="preloader-progress-track">
+          <div class="preloader-progress-bar" id="preloader-bar"></div>
+        </div>
+        <div class="preloader-counter" id="preloader-counter">00%</div>
+      </div>
+    </div>
+
     <!-- Subtle Architectural Background Grid -->
     <div class="editorial-grid-overlay" aria-hidden="true">
       <div class="grid-line" data-coord="/01"></div>
@@ -34,7 +59,6 @@
           <a href="/" class="nav-link">Home</a>
           <a href="/about.html" class="nav-link">About Us</a>
           <a href="/classes.html" class="nav-link">Classes</a>
-          <a href="/events.html" class="nav-link">Events</a>
           <a href="/blog.html" class="nav-link active">Blog</a>
           <a href="/reviews.html" class="nav-link">Reviews</a>
         </nav>
@@ -59,130 +83,53 @@
         <a href="/" class="drawer-link">Home</a>
         <a href="/about.html" class="drawer-link">About Us</a>
         <a href="/classes.html" class="drawer-link">Classes</a>
-        <a href="/events.html" class="drawer-link">Events</a>
         <a href="/blog.html" class="drawer-link">Blog</a>
         <a href="/reviews.html" class="drawer-link">Reviews</a>
         <a href="/index.html#contact" class="btn btn-amber drawer-btn">Book A Demo Class</a>
       </nav>
     </div>
 
-    <main style="padding-top: 100px;">
-      <!-- Page Header -->
-      <section class="container py-large text-center" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-        <span class="meta-bracket">01 // ESSAYS &bull; JOURNAL &bull; INSIGHTS</span>
-        <h1 class="section-title" style="margin-top: 16px;">
-          THE EDITORIAL <span class="serif-italic">DISPATCH</span>
-        </h1>
-        <p class="section-desc" style="text-align: center; margin: 0 auto;">
-          In-depth masterclass analyses, choreographic breakdowns, kinesiology tips, and behind-the-curtain stories from our company dancers.
-        </p>
-      </section>
-
-      <!-- Blog Grid -->
-      <section class="container section-divider" style="padding-bottom: 120px;">
-        <div class="disciplines-grid-luxury reveal">
-          <!-- Article 1 -->
-          <article class="discipline-card-deluxe">
-            <div class="discipline-img-holder">
-              <img src="https://framerusercontent.com/images/hKjkMTXkcviFlrfk8dghf9L9k.jpg" alt="Unveiling The Art Of Ballet" />
-              <span class="discipline-tag-pill">CHOREOGRAPHY &bull; ESSAY</span>
-            </div>
-            <div class="discipline-info-deluxe">
-              <div>
-                <h3 class="discipline-title-deluxe">Unveiling The Art Of Classical Ballet</h3>
-                <p class="discipline-desc-deluxe">How 19th-century alignment fundamentals remain the indispensable bedrock for cutting-edge contemporary floor work and acrobatic power.</p>
-              </div>
-              <div class="discipline-footer-meta">
-                <span class="discipline-level">6 Min Read</span>
-                <a href="/index.html#contact" class="discipline-arrow-link"><span>Read Essay</span> &rarr;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 2 -->
-          <article class="discipline-card-deluxe">
-            <div class="discipline-img-holder">
-              <img src="https://framerusercontent.com/images/hJogs3ApDSRbTvfXJWIhSeDrKI.jpg" alt="Rhythms And Beats Alive" />
-              <span class="discipline-tag-pill">KINESIOLOGY &bull; PRACTICE</span>
-            </div>
-            <div class="discipline-info-deluxe">
-              <div>
-                <h3 class="discipline-title-deluxe">Rhythms And Beats: Sonic Musicality</h3>
-                <p class="discipline-desc-deluxe">Training your nervous system to detect micro-polyrhythms and translate sub-bass frequencies into sharp kinetic isolations.</p>
-              </div>
-              <div class="discipline-footer-meta">
-                <span class="discipline-level">4 Min Read</span>
-                <a href="/index.html#contact" class="discipline-arrow-link"><span>Read Essay</span> &rarr;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 3 -->
-          <article class="discipline-card-deluxe">
-            <div class="discipline-img-holder">
-              <img src="https://framerusercontent.com/images/L4IbuB3J6msTjMsPhdOrXyfHPuY.jpg" alt="Guide To Dance Styles" />
-              <span class="discipline-tag-pill">PEDAGOGY &bull; CURRICULUM</span>
-            </div>
-            <div class="discipline-info-deluxe">
-              <div>
-                <h3 class="discipline-title-deluxe">A Connoisseur's Guide To Movement</h3>
-                <p class="discipline-desc-deluxe">Navigating the nuances between contemporary release, rhythmic precision, and theatrical stagecraft to discover your artistic voice.</p>
-              </div>
-              <div class="discipline-footer-meta">
-                <span class="discipline-level">8 Min Read</span>
-                <a href="/index.html#contact" class="discipline-arrow-link"><span>Read Essay</span> &rarr;</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article 4 -->
-          <article class="discipline-card-deluxe">
-            <div class="discipline-img-holder">
-              <img src="https://framerusercontent.com/images/u8PZASBXjZXv4m6yHFjb1MX5Z6w.jpg" alt="Dance In The Digital Age" />
-              <span class="discipline-tag-pill">FUTURE &bull; STAGECRAFT</span>
-            </div>
-            <div class="discipline-info-deluxe">
-              <div>
-                <h3 class="discipline-title-deluxe">Dance In The Digital Spatial Age</h3>
-                <p class="discipline-desc-deluxe">How projection mapping, immersive spatial audio, and cinematic camera tracking are transforming the modern performance stage.</p>
-              </div>
-              <div class="discipline-footer-meta">
-                <span class="discipline-level">5 Min Read</span>
-                <a href="/index.html#contact" class="discipline-arrow-link"><span>Read Essay</span> &rarr;</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Bottom Callout -->
-      <section class="bottom-cta-deluxe" id="contact">
-        <div class="cta-deluxe-box reveal">
-          <span class="meta-bracket">JOIN THE DISPATCH</span>
-          <h2 class="cta-deluxe-title">Receive Masterclass Insights Weekly</h2>
-          <p class="section-desc" style="margin: 0 auto 28px; color: #fff;">
-            Connect with our editorial team or subscribe for curated masterclasses.
-          </p>
-          <div class="contact-direct-grid" style="margin-bottom: 28px;">
-            <a href="tel:+918169729704" class="contact-badge-deluxe" aria-label="Call +91 816 972 9704">
-              <span class="contact-badge-icon">📞</span>
-              <span class="contact-badge-meta">
-                <span class="contact-badge-label">Direct Hotline</span>
-                <strong class="contact-badge-value">+91 816 972 9704</strong>
-              </span>
-            </a>
-            <a href="mailto:performerzacademy@gmail.com" class="contact-badge-deluxe" aria-label="Email performerzacademy@gmail.com">
-              <span class="contact-badge-icon">✉</span>
-              <span class="contact-badge-meta">
-                <span class="contact-badge-label">Atelier Email</span>
-                <strong class="contact-badge-value">performerzacademy@gmail.com</strong>
-              </span>
-            </a>
+    <main style="padding-top: 100px; min-height: 75vh; display: flex; align-items: center; justify-content: center;">
+      <!-- Under Maintenance Section -->
+      <section class="container py-large text-center maintenance-hero-stage">
+        <div class="maintenance-box reveal">
+          <div class="maintenance-status-pill">
+            <span class="status-pulse-dot"></span>
+            <span>SYSTEM &bull; UNDER MAINTENANCE</span>
           </div>
-          <form class="subscribe-form" id="newsletter-form">
-            <input type="email" placeholder="Enter your email address..." required class="subscribe-input" aria-label="Email Address" />
-            <button type="submit" class="btn btn-amber subscribe-btn">Subscribe &rarr;</button>
-          </form>
+
+          <span class="meta-bracket" style="margin: 10px 0 14px; display: inline-block;">01 // EDITORIAL JOURNAL &bull; ARCHIVE REVISION</span>
+
+          <h1 class="maintenance-title">
+            THE EDITORIAL DISPATCH IS <br><span class="serif-italic">UNDER MAINTENANCE</span>
+          </h1>
+
+          <p class="maintenance-desc">
+            We are currently refining and updating our choreographic masterclass analyses, dancer research journals, and performance essays. The editorial archive will return shortly with new curated insights.
+          </p>
+
+          <!-- Maintenance Glass Status Card -->
+          <div class="maintenance-card-glass">
+            <div class="maintenance-card-grid">
+              <div class="maintenance-stat-item">
+                <span class="maintenance-stat-label">DISPATCH STATUS</span>
+                <span class="maintenance-stat-value text-amber">Upgrading Archive</span>
+              </div>
+              <div class="maintenance-stat-item">
+                <span class="maintenance-stat-label">EXPECTED RESUMPTION</span>
+                <span class="maintenance-stat-value">Coming Soon</span>
+              </div>
+              <div class="maintenance-stat-item">
+                <span class="maintenance-stat-label">ADMISSIONS &amp; CLASSES</span>
+                <span class="maintenance-stat-value text-gold">100% Operational</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="maintenance-btn-row">
+            <a href="/" class="btn btn-amber">&larr; Return To Main Stage</a>
+            <a href="/classes.html" class="btn btn-outline">Explore Dance Classes &rarr;</a>
+          </div>
         </div>
       </section>
     </main>
@@ -204,7 +151,6 @@
             <li><a href="/">Home</a></li>
             <li><a href="/about.html">About Atelier</a></li>
             <li><a href="/classes.html">Dance Classes</a></li>
-            <li><a href="/events.html">Live Events</a></li>
             <li><a href="/blog.html">Editorial Blog</a></li>
             <li><a href="/reviews.html">Dancer Reviews</a></li>
           </ul>
@@ -238,7 +184,7 @@
       </div>
       <div class="container footer-bottom-bar">
         <span>&copy; <span id="year">2026</span> THE PERFORMERZ ACADEMY. ALL RIGHTS RESERVED.</span>
-        <span>DESIGNED AS AN ATELIER OF MOTION</span>
+        <span>DEVELOPED AND DESIGNED BY MAHESH GOLAM</span>
       </div>
     </footer>
 

@@ -48,17 +48,29 @@
   box-sizing: border-box;
 }
 
+.movement-hero-compact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 45%, rgba(225, 29, 72, 0.14) 0%, rgba(245, 158, 11, 0.08) 35%, rgba(7, 8, 11, 0.72) 75%, rgba(7, 8, 11, 0.95) 100%),
+    linear-gradient(180deg, #07080b 0%, rgba(7, 8, 11, 0.18) 25%, rgba(7, 8, 11, 0.18) 75%, #07080b 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
 .movement-hero-bg {
   position: absolute;
   inset: -10% -5%;
-  background-image: url('/echoes_motion_dancer.jpg');
+  background-image: url('/about_philosophy_ensemble.webp'), url('/about_philosophy_ensemble.jpg');
   background-size: cover;
-  background-position: center 30%;
-  opacity: 0.14;
-  filter: grayscale(100%) contrast(140%);
+  background-position: center 38%;
+  opacity: 0.45;
+  filter: brightness(0.72) contrast(1.22) saturate(1.28);
   pointer-events: none;
   z-index: 1;
   will-change: transform;
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
 .movement-hero-meta {
@@ -76,6 +88,7 @@
   color: var(--studio-amber);
   text-transform: uppercase;
   margin-bottom: 6px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
 }
 
 .movement-hero-sub {
@@ -85,6 +98,7 @@
   letter-spacing: 0.16em;
   color: var(--text-muted);
   text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 .movement-hero-kinetic-bar {
@@ -113,6 +127,7 @@
   opacity: 0.1;
   transition: opacity 0.2s ease-out;
   will-change: clip-path, opacity;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 0, 0, 0.85);
 }
 
 .word-right {

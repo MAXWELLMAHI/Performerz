@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Disciplines & Classes — The Performerz Academy</title>
+    <meta name="description" content="Explore intensive dance programs in Classical Ballet, Contemporary, Acrobatics, Aerial Silks, and Urban Hip-Hop at The Performerz Academy." />
     <!-- Google Fonts: Outfit, Space Grotesk, Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +13,30 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
+    <!-- Haute Preloader & Kinetic Logo Calibration Overlay -->
+    <div class="haute-preloader" id="site-preloader" aria-hidden="true">
+      <div class="preloader-backdrop-glow"></div>
+      <div class="preloader-content">
+        <div class="preloader-logo-wrap">
+          <div class="preloader-orbit ring-1"></div>
+          <div class="preloader-orbit ring-2"></div>
+          <div class="preloader-orbit ring-3"></div>
+          <div class="preloader-pulse-glow"></div>
+          <img src="/Academy-Logo-Final.png" alt="The Performerz Academy Logo" class="preloader-logo-img" />
+        </div>
+        
+        <div class="preloader-meta">
+          <div class="preloader-title">THE PERFORMERZ ACADEMY</div>
+          <div class="preloader-subtitle">// CALIBRATING ATELIER OF MOTION</div>
+        </div>
+
+        <div class="preloader-progress-track">
+          <div class="preloader-progress-bar" id="preloader-bar"></div>
+        </div>
+        <div class="preloader-counter" id="preloader-counter">00%</div>
+      </div>
+    </div>
+
     <!-- Subtle Architectural Background Grid -->
     <div class="editorial-grid-overlay" aria-hidden="true">
       <div class="grid-line" data-coord="/01"></div>
@@ -34,7 +59,6 @@
           <a href="/" class="nav-link">Home</a>
           <a href="/about.html" class="nav-link">About Us</a>
           <a href="/classes.html" class="nav-link active">Classes</a>
-          <a href="/events.html" class="nav-link">Events</a>
           <a href="/blog.html" class="nav-link">Blog</a>
           <a href="/reviews.html" class="nav-link">Reviews</a>
         </nav>
@@ -59,7 +83,6 @@
         <a href="/" class="drawer-link">Home</a>
         <a href="/about.html" class="drawer-link">About Us</a>
         <a href="/classes.html" class="drawer-link">Classes</a>
-        <a href="/events.html" class="drawer-link">Events</a>
         <a href="/blog.html" class="drawer-link">Blog</a>
         <a href="/reviews.html" class="drawer-link">Reviews</a>
         <a href="/index.html#contact" class="btn btn-amber drawer-btn">Book A Demo Class</a>
@@ -120,7 +143,7 @@
           <!-- Card 3: Aerial Silk & Poise -->
           <div class="discipline-card-deluxe">
             <div class="discipline-img-holder">
-              <img src="https://framerusercontent.com/images/RHd0yaLWnnyK7yve0hM2pjBlYuM.jpg" alt="Aerial Silk Artistry" />
+              <img src="/dance_aerial.webp" alt="Aerial Silk Artistry" style="object-position: center 30%;" />
               <span class="discipline-tag-pill coming-soon-pill-blue">COMING SOON</span>
             </div>
             <div class="discipline-info-deluxe">
@@ -140,6 +163,12 @@
 
       <!-- Bottom Callout -->
       <section class="bottom-cta-deluxe" id="contact">
+        <!-- Full-Coverage Video Background -->
+        <div class="cta-video-container" aria-hidden="true">
+          <video class="cta-video-main" src="/cta_video.mp4" poster="/cta_bg.webp" autoplay loop muted playsinline preload="auto"></video>
+          <div class="cta-video-overlay"></div>
+        </div>
+
         <div class="cta-deluxe-box reveal">
           <span class="meta-bracket">SCHEDULE &bull; AUDITION</span>
           <h2 class="cta-deluxe-title">Ready To Move? Book A Trial.</h2>
@@ -184,7 +213,6 @@
             <li><a href="/">Home</a></li>
             <li><a href="/about.html">About Atelier</a></li>
             <li><a href="/classes.html">Dance Classes</a></li>
-            <li><a href="/events.html">Live Events</a></li>
             <li><a href="/blog.html">Editorial Blog</a></li>
             <li><a href="/reviews.html">Dancer Reviews</a></li>
           </ul>
@@ -218,7 +246,7 @@
       </div>
       <div class="container footer-bottom-bar">
         <span>&copy; <span id="year">2026</span> THE PERFORMERZ ACADEMY. ALL RIGHTS RESERVED.</span>
-        <span>DESIGNED AS AN ATELIER OF MOTION</span>
+        <span>DEVELOPED AND DESIGNED BY MAHESH GOLAM</span>
       </div>
     </footer>
 

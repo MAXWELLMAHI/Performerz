@@ -32,7 +32,7 @@ const COACHES = [
     years: '5+ Yrs',
     students: 'Gold Medalist',
     portrait: '/coach_sohil.jpg',
-    danceImg: 'https://framerusercontent.com/images/RHd0yaLWnnyK7yve0hM2pjBlYuM.jpg',
+    danceImg: '/dance_aerial.webp',
     index: '02',
   },
   {

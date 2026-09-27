@@ -55,7 +55,7 @@ export const TOP_10_INSTAGRAM_REELS = [
     id: 'DcivIHONvGp',
     url: 'https://www.instagram.com/reel/DcivIHONvGp/',
     videoUrl: '/vertical_reel_1.mp4',
-    poster: '/echoes_motion_dancer.jpg',
+    poster: '/about_philosophy_ensemble.jpg',
     title: 'Raw Grace & Momentum Flow',
     views: '29.7K',
     likes: '2.1K'
@@ -100,7 +100,7 @@ export const TOP_10_INSTAGRAM_REELS = [
     id: 'DcrF0VUNf40_2',
     url: 'https://www.instagram.com/reel/DcrF0VUNf40/',
     videoUrl: '/vertical_reel_2.mp4',
-    poster: '/echoes_motion_dancer.jpg',
+    poster: '/about_philosophy_ensemble.jpg',
     title: 'Stage Craft & Contemporary Artistry',
     views: '54.6K',
     likes: '4.5K'
