@@ -4593,7 +4593,7 @@ img, video {
   }
 
   /* 3. Global Section Spacing Reduction (Eliminate massive blank gaps) */
-  section,
+  section:not(.four-pillars-section):not(.movement-line-section):not(.hero-editorial),
   .section-divider,
   .benefits-section-deluxe,
   .testimonials-section-deluxe,

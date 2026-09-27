@@ -89,45 +89,67 @@ export function initMovementLine() {
   const counterEl = document.querySelector('#phil-beat-counter');
 
   if (philSection && strokeRail && trackWrap && strokeCards.length > 0) {
+    const isMobile = () => window.innerWidth < 768;
+
+    const getScrollDistance = () => {
+      const railWidth = strokeRail.scrollWidth;
+      const wrapWidth = trackWrap.clientWidth || window.innerWidth;
+      const extraPad = Math.min(80, window.innerWidth * 0.06);
+      return Math.max(0, railWidth - wrapWidth + extraPad);
+    };
+
     let horizontalTrigger = null;
 
-    if (!prefersReducedMotion) {
-      // Horizontal scrub animation
-      const horizontalTween = gsap.to(strokeRail, {
-        x: () => -getScrollDistance(),
-        ease: 'none',
-      });
+    const setupHorizontalScroll = () => {
+      if (horizontalTrigger) {
+        horizontalTrigger.kill();
+        horizontalTrigger = null;
+      }
 
-      horizontalTrigger = ScrollTrigger.create({
-        id: 'kineticBeatsHorizontalScroll',
-        trigger: philSection,
-        start: 'top top',
-        end: () => `+=${Math.max(1200, getScrollDistance() * 1.15)}`,
-        pin: true,
-        anticipatePin: 1,
-        scrub: 0.8,
-        animation: horizontalTween,
-        invalidateOnRefresh: true,
-        onUpdate(self) {
-          const p = self.progress;
-          if (progressFill) {
-            progressFill.style.width = `${(p * 100).toFixed(1)}%`;
-          }
-          if (counterEl) {
-            const currentBeat = Math.min(Math.floor(p * strokeCards.length) + 1, strokeCards.length);
-            counterEl.textContent = `0${currentBeat} / 0${strokeCards.length}`;
-          }
-        },
-      });
+      if (!prefersReducedMotion) {
+        // Pinned horizontal GSAP scrub animation
+        const horizontalTween = gsap.to(strokeRail, {
+          x: () => -getScrollDistance(),
+          ease: 'none',
+        });
 
-      window.addEventListener('resize', () => {
-        ScrollTrigger.refresh();
-      }, { passive: true });
-    }
+        horizontalTrigger = ScrollTrigger.create({
+          id: 'kineticBeatsHorizontalScroll',
+          trigger: philSection,
+          start: 'top top',
+          end: () => `+=${Math.max(window.innerWidth < 768 ? 950 : 1200, getScrollDistance() * (window.innerWidth < 768 ? 1.05 : 1.15))}`,
+          pin: true,
+          anticipatePin: 1,
+          scrub: 0.6,
+          animation: horizontalTween,
+          invalidateOnRefresh: true,
+          onUpdate(self) {
+            const p = self.progress;
+            if (progressFill) {
+              progressFill.style.width = `${(p * 100).toFixed(1)}%`;
+            }
+            if (counterEl) {
+              const currentBeat = Math.min(Math.floor(p * strokeCards.length) + 1, strokeCards.length);
+              counterEl.textContent = `0${currentBeat} / 0${strokeCards.length}`;
+            }
+          },
+        });
+      } else {
+        // Reduced Motion: reset transform
+        gsap.set(strokeRail, { clearProps: 'transform,x' });
+      }
+    };
+
+    setupHorizontalScroll();
+
+    window.addEventListener('resize', () => {
+      setupHorizontalScroll();
+      ScrollTrigger.refresh();
+    }, { passive: true });
 
     // Arrow navigation
     const getStepDistance = () => {
-      if (!horizontalTrigger) return 340;
+      if (!horizontalTrigger) return 300;
       const scrollRange = horizontalTrigger.end - horizontalTrigger.start;
       return scrollRange / (strokeCards.length - 1);
     };
@@ -138,7 +160,7 @@ export function initMovementLine() {
         const step = getStepDistance();
         window.scrollBy({ top: -step, behavior: 'smooth' });
       } else {
-        strokeRail.scrollBy({ left: -340, behavior: 'smooth' });
+        strokeRail.scrollBy({ left: -300, behavior: 'smooth' });
       }
     });
 
@@ -148,7 +170,7 @@ export function initMovementLine() {
         const step = getStepDistance();
         window.scrollBy({ top: step, behavior: 'smooth' });
       } else {
-        strokeRail.scrollBy({ left: 340, behavior: 'smooth' });
+        strokeRail.scrollBy({ left: 300, behavior: 'smooth' });
       }
     });
 

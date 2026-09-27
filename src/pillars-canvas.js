@@ -74,37 +74,62 @@ export function initPillarsCanvas() {
   }
 
   /* ==========================================================================
-     2. FRAME PRELOADER (120 Transparent WebP frames)
+     2. FAST PROGRESSIVE FRAME PRELOADER (120 Transparent WebP frames)
      ========================================================================== */
   const TOTAL_FRAMES = 120;
   const loadedImages = new Array(TOTAL_FRAMES);
   let loadedCount = 0;
   let isReady = false;
 
-  function handleFrameLoaded(index, img) {
-    loadedImages[index] = img;
-    loadedCount++;
-    if (loaderPct) {
-      const pct = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-      loaderPct.textContent = `${pct}%`;
+  function dismissLoader() {
+    if (isReady) return;
+    isReady = true;
+    if (loader) {
+      loader.classList.add('is-hidden');
     }
-
-    if (loadedCount === TOTAL_FRAMES) {
-      isReady = true;
-      if (loader) {
-        loader.classList.add('is-hidden');
-      }
-      resizeCanvas();
-      setupScrollScrub();
-    }
+    resizeCanvas();
+    setupScrollScrub();
   }
 
-  for (let i = 0; i < TOTAL_FRAMES; i++) {
+  // Preload frame 0 immediately to start animation & dismiss loader without waiting
+  const firstFrame = new Image();
+  firstFrame.src = '/frames/frame_000.webp';
+  firstFrame.onload = () => {
+    loadedImages[0] = firstFrame;
+    loadedCount++;
+    dismissLoader();
+  };
+  firstFrame.onerror = () => {
+    dismissLoader();
+  };
+
+  // Hard safety timeout: Dismiss loader in 600ms max regardless of slow mobile network
+  setTimeout(() => {
+    dismissLoader();
+  }, 600);
+
+  // Background fetch remaining frames
+  for (let i = 1; i < TOTAL_FRAMES; i++) {
     const img = new Image();
     const padIndex = String(i).padStart(3, '0');
     img.src = `/frames/frame_${padIndex}.webp`;
-    img.onload = () => handleFrameLoaded(i, img);
-    img.onerror = () => handleFrameLoaded(i, img);
+    img.onload = () => {
+      loadedImages[i] = img;
+      loadedCount++;
+      if (loaderPct) {
+        const pct = Math.round((loadedCount / TOTAL_FRAMES) * 100);
+        loaderPct.textContent = `${pct}%`;
+      }
+      if (loadedCount >= TOTAL_FRAMES) {
+        dismissLoader();
+      }
+    };
+    img.onerror = () => {
+      loadedCount++;
+      if (loadedCount >= TOTAL_FRAMES) {
+        dismissLoader();
+      }
+    };
   }
 
   /* ==========================================================================
@@ -115,8 +140,23 @@ export function initPillarsCanvas() {
   let lastDrawnProgress = -1;
 
   function renderFrame(index, progress = 0) {
-    if (!isReady || !loadedImages[index]) return;
-    const img = loadedImages[index];
+    if (!canvas) return;
+
+    // Find requested frame or nearest loaded frame for zero-lag rendering
+    let img = loadedImages[index];
+    if (!img) {
+      for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+        if (index - offset >= 0 && loadedImages[index - offset]) {
+          img = loadedImages[index - offset];
+          break;
+        }
+        if (index + offset < TOTAL_FRAMES && loadedImages[index + offset]) {
+          img = loadedImages[index + offset];
+          break;
+        }
+      }
+    }
+    if (!img) return;
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
@@ -237,13 +277,34 @@ export function initPillarsCanvas() {
 
   function setupScrollScrub() {
     const viewport = section.querySelector('.pillars-sticky-viewport');
-    if (!viewport) return;
+    const isMobile = () => window.innerWidth < 768;
 
-    const st = ScrollTrigger.create({
+    function setActiveTabPillar(index) {
+      panels.forEach((p, i) => {
+        p.classList.toggle('is-active', i === index);
+      });
+      reducedMotionTabs.forEach((tab, i) => {
+        tab.classList.toggle('is-active', i === index);
+      });
+      if (currNumSpan) {
+        currNumSpan.textContent = `0${index + 1}`;
+      }
+      targetProgress = (index + 0.1) / 4;
+      currentProgress = targetProgress;
+      currentFrameIndex = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.floor(currentProgress * (TOTAL_FRAMES - 1))));
+      renderFrame(currentFrameIndex, currentProgress);
+    }
+
+    reducedMotionTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => setActiveTabPillar(i));
+    });
+
+    let st = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: true,
+      scrub: 0.6,
+      invalidateOnRefresh: true,
       onUpdate(self) {
         targetProgress = self.progress;
         resumeLoopIfNeeded();
@@ -253,11 +314,20 @@ export function initPillarsCanvas() {
     // Make segment dots clickable to smoothly jump to that pillar
     segmentDots.forEach((dot, idx) => {
       dot.addEventListener('click', () => {
-        const targetP = (idx + 0.12) / 4;
-        const targetScroll = st.start + targetP * (st.end - st.start);
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        if (st) {
+          const targetP = (idx + 0.12) / 4;
+          const targetScroll = st.start + targetP * (st.end - st.start);
+          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        } else {
+          setActiveTabPillar(idx);
+        }
       });
     });
+
+    window.addEventListener('resize', () => {
+      ScrollTrigger.refresh();
+      resizeCanvas();
+    }, { passive: true });
 
     // Viewport visibility observer to avoid running 60fps rAF offscreen
     const visibilityObserver = new IntersectionObserver((entries) => {
