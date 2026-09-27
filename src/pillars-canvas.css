@@ -10,7 +10,6 @@
   background: #060606;
   color: #ffffff;
   z-index: 10;
-  contain: paint;
 }
 
 /* Sticky Viewport Stage (100vh) */
@@ -501,7 +500,8 @@
 
 @media (max-width: 768px) {
   .four-pillars-section {
-    height: 260vh !important;
+    height: 200vh !important;
+    min-height: 200vh;
     position: relative;
     padding: 0;
   }

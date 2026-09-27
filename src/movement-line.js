@@ -94,7 +94,7 @@ export function initMovementLine() {
     const getScrollDistance = () => {
       const railWidth = strokeRail.scrollWidth;
       const wrapWidth = trackWrap.clientWidth || window.innerWidth;
-      const extraPad = Math.min(80, window.innerWidth * 0.06);
+      const extraPad = window.innerWidth < 768 ? 20 : Math.min(80, window.innerWidth * 0.06);
       return Math.max(0, railWidth - wrapWidth + extraPad);
     };
 
@@ -107,7 +107,6 @@ export function initMovementLine() {
       }
 
       if (!prefersReducedMotion) {
-        // Pinned horizontal GSAP scrub animation
         const horizontalTween = gsap.to(strokeRail, {
           x: () => -getScrollDistance(),
           ease: 'none',
@@ -117,10 +116,11 @@ export function initMovementLine() {
           id: 'kineticBeatsHorizontalScroll',
           trigger: philSection,
           start: 'top top',
-          end: () => `+=${Math.max(window.innerWidth < 768 ? 950 : 1200, getScrollDistance() * (window.innerWidth < 768 ? 1.05 : 1.15))}`,
+          end: () => `+=${Math.round(getScrollDistance())}`,
           pin: true,
+          pinSpacing: true,
           anticipatePin: 1,
-          scrub: 0.6,
+          scrub: 0.5,
           animation: horizontalTween,
           invalidateOnRefresh: true,
           onUpdate(self) {

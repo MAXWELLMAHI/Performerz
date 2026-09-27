@@ -7,6 +7,7 @@ import Swiper from 'swiper';
 import { EffectCoverflow, Mousewheel, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initCoachesOrbit } from './coaches-orbit.js';
 import { initHolographicTree } from './holographic-tree.js';
 import { initMovementLine } from './movement-line.js';
@@ -668,6 +669,17 @@ document.addEventListener('DOMContentLoaded', () => {
      15. OUR FOUR PILLARS OF MOTION — PINNED CANVAS SCRUB ENGINE
      ========================================================================== */
   initPillarsCanvas();
+
+  // Recalibrate trigger positions once layout settles
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 100);
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 250);
+  }, { once: true });
 
   /* ==========================================================================
      16. STUDENT REVIEWS & ESSAYS MODAL ENGINE (Strict Whitelist & Safe Sanitization)

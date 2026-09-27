@@ -303,7 +303,10 @@ export function initPillarsCanvas() {
       trigger: section,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.6,
+      pin: viewport,
+      pinSpacing: false,
+      anticipatePin: 1,
+      scrub: 0.5,
       invalidateOnRefresh: true,
       onUpdate(self) {
         targetProgress = self.progress;
