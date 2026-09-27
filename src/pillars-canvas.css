@@ -499,53 +499,59 @@
 }
 
 @media (max-width: 768px) {
-  /* ── Mobile: no sticky, no canvas, no black space ── */
+  /* ── Mobile: same canvas dancer animation, resized to fit portrait screen ── */
   .four-pillars-section {
-    height: auto !important;
-    min-height: unset !important;
+    height: 200vh;
+    min-height: 200dvh;
     position: relative;
     padding: 0;
   }
 
-  /* The sticky viewport becomes a normal full-screen block */
+  /* Sticky viewport: full-screen, pinned while dancer scrubs */
   .pillars-sticky-viewport {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 100svh;
-    overflow: visible !important;
-    padding: calc(var(--nav-height, 68px) + 1rem) 1.25rem 3rem !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    gap: 0 !important;
-  }
-
-  /* Hide the canvas entirely — mobile uses CSS tab switcher */
-  .dancer-fullscreen-canvas {
-    display: none !important;
-  }
-
-  /* Hide unused elements */
-  .pillars-stage-baseline {
-    display: none;
-  }
-  .pillars-bg-grid {
-    opacity: 0.08;
-  }
-
-  /* Header eyebrow */
-  .pillars-top-header {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    margin-bottom: 1.5rem;
-    text-align: left;
+    position: sticky;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 1.25rem 1.5rem;
+  }
+
+  /* Canvas: full-bleed behind everything */
+  .dancer-fullscreen-canvas {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .pillars-bg-grid {
+    opacity: 0.06;
+  }
+
+  .pillars-stage-baseline {
+    bottom: 10%;
+  }
+
+  /* Eyebrow: floats at the top of the sticky frame */
+  .pillars-top-header {
+    position: absolute;
+    top: calc(var(--nav-height, 68px) + 0.75rem);
+    left: 1.25rem;
+    right: 1.25rem;
+    margin-bottom: 0;
+    text-align: left;
+    width: auto;
+    z-index: 10;
     pointer-events: none;
   }
 
@@ -558,15 +564,26 @@
     display: none;
   }
 
-  /* Stage container: full width, natural height */
+  /* Stage container: anchored at bottom, text overlays dancer */
   .pillars-stage-container {
-    padding: 0;
+    position: relative;
     max-width: 100%;
-    width: 100%;
+    width: calc(100% + 2.5rem);
+    margin: 0 -1.25rem;
     height: auto;
-    display: block;
+    display: flex;
+    align-items: flex-end;
     z-index: 5;
     pointer-events: auto;
+    /* Frosted gradient for text readability over the dancer */
+    background: linear-gradient(
+      to top,
+      rgba(6, 6, 6, 0.95) 0%,
+      rgba(6, 6, 6, 0.80) 50%,
+      transparent 100%
+    );
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem 1.25rem 0.25rem;
   }
 
   .pillars-content-col {
@@ -575,11 +592,10 @@
     height: auto;
   }
 
-  /* Progress rail */
   .pillars-progress-rail {
     display: flex !important;
     gap: 0.75rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     align-items: center;
   }
 
@@ -595,29 +611,15 @@
     max-width: 160px;
   }
 
-  /* Tab nav: show on mobile for tap-to-switch */
   .pillars-reduced-motion-nav {
-    display: flex !important;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1.5rem;
+    display: none !important;
   }
 
-  .reduced-motion-tab {
-    font-size: 0.68rem;
-    padding: 0.35rem 0.7rem;
-    letter-spacing: 0.04em;
-  }
-
-  /* Panels stage: fixed height so absolute children have a container */
   .pillars-panels-stage {
-    height: 360px;
-    min-height: unset;
+    height: 260px;
     position: relative;
-    overflow: visible;
   }
 
-  /* Panels: absolute stacked, crossfade like desktop */
   .pillar-panel {
     position: absolute;
     top: 0;
@@ -625,39 +627,43 @@
     width: 100%;
   }
 
-  /* Title */
   .pillar-title {
-    font-size: clamp(26px, 7vw, 36px);
-    margin-bottom: 0.75rem;
+    font-size: clamp(24px, 6.5vw, 32px);
+    margin-bottom: 0.5rem;
     line-height: 1.1;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.98), 0 1px 6px rgba(0,0,0,1);
   }
 
-  /* Body */
   .pillar-body {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-    color: rgba(255,255,255,0.72);
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  /* CTA button */
   .pillar-cta-btn {
-    padding: 0.7rem 1.4rem;
-    font-size: 0.78rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
   }
 
-  /* Eyebrow row */
   .pillar-panel-eyebrow-row {
-    gap: 0.6rem;
-    margin-bottom: 0.65rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .pillar-badge {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
 
   .pillar-tone-tag {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.62rem;
+    padding: 0.18rem 0.45rem;
   }
 }
+

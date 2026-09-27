@@ -2,8 +2,8 @@
  * pillars-canvas.js
  *
  * "Our Four Pillars of Motion"
- * Desktop: Full-width scroll-scrubbed transparent canvas dancer sequence with GSAP ScrollTrigger pinning.
- * Mobile: Lightweight tab/swipe UI — no canvas, no frame preload. Fast & smooth.
+ * Full-width scroll-scrubbed transparent canvas dancer sequence with GSAP ScrollTrigger pinning.
+ * Works on both desktop and mobile — mobile uses the same animation, just resized to fit the screen.
  */
 
 import { gsap } from 'gsap';
@@ -11,7 +11,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Measured center X of dancer inside each 1280x720 video frame
+// Measured center X of dancer inside each 1280x720 video frame extracted from i_want_this_video_background_t.mp4
 const DANCER_CENTERS = [
   463.5, 464.5, 459.5, 462.0, 466.5, 469.0, 470.5, 473.0, 479.0, 480.5,
   482.0, 485.0, 486.0, 485.0, 485.5, 496.0, 503.5, 501.5, 499.5, 501.5,
@@ -32,29 +32,22 @@ export function initPillarsCanvas() {
   const canvas = document.querySelector('#dancer-scrub-canvas');
   if (!section || !canvas) return;
 
+  const ctx = canvas.getContext('2d');
+  const loader = document.querySelector('#pillars-loader');
+  const loaderPct = document.querySelector('#pillars-loader-pct');
   const panels = Array.from(document.querySelectorAll('.pillar-panel'));
   const segmentDots = Array.from(document.querySelectorAll('.pillar-segment-dot'));
   const currNumSpan = document.querySelector('#pillars-curr-num');
+  const staticPoster = document.querySelector('#dancer-static-poster');
   const reducedMotionTabs = Array.from(document.querySelectorAll('.reduced-motion-tab'));
-  const loader = document.querySelector('#pillars-loader');
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobileDevice = () => window.innerWidth < 768;
 
   /* ==========================================================================
-     MOBILE PATH — Lightweight tab switcher, no canvas, no frame download
-     ========================================================================== */
-  if (isMobileDevice()) {
-    initMobilePillars();
-    return;
-  }
-
-  /* ==========================================================================
-     PREFERS-REDUCED-MOTION FALLBACK
+     1. PREFERS-REDUCED-MOTION FALLBACK
      ========================================================================== */
   if (prefersReducedMotion) {
     if (loader) loader.classList.add('is-hidden');
-    const staticPoster = document.querySelector('#dancer-static-poster');
     if (staticPoster) {
       staticPoster.src = '/frames/poster.webp';
       staticPoster.style.display = 'block';
@@ -74,12 +67,9 @@ export function initPillarsCanvas() {
   }
 
   /* ==========================================================================
-     DESKTOP PATH — Full 120-frame canvas scrub
+     2. FAST PROGRESSIVE FRAME PRELOADER (120 Transparent WebP frames)
+        Works on BOTH desktop and mobile — same animation, mobile-resized
      ========================================================================== */
-  const ctx = canvas.getContext('2d');
-  const loaderPct = document.querySelector('#pillars-loader-pct');
-  const staticPoster = document.querySelector('#dancer-static-poster');
-
   const TOTAL_FRAMES = 120;
   const loadedImages = new Array(TOTAL_FRAMES);
   let loadedCount = 0;
@@ -93,7 +83,7 @@ export function initPillarsCanvas() {
     setupScrollScrub();
   }
 
-  // Preload frame 0 first for instant dismiss
+  // Preload frame 0 immediately — dismiss loader the moment it arrives
   const firstFrame = new Image();
   firstFrame.src = '/frames/frame_000.webp';
   firstFrame.onload = () => {
@@ -103,17 +93,20 @@ export function initPillarsCanvas() {
   };
   firstFrame.onerror = () => dismissLoader();
 
-  // Hard timeout: never block longer than 800ms
-  setTimeout(() => dismissLoader(), 800);
+  // Hard safety timeout: never block longer than 600ms regardless of network
+  setTimeout(() => dismissLoader(), 600);
 
   // Background fetch remaining frames
   for (let i = 1; i < TOTAL_FRAMES; i++) {
     const img = new Image();
-    img.src = `/frames/frame_${String(i).padStart(3, '0')}.webp`;
+    const padIndex = String(i).padStart(3, '0');
+    img.src = `/frames/frame_${padIndex}.webp`;
     img.onload = () => {
       loadedImages[i] = img;
       loadedCount++;
-      if (loaderPct) loaderPct.textContent = `${Math.round((loadedCount / TOTAL_FRAMES) * 100)}%`;
+      if (loaderPct) {
+        loaderPct.textContent = `${Math.round((loadedCount / TOTAL_FRAMES) * 100)}%`;
+      }
       if (loadedCount >= TOTAL_FRAMES) dismissLoader();
     };
     img.onerror = () => {
@@ -123,7 +116,9 @@ export function initPillarsCanvas() {
   }
 
   /* ==========================================================================
-     CANVAS RENDERING & LEFT-TO-RIGHT STAGE TRAVEL
+     3. FULL-WIDTH CANVAS RENDERING & LEFT-TO-RIGHT STAGE TRAVEL
+        Mobile: dancer is centered, scaled to ~70% of viewport height
+        Desktop: dancer travels left (0.24) to right (0.80) across the stage
      ========================================================================== */
   let currentFrameIndex = 0;
   let lastDrawnIndex = -1;
@@ -132,11 +127,18 @@ export function initPillarsCanvas() {
   function renderFrame(index, progress = 0) {
     if (!canvas) return;
 
+    // Find requested frame or nearest loaded frame for zero-lag rendering
     let img = loadedImages[index];
     if (!img) {
       for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
-        if (index - offset >= 0 && loadedImages[index - offset]) { img = loadedImages[index - offset]; break; }
-        if (index + offset < TOTAL_FRAMES && loadedImages[index + offset]) { img = loadedImages[index + offset]; break; }
+        if (index - offset >= 0 && loadedImages[index - offset]) {
+          img = loadedImages[index - offset];
+          break;
+        }
+        if (index + offset < TOTAL_FRAMES && loadedImages[index + offset]) {
+          img = loadedImages[index + offset];
+          break;
+        }
       }
     }
     if (!img) return;
@@ -145,16 +147,28 @@ export function initPillarsCanvas() {
     const canvasHeight = canvas.height;
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    const targetScale = (canvasHeight * 0.82) / 720;
+    const isMobile = window.innerWidth < 768;
+
+    // Scale dancer to occupy ~70% of viewport height on mobile, ~82% on desktop
+    const heightFraction = isMobile ? 0.72 : 0.82;
+    const targetScale = (canvasHeight * heightFraction) / 720;
     const drawW = 1280 * targetScale;
     const drawH = 720 * targetScale;
 
-    const baselineY = canvasHeight * 0.86;
+    // Baseline: foot contact point in original frame is at y=633
+    // Place baseline at 88% of viewport height on mobile, 86% on desktop
+    const baselineFraction = isMobile ? 0.88 : 0.86;
+    const baselineY = canvasHeight * baselineFraction;
     const drawY = baselineY - (633 * targetScale);
 
-    const startXFraction = 0.24;
-    const travelSpan = 0.58;
+    // Horizontal travel:
+    // Desktop: travels from 0.24 (left, behind text) to 0.80 (right side)
+    // Mobile:  travels from 0.15 to 0.85 — full width for full dramatic effect
+    const startXFraction = isMobile ? 0.15 : 0.24;
+    const travelSpan = isMobile ? 0.70 : 0.58;
     const screenTargetX = canvasWidth * (startXFraction + (progress * travelSpan));
+
+    // Align dancer's specific center-of-mass with screenTargetX
     const dancerCenterX = DANCER_CENTERS[index] || 540;
     const drawX = screenTargetX - (dancerCenterX * targetScale);
 
@@ -172,10 +186,10 @@ export function initPillarsCanvas() {
     renderFrame(currentFrameIndex, currentProgress);
   }
 
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', resizeCanvas, { passive: true });
 
   /* ==========================================================================
-     REQUEST-ANIMATION-FRAME SCROLL SCRUB & CROSSFADE LOGIC
+     4. REQUEST-ANIMATION-FRAME SCROLL SCRUB & CROSSFADE LOGIC
      ========================================================================== */
   let targetProgress = 0;
   let currentProgress = 0;
@@ -184,13 +198,19 @@ export function initPillarsCanvas() {
 
   function updatePillarsUI(progress) {
     const sliceIndex = Math.min(3, Math.max(0, Math.floor(progress * 4)));
+
     if (sliceIndex !== activePillarIndex) {
       activePillarIndex = sliceIndex;
-      panels.forEach((panel, idx) => { panel.classList.toggle('is-active', idx === sliceIndex); });
+
+      panels.forEach((panel, idx) => {
+        panel.classList.toggle('is-active', idx === sliceIndex);
+      });
+
       segmentDots.forEach((dot, idx) => {
         dot.classList.toggle('is-active', idx === sliceIndex);
         dot.classList.toggle('is-passed', idx < sliceIndex);
       });
+
       if (currNumSpan) currNumSpan.textContent = `0${sliceIndex + 1}`;
     }
   }
@@ -226,9 +246,16 @@ export function initPillarsCanvas() {
   }
 
   function pauseLoop() {
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
   }
 
+  /* ==========================================================================
+     5. GSAP SCROLLTRIGGER — PIN STICKY VIEWPORT & SCRUB ANIMATION
+        Same on desktop and mobile. Mobile uses 200dvh scroll budget.
+     ========================================================================== */
   function setupScrollScrub() {
     const viewport = section.querySelector('.pillars-sticky-viewport');
 
@@ -261,6 +288,7 @@ export function initPillarsCanvas() {
       }
     });
 
+    // Segment dots: click to jump to that pillar
     segmentDots.forEach((dot, idx) => {
       dot.addEventListener('click', () => {
         if (st) {
@@ -274,11 +302,11 @@ export function initPillarsCanvas() {
     });
 
     window.addEventListener('resize', () => {
-      if (isMobileDevice()) return; // Don't refresh desktop trigger on mobile
       ScrollTrigger.refresh();
       resizeCanvas();
     }, { passive: true });
 
+    // Pause RAF when section is offscreen to save battery
     const visibilityObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         isSectionVisible = entry.isIntersecting;
@@ -294,88 +322,8 @@ export function initPillarsCanvas() {
       else resumeLoopIfNeeded();
     });
 
+    // Initialize first frame & UI state
     updatePillarsUI(0);
     renderFrame(0, 0);
-  }
-
-  /* ==========================================================================
-     MOBILE PILLARS — Pure CSS tab switcher, zero canvas, zero frame load
-     ========================================================================== */
-  function initMobilePillars() {
-    // Hide loader immediately
-    if (loader) loader.classList.add('is-hidden');
-
-    // Hide the canvas — not used on mobile
-    if (canvas) canvas.style.display = 'none';
-
-    let currentIndex = 0;
-    const totalPillars = panels.length;
-
-    function setMobilePillar(index, animate = true) {
-      currentIndex = index;
-
-      panels.forEach((p, i) => {
-        p.classList.toggle('is-active', i === index);
-      });
-
-      segmentDots.forEach((dot, idx) => {
-        dot.classList.toggle('is-active', idx === index);
-        dot.classList.toggle('is-passed', idx < index);
-      });
-
-      reducedMotionTabs.forEach((tab, i) => {
-        tab.classList.toggle('is-active', i === index);
-      });
-
-      if (currNumSpan) currNumSpan.textContent = `0${index + 1}`;
-    }
-
-    // Dot navigation
-    segmentDots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => setMobilePillar(idx));
-    });
-
-    // Tab navigation
-    reducedMotionTabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => setMobilePillar(i));
-    });
-
-    // Touch swipe support on the section
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    section.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    section.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      const dy = e.changedTouches[0].clientY - touchStartY;
-
-      // Only trigger if horizontal swipe is more dominant than vertical
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-        if (dx < 0 && currentIndex < totalPillars - 1) {
-          setMobilePillar(currentIndex + 1); // swipe left = next
-        } else if (dx > 0 && currentIndex > 0) {
-          setMobilePillar(currentIndex - 1); // swipe right = prev
-        }
-      }
-    }, { passive: true });
-
-    // Auto-advance pillars as user scrolls through the section
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top 60%',
-      end: 'bottom 40%',
-      scrub: false,
-      onUpdate(self) {
-        const idx = Math.min(totalPillars - 1, Math.max(0, Math.floor(self.progress * totalPillars)));
-        if (idx !== currentIndex) setMobilePillar(idx);
-      }
-    });
-
-    // Initialize
-    setMobilePillar(0);
   }
 }
