@@ -91,10 +91,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileDrawer = document.querySelector('.mobile-drawer');
   const drawerClose = document.querySelector('.drawer-close');
   const drawerLinks = document.querySelectorAll('.drawer-link');
+  let drawerBackdrop = document.querySelector('.mobile-drawer-backdrop');
 
-  menuToggle?.addEventListener('click', () => mobileDrawer?.classList.add('open'));
-  drawerClose?.addEventListener('click', () => mobileDrawer?.classList.remove('open'));
-  drawerLinks.forEach(link => link.addEventListener('click', () => mobileDrawer?.classList.remove('open')));
+  if (!drawerBackdrop && mobileDrawer) {
+    drawerBackdrop = document.createElement('div');
+    drawerBackdrop.className = 'mobile-drawer-backdrop';
+    document.body.appendChild(drawerBackdrop);
+  }
+
+  const openDrawer = () => {
+    mobileDrawer?.classList.add('open');
+    drawerBackdrop?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeDrawer = () => {
+    mobileDrawer?.classList.remove('open');
+    drawerBackdrop?.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  menuToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openDrawer();
+  });
+  drawerClose?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeDrawer();
+  });
+  drawerBackdrop?.addEventListener('click', closeDrawer);
+  drawerLinks.forEach(link => link.addEventListener('click', closeDrawer));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileDrawer?.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
 
   /* ==========================================================================
      3. 3D COVERFLOW SWIPER REEL CAROUSEL (TOP 10 INSTAGRAM REELS)

@@ -340,24 +340,31 @@ export function initCoachesOrbit() {
   });
 
   // IntersectionObserver for entrance & auto-cycle activation
+  const isMobile = () => window.innerWidth < 768;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       isSectionInView = entry.isIntersecting;
       if (isSectionInView) {
         if (!document.hidden) startAutoCycle();
-        gsap.fromTo(focalCard,
-          { opacity: 0, y: 30, scale: 0.96 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' }
-        );
-        gsap.fromTo('.coaches-headline',
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
-        );
+        if (!isMobile()) {
+          gsap.fromTo(focalCard,
+            { opacity: 0, y: 30, scale: 0.96 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' }
+          );
+          gsap.fromTo('.coaches-headline',
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
+          );
+        } else {
+          gsap.set(focalCard, { opacity: 1, y: 0, scale: 1 });
+          gsap.set('.coaches-headline', { opacity: 1, y: 0 });
+        }
       } else {
         stopAutoCycle();
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: isMobile() ? 0.05 : 0.2 });
 
   observer.observe(wrapperSection);
 }

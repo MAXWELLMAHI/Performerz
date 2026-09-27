@@ -987,27 +987,139 @@
    RESPONSIVE (MOBILE < 768px)
    ========================================================================== */
 @media (max-width: 768px) {
+  .movement-line-section {
+    padding: 0;
+  }
+
   .movement-hero-compact {
-    min-height: 50vh;
+    min-height: auto;
     max-height: none;
-    padding: 2.5rem 1rem;
+    padding: 28px 16px 12px;
+  }
+
+  .movement-hero-meta {
+    margin-bottom: 12px;
+  }
+
+  .movement-hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+
+  .movement-hero-sub {
+    font-size: 9px;
   }
 
   .movement-hero-kinetic-bar {
-    gap: 0.8rem;
+    gap: 8px;
   }
 
   .movement-word {
-    font-size: 26px;
+    font-size: 18px;
+    letter-spacing: -0.01em;
   }
 
   .philosophy-horizontal-section {
-    padding: 1rem 1rem 2.5rem;
+    padding: 16px 0 32px;
+  }
+
+  .philosophy-section-header {
+    padding: 0 16px;
+    margin-bottom: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .phil-header-eyebrow {
+    font-size: 10px;
+  }
+
+  .phil-header-title {
+    font-size: clamp(22px, 6.2vw, 30px);
+    margin: 2px 0 0;
+  }
+
+  .phil-nav-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .phil-progress-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .phil-scroll-progress-bar {
+    flex: 1;
+    max-width: none;
+    height: 4px;
+  }
+
+  .phil-nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .philosophy-stroke-track-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .philosophy-stroke-rail {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 16px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    transform: none !important;
+  }
+
+  .philosophy-stroke-rail::-webkit-scrollbar {
+    display: none;
   }
 
   .stroke-philosophy-card {
-    flex: 0 0 270px;
-    min-height: 440px;
+    flex: 0 0 min(285px, 82vw);
+    max-width: 320px;
+    min-height: 400px;
+    height: auto;
+    border-radius: 20px;
+    padding: 1.25rem 1.15rem;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .stroke-dance-stage {
+    height: 120px;
+    margin: 10px 0;
+  }
+
+  .stroke-dance-svg {
+    max-height: 110px;
+    width: auto;
+  }
+
+  .stroke-card-title {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .stroke-card-teaser {
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .filmstrip-margin-counter {
