@@ -4644,9 +4644,32 @@ img, video {
   /* 5. Hero Section Tightening & Aspect Ratio */
   .hero-editorial {
     min-height: 100dvh !important;
+    height: 100dvh !important;
     padding-top: calc(var(--nav-height) + 12px) !important;
     padding-bottom: 18px !important;
     justify-content: space-between !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .hero-bg-video-wrapper {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .hero-bg-video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
   }
 
   .hero-content-stage {

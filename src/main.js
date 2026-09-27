@@ -375,11 +375,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const onScrollParallax = () => {
     const scrollY = window.scrollY;
 
-    // 1. Hero background video cinematic zoom & parallax pan
+    // 1. Hero background video cinematic zoom & parallax pan (Desktop only)
     if (heroVideo && scrollY < window.innerHeight * 1.5) {
-      const scale = 1.05 + scrollY * 0.0003;
-      const translateY = scrollY * 0.32;
-      heroVideo.style.transform = `translateY(${translateY.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      if (window.innerWidth >= 768) {
+        const scale = 1.05 + scrollY * 0.0003;
+        const translateY = scrollY * 0.32;
+        heroVideo.style.transform = `translateY(${translateY.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      } else {
+        heroVideo.style.transform = 'none';
+      }
     }
 
     // 2. Story rail chapter tracking (ScrollSpy)
