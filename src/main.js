@@ -717,5 +717,303 @@ document.addEventListener('DOMContentLoaded', () => {
       closeReviewModal();
     }
   });
+
+  /* ==========================================================================
+     12. POLICY TABLE OF CONTENTS SCROLLSPY
+     ========================================================================== */
+  const tocLinks = document.querySelectorAll('.policy-toc-link');
+  if (tocLinks.length > 0) {
+    const policySections = document.querySelectorAll('.policy-section-block');
+    const updateTocSpy = () => {
+      const scrollPos = window.scrollY + 160;
+      policySections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        if (scrollPos >= top && scrollPos < top + height) {
+          tocLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    };
+    window.addEventListener('scroll', updateTocSpy, { passive: true });
+    updateTocSpy();
+  }
+
+  /* ==========================================================================
+     13. GLOBAL COOKIE CONSENT BANNER & PREFERENCES MODAL
+     ========================================================================== */
+  const COOKIE_STORAGE_KEY = 'performerz_cookie_consent';
+
+  const getSavedCookiePreferences = () => {
+    try {
+      const raw = localStorage.getItem(COOKIE_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return null;
+    }
+  };
+
+  const saveCookiePreferences = (prefs) => {
+    try {
+      const payload = {
+        essential: true,
+        performance: !!prefs.performance,
+        analytics: !!prefs.analytics,
+        marketing: !!prefs.marketing,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify(payload));
+      return payload;
+    } catch (e) {
+      console.warn('Cookie preferences could not be stored in localStorage:', e);
+      return prefs;
+    }
+  };
+
+  // Create & Inject Banner & Modal if not present in DOM
+  const injectCookieUI = () => {
+    if (document.getElementById('cookie-consent-banner')) return;
+
+    // Banner HTML
+    const banner = document.createElement('div');
+    banner.id = 'cookie-consent-banner';
+    banner.className = 'cookie-consent-banner';
+    banner.innerHTML = `
+      <div class="cookie-banner-content-grid">
+        <div class="cookie-banner-text-wrap">
+          <div class="cookie-banner-tag">
+            <span>✦</span> ATELIER PRIVACY &bull; COOKIE DIRECTIVE
+          </div>
+          <div class="cookie-banner-title">We value your privacy and digital motion experience</div>
+          <p class="cookie-banner-desc">
+            We use essential cookies and performance caching to calibrate high-fidelity 60fps video reels and provide instant WhatsApp admissions booking. Learn more in our 
+            <a href="/privacy-policy.html">Privacy Policy</a> and <a href="/cookie-policy.html">Cookie Policy</a>.
+          </p>
+        </div>
+        <div class="cookie-banner-actions">
+          <button type="button" class="cookie-btn cookie-btn-link" id="cookie-customize-btn">Customize</button>
+          <button type="button" class="cookie-btn cookie-btn-secondary" id="cookie-reject-btn">Essential Only</button>
+          <button type="button" class="cookie-btn cookie-btn-primary" id="cookie-accept-all-btn">Accept All</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    // Modal HTML
+    const modal = document.createElement('div');
+    modal.id = 'cookie-preferences-modal';
+    modal.className = 'cookie-modal-backdrop';
+    modal.innerHTML = `
+      <div class="cookie-modal-card" role="dialog" aria-labelledby="cookie-modal-heading" aria-modal="true">
+        <div class="cookie-modal-header">
+          <div>
+            <h3 class="cookie-modal-title" id="cookie-modal-heading">Cookie Preferences</h3>
+            <p class="cookie-modal-subtitle">Manage how The Performerz Academy utilizes tracking technologies.</p>
+          </div>
+          <button type="button" class="cookie-modal-close" id="cookie-modal-close-btn" aria-label="Close Modal">&times;</button>
+        </div>
+        <div class="cookie-modal-body">
+          <div class="cookie-pref-card">
+            <div class="cookie-pref-info">
+              <div class="cookie-pref-title">
+                <span>Strictly Necessary</span>
+                <span class="cookie-badge-always">Required</span>
+              </div>
+              <p class="cookie-pref-desc">
+                Vital for site navigation, asset preloader calibration, and system security. Cannot be disabled.
+              </p>
+            </div>
+            <label class="cookie-switch">
+              <input type="checkbox" checked disabled />
+              <span class="cookie-slider"></span>
+            </label>
+          </div>
+
+          <div class="cookie-pref-card">
+            <div class="cookie-pref-info">
+              <div class="cookie-pref-title">
+                <span>Performance &amp; 60fps Video Buffer</span>
+              </div>
+              <p class="cookie-pref-desc">
+                Caches high-resolution choreography video frames and audio ambience states for smooth playback.
+              </p>
+            </div>
+            <label class="cookie-switch">
+              <input type="checkbox" id="modal-pref-performance" checked />
+              <span class="cookie-slider"></span>
+            </label>
+          </div>
+
+          <div class="cookie-pref-card">
+            <div class="cookie-pref-info">
+              <div class="cookie-pref-title">
+                <span>Analytics &amp; Experience Metrics</span>
+              </div>
+              <p class="cookie-pref-desc">
+                Helps us evaluate curriculum popularity and optimize atelier navigation anonymously.
+              </p>
+            </div>
+            <label class="cookie-switch">
+              <input type="checkbox" id="modal-pref-analytics" checked />
+              <span class="cookie-slider"></span>
+            </label>
+          </div>
+
+          <div class="cookie-pref-card">
+            <div class="cookie-pref-info">
+              <div class="cookie-pref-title">
+                <span>Social Media &amp; Reels Embedding</span>
+              </div>
+              <p class="cookie-pref-desc">
+                Allows embedded Instagram showcase reels and seamless WhatsApp direct consultation.
+              </p>
+            </div>
+            <label class="cookie-switch">
+              <input type="checkbox" id="modal-pref-marketing" checked />
+              <span class="cookie-slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="cookie-modal-footer">
+          <button type="button" class="btn btn-outline" id="modal-reject-all-btn" style="padding: 10px 20px; font-size: 11px;">Essential Only</button>
+          <button type="button" class="btn btn-amber" id="modal-save-prefs-btn" style="padding: 10px 24px; font-size: 11px;">Save Preferences</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  };
+
+  injectCookieUI();
+
+  const cookieBanner = document.getElementById('cookie-consent-banner');
+  const cookieModal = document.getElementById('cookie-preferences-modal');
+  const modalPerformanceCheckbox = document.getElementById('modal-pref-performance');
+  const modalAnalyticsCheckbox = document.getElementById('modal-pref-analytics');
+  const modalMarketingCheckbox = document.getElementById('modal-pref-marketing');
+
+  const pagePerfCheckbox = document.getElementById('pref-performance-page');
+  const pageAnalyticsCheckbox = document.getElementById('pref-analytics-page');
+  const pageMarketingCheckbox = document.getElementById('pref-marketing-page');
+
+  const syncCheckboxes = (prefs) => {
+    const p = prefs || { performance: true, analytics: true, marketing: true };
+    if (modalPerformanceCheckbox) modalPerformanceCheckbox.checked = p.performance !== false;
+    if (modalAnalyticsCheckbox) modalAnalyticsCheckbox.checked = p.analytics !== false;
+    if (modalMarketingCheckbox) modalMarketingCheckbox.checked = p.marketing !== false;
+
+    if (pagePerfCheckbox) pagePerfCheckbox.checked = p.performance !== false;
+    if (pageAnalyticsCheckbox) pageAnalyticsCheckbox.checked = p.analytics !== false;
+    if (pageMarketingCheckbox) pageMarketingCheckbox.checked = p.marketing !== false;
+  };
+
+  const existingPrefs = getSavedCookiePreferences();
+  if (existingPrefs) {
+    syncCheckboxes(existingPrefs);
+  } else {
+    // Show banner after brief cinematic delay
+    setTimeout(() => {
+      cookieBanner?.classList.add('active');
+    }, 1200);
+  }
+
+  const openPreferencesModal = () => {
+    const current = getSavedCookiePreferences() || { performance: true, analytics: true, marketing: true };
+    syncCheckboxes(current);
+    cookieModal?.classList.add('active');
+  };
+
+  const closePreferencesModal = () => {
+    cookieModal?.classList.remove('active');
+  };
+
+  // Banner Actions
+  document.getElementById('cookie-accept-all-btn')?.addEventListener('click', () => {
+    saveCookiePreferences({ performance: true, analytics: true, marketing: true });
+    cookieBanner?.classList.remove('active');
+    syncCheckboxes({ performance: true, analytics: true, marketing: true });
+  });
+
+  document.getElementById('cookie-reject-btn')?.addEventListener('click', () => {
+    saveCookiePreferences({ performance: false, analytics: false, marketing: false });
+    cookieBanner?.classList.remove('active');
+    syncCheckboxes({ performance: false, analytics: false, marketing: false });
+  });
+
+  document.getElementById('cookie-customize-btn')?.addEventListener('click', () => {
+    cookieBanner?.classList.remove('active');
+    openPreferencesModal();
+  });
+
+  // Modal Actions
+  document.getElementById('cookie-modal-close-btn')?.addEventListener('click', closePreferencesModal);
+  
+  cookieModal?.addEventListener('click', (e) => {
+    if (e.target === cookieModal) closePreferencesModal();
+  });
+
+  document.getElementById('modal-save-prefs-btn')?.addEventListener('click', () => {
+    const prefs = {
+      performance: modalPerformanceCheckbox?.checked ?? true,
+      analytics: modalAnalyticsCheckbox?.checked ?? true,
+      marketing: modalMarketingCheckbox?.checked ?? true
+    };
+    saveCookiePreferences(prefs);
+    syncCheckboxes(prefs);
+    closePreferencesModal();
+    cookieBanner?.classList.remove('active');
+  });
+
+  document.getElementById('modal-reject-all-btn')?.addEventListener('click', () => {
+    const prefs = { performance: false, analytics: false, marketing: false };
+    saveCookiePreferences(prefs);
+    syncCheckboxes(prefs);
+    closePreferencesModal();
+    cookieBanner?.classList.remove('active');
+  });
+
+  // Global triggers for opening cookie settings
+  document.querySelectorAll('#open-cookie-settings-btn, [data-open-cookie-settings]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPreferencesModal();
+    });
+  });
+
+  // In-Page Cookie Policy Interactive Controls
+  const savePagePrefsBtn = document.getElementById('save-page-preferences-btn');
+  const acceptAllPageBtn = document.getElementById('accept-all-page-btn');
+  const prefStatusMsg = document.getElementById('pref-status-message');
+
+  savePagePrefsBtn?.addEventListener('click', () => {
+    const prefs = {
+      performance: pagePerfCheckbox?.checked ?? true,
+      analytics: pageAnalyticsCheckbox?.checked ?? true,
+      marketing: pageMarketingCheckbox?.checked ?? true
+    };
+    saveCookiePreferences(prefs);
+    syncCheckboxes(prefs);
+    if (prefStatusMsg) {
+      prefStatusMsg.style.display = 'block';
+      setTimeout(() => { prefStatusMsg.style.display = 'none'; }, 4000);
+    }
+  });
+
+  acceptAllPageBtn?.addEventListener('click', () => {
+    const prefs = { performance: true, analytics: true, marketing: true };
+    saveCookiePreferences(prefs);
+    syncCheckboxes(prefs);
+    if (prefStatusMsg) {
+      prefStatusMsg.textContent = '✓ All cookies have been accepted and preferences saved!';
+      prefStatusMsg.style.display = 'block';
+      setTimeout(() => { prefStatusMsg.style.display = 'none'; }, 4000);
+    }
+  });
 });
+
 
