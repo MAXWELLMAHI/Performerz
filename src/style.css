@@ -2299,9 +2299,9 @@ img, video {
 
 .cta-deluxe-title {
   font-family: var(--font-display);
-  font-size: clamp(38px, 5.8vw, 76px);
+  font-size: clamp(28px, 4vw, 54px);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.1;
   text-transform: uppercase;
   color: #ffffff;
   margin-bottom: 30px;
@@ -4828,8 +4828,8 @@ img, video {
   }
 
   .cta-deluxe-title {
-    font-size: clamp(22px, 6vw, 30px) !important;
-    line-height: 1.15 !important;
+    font-size: clamp(18px, 5vw, 24px) !important;
+    line-height: 1.2 !important;
     margin-bottom: 16px !important;
   }
 
