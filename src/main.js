@@ -345,6 +345,10 @@ document.addEventListener('DOMContentLoaded', () => {
      STORYTELLING PARALLAX SCROLL ENGINE & NARRATIVE PROGRESS TRACKER
      ========================================================================== */
   const heroVideo = document.getElementById('hero-bg-video');
+  const heroVideoMobile = document.getElementById('hero-bg-video-mobile');
+  [heroVideo, heroVideoMobile].forEach(v => {
+    if (v) v.play().catch(() => {});
+  });
   const storyPips = document.querySelectorAll('.story-pip');
   const storySections = [
     'overture',

@@ -672,6 +672,14 @@ img, video {
   filter: brightness(0.68) contrast(1.15) saturate(1.05);
 }
 
+.hero-bg-video--desktop {
+  display: block !important;
+}
+
+.hero-bg-video--mobile {
+  display: none !important;
+}
+
 .hero-video-scrim {
   position: absolute;
   inset: 0;
@@ -4716,6 +4724,14 @@ img, video {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
+  }
+
+  .hero-bg-video--desktop {
+    display: none !important;
+  }
+
+  .hero-bg-video--mobile {
+    display: block !important;
   }
 
   .hero-video-scrim {
