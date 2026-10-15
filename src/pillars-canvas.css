@@ -498,250 +498,172 @@
   }
 }
 
-/* Desktop-only: hide mobile deck */
-@media (min-width: 1024px) {
-  .pillars-mobile-stage {
-    display: none !important;
-  }
-}
-
-/* ==========================================================================
-   MOBILE & TABLET (< 1024px): NATIVE TOUCH CARD DECK & MOMENTUM SCROLL
-   Canvas scroll-jacking and sticky viewport are completely removed.
-   ========================================================================== */
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
+  /* ── Mobile: same canvas dancer animation, resized to fit portrait screen ── */
   .four-pillars-section {
-    height: auto !important;
-    min-height: auto !important;
-    position: relative !important;
-    padding: 4.5rem 1.25rem 4rem !important;
-    background: #070709 !important;
-    overflow: visible !important;
-  }
-
-  /* Completely kill desktop sticky viewport and canvas */
-  .pillars-sticky-viewport {
-    display: none !important;
-    height: 0 !important;
-    position: static !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-
-  .dancer-fullscreen-canvas {
-    display: none !important;
-  }
-
-  .dancer-static-poster {
-    display: none !important;
-  }
-
-  /* Mobile Deck Container */
-  .pillars-mobile-stage {
-    display: block !important;
-    width: 100%;
-    max-width: 680px;
-    margin: 0 auto;
-  }
-
-  .pillars-mobile-header {
-    margin-bottom: 2rem;
-    text-align: left;
-  }
-
-  .pillars-mobile-eyebrow {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: #e4ff54;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-  }
-
-  .pillars-mobile-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(28px, 7vw, 42px);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #ffffff;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-  }
-
-  .pillars-mobile-subtitle {
-    font-size: 14px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 1.5rem;
-  }
-
-  .pillars-mobile-counter-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 1.25rem;
-  }
-
-  .pillars-mobile-counter {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.08em;
-  }
-
-  .pillars-mobile-counter strong {
-    font-size: 18px;
-    color: #e4ff54;
-    font-weight: 700;
-  }
-
-  .pillars-mobile-dots {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .pillars-mobile-dot {
-    width: 24px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.18);
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    height: 200vh;
+    min-height: 200dvh;
+    position: relative;
     padding: 0;
   }
 
-  .pillars-mobile-dot.is-active {
-    width: 44px;
-    background: #e4ff54;
-    box-shadow: 0 0 10px rgba(228, 255, 84, 0.5);
-  }
-
-  /* Horizontal swipeable card deck */
-  .pillars-mobile-deck {
+  /* Sticky viewport: full-screen, pinned while dancer scrubs */
+  .pillars-sticky-viewport {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 4px 4px 18px;
-    scrollbar-width: none;
-    margin: 0 -1.25rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 1.25rem 1.5rem;
   }
 
-  .pillars-mobile-deck::-webkit-scrollbar {
+  /* Canvas: full-bleed behind everything */
+  .dancer-fullscreen-canvas {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .pillars-bg-grid {
+    opacity: 0.06;
+  }
+
+  .pillars-stage-baseline {
+    bottom: 10%;
+  }
+
+  /* Eyebrow: floats at the top of the sticky frame */
+  .pillars-top-header {
+    position: absolute;
+    top: calc(var(--nav-height, 68px) + 0.75rem);
+    left: 1.25rem;
+    right: 1.25rem;
+    margin-bottom: 0;
+    text-align: left;
+    width: auto;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .pillars-eyebrow-main {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+
+  .pillars-methodology-tag {
     display: none;
   }
 
-  /* Pillar Mobile Card */
-  .pillar-mobile-card {
-    flex: 0 0 88%;
-    min-width: 280px;
-    max-width: 360px;
-    scroll-snap-align: center;
-    background: linear-gradient(135deg, rgba(20, 22, 30, 0.95) 0%, rgba(12, 13, 18, 0.98) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    padding: 26px 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  /* Stage container: anchored at bottom, text overlays dancer */
+  .pillars-stage-container {
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    max-width: 100%;
+    width: calc(100% + 2.5rem);
+    margin: 0 -1.25rem;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    z-index: 5;
+    pointer-events: auto;
+    /* Frosted gradient for text readability over the dancer */
+    background: linear-gradient(
+      to top,
+      rgba(6, 6, 6, 0.95) 0%,
+      rgba(6, 6, 6, 0.80) 50%,
+      transparent 100%
+    );
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem 1.25rem 0.25rem;
   }
 
-  .pillar-mobile-card::before {
-    content: '';
+  .pillars-content-col {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  .pillars-progress-rail {
+    display: flex !important;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    align-items: center;
+  }
+
+  .pillars-index-display {
+    font-size: 0.85rem;
+  }
+
+  .pillars-curr-num {
+    font-size: 1.2rem;
+  }
+
+  .pillars-progress-segments {
+    max-width: 160px;
+  }
+
+  .pillars-reduced-motion-nav {
+    display: none !important;
+  }
+
+  .pillars-panels-stage {
+    height: 260px;
+    position: relative;
+  }
+
+  .pillar-panel {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #e4ff54 0%, transparent 80%);
+    width: 100%;
   }
 
-  .pillar-mobile-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .pillar-mobile-badge {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    color: #e4ff54;
-    padding: 3px 8px;
-    border-radius: 4px;
-    background: rgba(228, 255, 84, 0.1);
-    border: 1px solid rgba(228, 255, 84, 0.25);
-    text-transform: uppercase;
-  }
-
-  .pillar-mobile-tone {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.45);
-    font-style: italic;
-  }
-
-  .pillar-mobile-card-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
+  .pillar-title {
+    font-size: clamp(24px, 6.5vw, 32px);
+    margin-bottom: 0.5rem;
     line-height: 1.1;
-    color: #ffffff;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.98), 0 1px 6px rgba(0,0,0,1);
+  }
+
+  .pillar-body {
+    font-size: 13.5px;
+    line-height: 1.55;
     margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .pillar-mobile-card-body {
-    font-size: 14px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
-    margin-bottom: 1.5rem;
+  .pillar-cta-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
   }
 
-  .pillar-mobile-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .pillar-panel-eyebrow-row {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
   }
 
-  .pillar-mobile-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Space Grotesk', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: #ffffff;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
+  .pillar-badge {
+    font-size: 0.7rem;
   }
 
-  .pillar-mobile-cta:hover,
-  .pillar-mobile-cta:active {
-    color: #e4ff54;
-    transform: translateX(4px);
-  }
-
-  .pillar-mobile-num-watermark {
-    font-family: 'Outfit', sans-serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.15);
+  .pillar-tone-tag {
+    font-size: 0.62rem;
+    padding: 0.18rem 0.45rem;
   }
 }
 

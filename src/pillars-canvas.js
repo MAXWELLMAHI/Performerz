@@ -1,10 +1,9 @@
 /**
  * pillars-canvas.js
  *
- * "Our Four Pillars of Motion / Kinetic Atelier"
- * - Desktop (>= 1024px): Full-width scroll-scrubbed transparent canvas dancer sequence with GSAP ScrollTrigger pinning.
- * - Mobile (< 1024px): Canvas scroll-jacking is completely disabled. Replaced with native touch momentum swipeable
- *   card deck with synchronized indicators and zero performance overhead.
+ * "Our Four Pillars of Motion"
+ * Full-width scroll-scrubbed transparent canvas dancer sequence with GSAP ScrollTrigger pinning.
+ * Works on both desktop and mobile — mobile uses the same animation, just resized to fit the screen.
  */
 
 import { gsap } from 'gsap';
@@ -12,13 +11,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Prevent mobile address bar height fluctuations from resetting ScrollTrigger pins
+// Prevent mobile address bar height fluctuations from resetting ScrollTrigger pins or jumping to top
 ScrollTrigger.config({
   ignoreMobileResize: true,
   autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
 });
 
-// Measured center X of dancer inside each 1280x720 video frame extracted from dancer sequence
+// Measured center X of dancer inside each 1280x720 video frame extracted from i_want_this_video_background_t.mp4
 const DANCER_CENTERS = [
   463.5, 464.5, 459.5, 462.0, 466.5, 469.0, 470.5, 473.0, 479.0, 480.5,
   482.0, 485.0, 486.0, 485.0, 485.5, 496.0, 503.5, 501.5, 499.5, 501.5,
@@ -36,9 +35,10 @@ const DANCER_CENTERS = [
 
 export function initPillarsCanvas() {
   const section = document.querySelector('.four-pillars-section');
-  if (!section) return;
-
   const canvas = document.querySelector('#dancer-scrub-canvas');
+  if (!section || !canvas) return;
+
+  const ctx = canvas.getContext('2d');
   const loader = document.querySelector('#pillars-loader');
   const loaderPct = document.querySelector('#pillars-loader-pct');
   const panels = Array.from(document.querySelectorAll('.pillar-panel'));
@@ -48,68 +48,11 @@ export function initPillarsCanvas() {
   const reducedMotionTabs = Array.from(document.querySelectorAll('.reduced-motion-tab'));
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobileViewport = () => window.innerWidth < 1024;
 
   /* ==========================================================================
-     A. MOBILE / TABLET (< 1024px): NATIVE TOUCH CARD DECK & MOMENTUM SCROLL
-     Canvas scrubbing and 120-image loading are completely bypassed.
+     1. PREFERS-REDUCED-MOTION FALLBACK
      ========================================================================== */
-  function initMobilePillars() {
-    if (loader) loader.classList.add('is-hidden');
-    if (canvas) canvas.style.display = 'none';
-
-    const mobileDeck = document.querySelector('.pillars-mobile-deck');
-    const mobileDots = Array.from(document.querySelectorAll('.pillars-mobile-dot'));
-    const mobileCurrNum = document.querySelector('#pillars-mobile-curr-num');
-    const mobileCards = Array.from(document.querySelectorAll('.pillar-mobile-card'));
-
-    if (!mobileDeck || mobileCards.length === 0) return;
-
-    // Active card tracking via scroll snap position
-    let isScrollingDeck = false;
-    const updateActiveMobileCard = () => {
-      const deckScrollLeft = mobileDeck.scrollLeft;
-      const cardWidth = mobileCards[0].offsetWidth + 16; // card width + gap
-      const activeIdx = Math.min(mobileCards.length - 1, Math.max(0, Math.round(deckScrollLeft / cardWidth)));
-
-      mobileDots.forEach((dot, idx) => {
-        dot.classList.toggle('is-active', idx === activeIdx);
-      });
-      if (mobileCurrNum) {
-        mobileCurrNum.textContent = `0${activeIdx + 1}`;
-      }
-    };
-
-    mobileDeck.addEventListener('scroll', () => {
-      if (!isScrollingDeck) {
-        requestAnimationFrame(() => {
-          updateActiveMobileCard();
-          isScrollingDeck = false;
-        });
-        isScrollingDeck = true;
-      }
-    }, { passive: true });
-
-    // Tapping dot smooth-scrolls to the card
-    mobileDots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        const targetCard = mobileCards[idx];
-        if (targetCard) {
-          mobileDeck.scrollTo({
-            left: targetCard.offsetLeft - mobileDeck.offsetLeft,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    updateActiveMobileCard();
-  }
-
-  /* ==========================================================================
-     B. PREFERS-REDUCED-MOTION DESKTOP FALLBACK
-     ========================================================================== */
-  if (prefersReducedMotion && !isMobileViewport()) {
+  if (prefersReducedMotion) {
     if (loader) loader.classList.add('is-hidden');
     if (staticPoster) {
       staticPoster.src = '/frames/poster.webp';
@@ -129,22 +72,14 @@ export function initPillarsCanvas() {
     return;
   }
 
-  // If on mobile / tablet, activate native touch experience immediately
-  if (isMobileViewport()) {
-    initMobilePillars();
-    return;
-  }
-
   /* ==========================================================================
-     C. DESKTOP (>= 1024px): 120-FRAME CANVAS SCRUB & GSAP PIN ENGINE
+     2. FAST PROGRESSIVE FRAME PRELOADER (120 Transparent WebP frames)
+        Works on BOTH desktop and mobile — same animation, mobile-resized
      ========================================================================== */
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
   const TOTAL_FRAMES = 120;
   const loadedImages = new Array(TOTAL_FRAMES);
   let loadedCount = 0;
   let isReady = false;
-  let stInstance = null;
 
   function dismissLoader() {
     if (isReady) return;
@@ -167,7 +102,7 @@ export function initPillarsCanvas() {
   // Hard safety timeout: never block longer than 400ms regardless of network
   setTimeout(() => dismissLoader(), 400);
 
-  // Background fetch remaining frames only on desktop
+  // Background fetch remaining frames
   for (let i = 1; i < TOTAL_FRAMES; i++) {
     const img = new Image();
     const padIndex = String(i).padStart(3, '0');
@@ -186,12 +121,19 @@ export function initPillarsCanvas() {
     };
   }
 
+  /* ==========================================================================
+     3. FULL-WIDTH CANVAS RENDERING & LEFT-TO-RIGHT STAGE TRAVEL
+        Mobile: dancer is centered, scaled to ~70% of viewport height
+        Desktop: dancer travels left (0.24) to right (0.80) across the stage
+     ========================================================================== */
   let currentFrameIndex = 0;
+  let lastDrawnIndex = -1;
   let lastDrawnProgress = -1;
 
   function renderFrame(index, progress = 0) {
-    if (!canvas || !ctx) return;
+    if (!canvas) return;
 
+    // Find requested frame or nearest loaded frame for zero-lag rendering
     let img = loadedImages[index];
     if (!img) {
       for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
@@ -211,23 +153,37 @@ export function initPillarsCanvas() {
     const canvasHeight = canvas.height;
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    // Desktop scale & positioning
-    const targetScale = (canvasHeight * 0.82) / 720;
+    const isMobile = window.innerWidth < 768;
+
+    // Scale dancer to occupy ~70% of viewport height on mobile, ~82% on desktop
+    const heightFraction = isMobile ? 0.72 : 0.82;
+    const targetScale = (canvasHeight * heightFraction) / 720;
     const drawW = 1280 * targetScale;
     const drawH = 720 * targetScale;
-    const baselineY = canvasHeight * 0.86;
+
+    // Baseline: foot contact point in original frame is at y=633
+    // Place baseline at 88% of viewport height on mobile, 86% on desktop
+    const baselineFraction = isMobile ? 0.88 : 0.86;
+    const baselineY = canvasHeight * baselineFraction;
     const drawY = baselineY - (633 * targetScale);
 
-    const screenTargetX = canvasWidth * (0.24 + (progress * 0.58));
+    // Horizontal travel:
+    // Desktop: travels from 0.24 (left, behind text) to 0.80 (right side)
+    // Mobile:  travels from 0.15 to 0.85 — full width for full dramatic effect
+    const startXFraction = isMobile ? 0.15 : 0.24;
+    const travelSpan = isMobile ? 0.70 : 0.58;
+    const screenTargetX = canvasWidth * (startXFraction + (progress * travelSpan));
+
+    // Align dancer's specific center-of-mass with screenTargetX
     const dancerCenterX = DANCER_CENTERS[index] || 540;
     const drawX = screenTargetX - (dancerCenterX * targetScale);
 
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    lastDrawnIndex = index;
     lastDrawnProgress = progress;
   }
 
   function resizeCanvas() {
-    if (!canvas) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = canvas.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
@@ -236,29 +192,15 @@ export function initPillarsCanvas() {
     renderFrame(currentFrameIndex, currentProgress);
   }
 
-  let lastWidth = window.innerWidth;
-  window.addEventListener('resize', () => {
-    // Only refresh if horizontal viewport width actually shifted (orientation or desktop resize)
-    if (Math.abs(window.innerWidth - lastWidth) > 30) {
-      lastWidth = window.innerWidth;
-      if (isMobileViewport()) {
-        if (stInstance) {
-          stInstance.kill();
-          stInstance = null;
-        }
-        initMobilePillars();
-      } else {
-        ScrollTrigger.refresh();
-        resizeCanvas();
-      }
-    }
-  }, { passive: true });
+  window.addEventListener('resize', resizeCanvas, { passive: true });
 
+  /* ==========================================================================
+     4. REQUEST-ANIMATION-FRAME SCROLL SCRUB & CROSSFADE LOGIC
+     ========================================================================== */
   let targetProgress = 0;
   let currentProgress = 0;
   let activePillarIndex = 0;
   let rafId = null;
-  let isSectionVisible = false;
 
   function updatePillarsUI(progress) {
     const sliceIndex = Math.min(3, Math.max(0, Math.floor(progress * 4)));
@@ -295,6 +237,8 @@ export function initPillarsCanvas() {
 
     updatePillarsUI(currentProgress);
 
+    // Keep running if progress hasn't fully settled OR section is visible
+    // This ensures reverse-scroll animation plays back correctly
     const hasPendingWork = Math.abs(targetProgress - currentProgress) > 0.0004;
     if (!document.hidden && (hasPendingWork || isSectionVisible)) {
       rafId = requestAnimationFrame(loop);
@@ -303,12 +247,17 @@ export function initPillarsCanvas() {
     }
   }
 
+  let isSectionVisible = false;
+
   function resumeLoopIfNeeded() {
+    // Standard resume: requires visible + ready
     if (isReady && isSectionVisible && !document.hidden && !rafId) {
       rafId = requestAnimationFrame(loop);
     }
   }
 
+  // Called directly from ScrollTrigger onUpdate — bypasses visibility check
+  // so reverse-scroll always triggers the animation loop
   function forceResumeLoop() {
     if (isReady && !document.hidden && !rafId) {
       rafId = requestAnimationFrame(loop);
@@ -322,9 +271,12 @@ export function initPillarsCanvas() {
     }
   }
 
+  /* ==========================================================================
+     5. GSAP SCROLLTRIGGER — PIN STICKY VIEWPORT & SCRUB ANIMATION
+        Same on desktop and mobile. Mobile uses 200dvh scroll budget.
+     ========================================================================== */
   function setupScrollScrub() {
     const viewport = section.querySelector('.pillars-sticky-viewport');
-    if (!viewport) return;
 
     function setActiveTabPillar(index) {
       panels.forEach((p, i) => { p.classList.toggle('is-active', i === index); });
@@ -340,7 +292,7 @@ export function initPillarsCanvas() {
       tab.addEventListener('click', () => setActiveTabPillar(i));
     });
 
-    stInstance = ScrollTrigger.create({
+    let st = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: 'bottom bottom',
@@ -351,16 +303,19 @@ export function initPillarsCanvas() {
       invalidateOnRefresh: true,
       onUpdate(self) {
         targetProgress = self.progress;
+        // forceResumeLoop bypasses the isSectionVisible gate so
+        // reverse-scroll (scrolling back up) always re-triggers the animation
         forceResumeLoop();
       }
     });
 
+    // Segment dots: click to jump to that pillar
     segmentDots.forEach((dot, idx) => {
       dot.addEventListener('click', (e) => {
         e.preventDefault();
-        if (stInstance && isFinite(stInstance.start) && isFinite(stInstance.end)) {
+        if (st && isFinite(st.start) && isFinite(st.end)) {
           const targetP = (idx + 0.12) / 4;
-          const targetScroll = stInstance.start + targetP * (stInstance.end - stInstance.start);
+          const targetScroll = st.start + targetP * (st.end - st.start);
           if (isFinite(targetScroll)) {
             window.scrollTo({ top: targetScroll, behavior: 'smooth' });
           }
@@ -370,6 +325,17 @@ export function initPillarsCanvas() {
       });
     });
 
+    let lastW = window.innerWidth;
+    window.addEventListener('resize', () => {
+      // Only refresh ScrollTrigger if the window width actually changed (ignore vertical address bar changes)
+      if (Math.abs(window.innerWidth - lastW) > 30) {
+        lastW = window.innerWidth;
+        ScrollTrigger.refresh();
+      }
+      resizeCanvas();
+    }, { passive: true });
+
+    // Pause RAF when section is offscreen to save battery
     const visibilityObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         isSectionVisible = entry.isIntersecting;
@@ -385,6 +351,7 @@ export function initPillarsCanvas() {
       else resumeLoopIfNeeded();
     });
 
+    // Initialize first frame & UI state
     updatePillarsUI(0);
     renderFrame(0, 0);
   }
