@@ -49,7 +49,7 @@
     <!-- Ambient Stage Cursor Glow -->
     <div class="cursor-ambient-glow" id="cursor-glow"></div>
 
-    <!-- Storytelling Narrative Rail (Chapters 01 - 08) -->
+    <!-- Storytelling Narrative Rail (Chapters 01 - 10) -->
     <aside class="story-nav-rail" id="story-rail" aria-label="Story Progress">
       <a href="#overture" class="story-pip active" data-target="overture" title="Chapter 01: The Overture">
         <span class="story-pip-dot"></span>
@@ -67,21 +67,29 @@
         <span class="story-pip-dot"></span>
         <span class="story-pip-label">04 // Disciplines</span>
       </a>
-      <a href="#coaches" class="story-pip" data-target="coaches" title="Chapter 05: Faculty Mentors">
+      <a href="#pillars" class="story-pip" data-target="pillars" title="Chapter 05: Brand Pillars">
         <span class="story-pip-dot"></span>
-        <span class="story-pip-label">05 // Master Faculty</span>
+        <span class="story-pip-label">05 // Brand Pillars</span>
       </a>
-      <a href="#honors" class="story-pip" data-target="honors" title="Chapter 06: Accolades">
+      <a href="#coaches" class="story-pip" data-target="coaches" title="Chapter 06: Faculty Mentors">
         <span class="story-pip-dot"></span>
-        <span class="story-pip-label">06 // Accolades</span>
+        <span class="story-pip-label">06 // Master Faculty</span>
       </a>
-      <a href="#stage" class="story-pip" data-target="stage" title="Chapter 07: Live Theatre Stage">
+      <a href="#honors" class="story-pip" data-target="honors" title="Chapter 07: Accolades">
         <span class="story-pip-dot"></span>
-        <span class="story-pip-label">07 // Visceral Stage</span>
+        <span class="story-pip-label">07 // Accolades</span>
       </a>
-      <a href="#contact" class="story-pip" data-target="contact" title="Chapter 08: Book A Demo Class">
+      <a href="#stage" class="story-pip" data-target="stage" title="Chapter 08: Live Theatre Stage">
         <span class="story-pip-dot"></span>
-        <span class="story-pip-label">08 // Book Demo</span>
+        <span class="story-pip-label">08 // Visceral Stage</span>
+      </a>
+      <a href="#social-reels" class="story-pip" data-target="social-reels" title="Chapter 09: Social Proof">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">09 // Social Reels</span>
+      </a>
+      <a href="#contact" class="story-pip" data-target="contact" title="Chapter 10: Book A Demo Class">
+        <span class="story-pip-dot"></span>
+        <span class="story-pip-label">10 // Book Demo</span>
       </a>
     </aside>
 
@@ -130,10 +138,9 @@
            SECTION 01: THE OVERTURE HERO (Full-Bleed Cinema Stage & Floating Glass HUD)
            ========================================================================== -->
       <section class="hero-editorial" id="overture">
-        <!-- Cinematic Background Video Stage -->
+        <!-- Cinematic Background Video Stage (Dynamically injected single source) -->
         <div class="hero-bg-video-wrapper">
-          <video class="hero-bg-video hero-bg-video--desktop" id="hero-bg-video" src="/C31E030D-1DA6-4553-912B-81A00E13D073 (1).mp4" poster="/cta_bg.webp" autoplay loop muted playsinline webkit-playsinline preload="metadata" style="object-fit: cover; object-position: center center; width: 100%; height: 100%;"></video>
-          <video class="hero-bg-video hero-bg-video--mobile" id="hero-bg-video-mobile" src="/nr%20mobile.mp4" poster="/cta_bg.webp" autoplay loop muted playsinline webkit-playsinline preload="metadata" style="object-fit: cover; object-position: center center; width: 100%; height: 100%;"></video>
+          <video class="hero-bg-video" id="hero-bg-video" poster="/cta_bg.webp" autoplay loop muted playsinline webkit-playsinline preload="metadata" style="object-fit: cover; object-position: center center; width: 100%; height: 100%;"></video>
           <div class="hero-video-scrim"></div>
         </div>
 
@@ -147,21 +154,94 @@
             The Performerz Academy is an internationally acclaimed sanctuary for dancers, choreographers, and visionaries. Refined classical discipline meets raw, unapologetic creative expression.
           </p>
           <div class="hero-btn-row">
-            <a href="#disciplines" class="btn btn-amber">Explore Disciplines</a>
-            <a href="#coaches" class="btn btn-outline">Meet Faculty</a>
+            <a href="#contact" class="btn btn-primary btn-claim-pass hero-btn-main">
+              <span>Book A Demo Class</span>
+              <span class="btn-arrow">✦</span>
+            </a>
+            <a href="#disciplines" class="btn btn-outline hero-btn-sub">
+              <span>Explore Disciplines</span>
+              <span class="btn-arrow">&darr;</span>
+            </a>
           </div>
         </div>
-
-
       </section>
 
       <!-- ==========================================================================
-           SECTION 04: "TRY DIFFERENT DANCE STYLES" (Step Up Dance Club Reference)
+           SECTION 02: OPPOSING DUAL KINETIC MARQUEE (Awwwards Grade Motion)
+           ========================================================================== -->
+      <section class="kinetic-marquee-section" id="marquee">
+        <!-- Top Track: Glides Left -->
+        <div class="marquee-track-outer">
+          <div class="marquee-track-inner track-slide-left">
+            <span class="marquee-item">PASSION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">FLUIDITY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">PRECISION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">ARTISTRY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">DISCIPLINE</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">ELEVATION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">RHYTHM</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">PASSION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">FLUIDITY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">PRECISION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">ARTISTRY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">DISCIPLINE</span><span class="marquee-star">&#10022;</span>
+          </div>
+        </div>
+
+        <!-- Bottom Track: Glides Right -->
+        <div class="marquee-track-outer" style="margin-top: 10px;">
+          <div class="marquee-track-inner track-slide-right">
+            <span class="marquee-item solid-amber">CONTEMPORARY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">AERIAL SILK</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">GYMNASTICS</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">STAGE MOTION</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">STAGECRAFT</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">BROADWAY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">ACROBATICS</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-amber">CONTEMPORARY</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">AERIAL SILK</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item solid-gold">GYMNASTICS</span><span class="marquee-star">&#10022;</span>
+            <span class="marquee-item">BALLET EXCELLENCE</span><span class="marquee-star">&#10022;</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 03: "THE MOVEMENT LINE" (About Philosophy & Vision)
+           ========================================================================== -->
+      <section class="movement-line-section" id="about">
+        <!-- SECTION A: COMPACT HERO WITH SYNCHRONIZED WE ARE / WE DO -->
+        <div class="movement-hero-compact">
+          <div class="movement-hero-bg" aria-hidden="true"></div>
+
+          <!-- Eyebrow Tag -->
+          <div class="movement-hero-meta reveal">
+            <span class="movement-hero-eyebrow">[ 03 // ABOUT US &bull; PHILOSOPHY &amp; CORE PILLARS ]</span>
+            <span class="movement-hero-sub">ARCHITECTURAL INTENTION &bull; FLUID EXPRESSION</span>
+          </div>
+
+          <!-- Kinetic Bar: Synced WE ARE / WE DO on shared progress -->
+          <div class="movement-hero-kinetic-bar">
+            <span class="movement-word word-left" id="word-we-are">WE ARE</span>
+            
+            <div class="movement-hero-line-track">
+              <svg class="movement-hero-svg-line" viewBox="0 0 600 12" preserveAspectRatio="none">
+                <line class="movement-hero-line-path" id="hero-line-path" x1="0" y1="6" x2="600" y2="6" />
+              </svg>
+            </div>
+
+            <span class="movement-word word-right" id="word-we-do">WE DO</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 04: "TRY DIFFERENT DANCE STYLES" (Syllabus & Disciplines)
            ========================================================================== -->
       <section class="disciplines-section section-divider" id="disciplines">
         <div class="container disciplines-header reveal">
           <div>
-            <span class="meta-bracket">03 // SYLLABUS &bull; DISCIPLINES</span>
+            <span class="meta-bracket">04 // SYLLABUS &bull; DISCIPLINES</span>
             <h2 class="section-title">
               Try <span class="serif-italic">Different</span> Dance Styles
             </h2>
@@ -229,77 +309,6 @@
           </div>
         </div>
       </section>
-
-      <!-- ==========================================================================
-           SECTION 02: OPPOSING DUAL KINETIC MARQUEE (Awwwards Grade Motion)
-           ========================================================================== -->
-      <section class="kinetic-marquee-section" id="marquee">
-        <!-- Top Track: Glides Left -->
-        <div class="marquee-track-outer">
-          <div class="marquee-track-inner track-slide-left">
-            <span class="marquee-item">PASSION</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-gold">FLUIDITY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">PRECISION</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-amber">ARTISTRY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">DISCIPLINE</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-gold">ELEVATION</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">RHYTHM</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">PASSION</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-gold">FLUIDITY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">PRECISION</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-amber">ARTISTRY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">DISCIPLINE</span><span class="marquee-star">&#10022;</span>
-          </div>
-        </div>
-
-        <!-- Bottom Track: Glides Right -->
-        <div class="marquee-track-outer" style="margin-top: 10px;">
-          <div class="marquee-track-inner track-slide-right">
-            <span class="marquee-item solid-amber">CONTEMPORARY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">AERIAL SILK</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-gold">GYMNASTICS</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">STAGE MOTION</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-amber">STAGECRAFT</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">BROADWAY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">ACROBATICS</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-amber">CONTEMPORARY</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">AERIAL SILK</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item solid-gold">GYMNASTICS</span><span class="marquee-star">&#10022;</span>
-            <span class="marquee-item">BALLET EXCELLENCE</span><span class="marquee-star">&#10022;</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================================================
-           SECTION 03: "THE MOVEMENT LINE" — v2 (Fixed Timing + Compact Scroll)
-           Total scroll budget: ~220vh desktop / ~280vh mobile
-           ========================================================================== -->
-      <section class="movement-line-section" id="about">
-        
-        <!-- SECTION A: COMPACT HERO (60-70vh) WITH SYNCHRONIZED WE ARE / WE DO -->
-        <div class="movement-hero-compact">
-          <!-- Subtle duotone background (~14% opacity) -->
-          <div class="movement-hero-bg" aria-hidden="true"></div>
-
-          <!-- Eyebrow Tag -->
-          <div class="movement-hero-meta reveal">
-            <span class="movement-hero-eyebrow">[ 03 // ABOUT US &bull; PHILOSOPHY &amp; CORE PILLARS ]</span>
-            <span class="movement-hero-sub">ARCHITECTURAL INTENTION &bull; FLUID EXPRESSION</span>
-          </div>
-
-          <!-- Kinetic Bar: Synced WE ARE / WE DO on shared progress -->
-          <div class="movement-hero-kinetic-bar">
-            <span class="movement-word word-left" id="word-we-are">WE ARE</span>
-            
-            <div class="movement-hero-line-track">
-              <svg class="movement-hero-svg-line" viewBox="0 0 600 12" preserveAspectRatio="none">
-                <line class="movement-hero-line-path" id="hero-line-path" x1="0" y1="6" x2="600" y2="6" />
-              </svg>
-            </div>
-
-            <span class="movement-word word-right" id="word-we-do">WE DO</span>
-          </div>
-        </div>
 
       
 
@@ -443,103 +452,110 @@
           </div>
 
         </div>
-      </section>
 
-      <!-- ==========================================================================
-           SECTION 3.5: 3D COVERFLOW SWIPER REEL CAROUSEL (TOP 8 INSTAGRAM REELS)
-           ========================================================================== -->
-      <section class="social-reels-section" id="social-reels">
-        <div class="container">
-          <div class="social-reels-header reveal">
-            <span class="meta-bracket">03.5 // INSTAGRAM REELS &bull; @PERFORMERZACADEMY</span>
-            <h2 class="social-reels-headline">
-              Selected and popular<br>
-              posts on the social <span class="serif-italic">right now</span>
-            </h2>
-          </div>
-
-          <!-- Swiper 3D Coverflow Container for Top 8 Reels -->
-          <div class="swiper swiper-top-reels reveal">
-            <div class="swiper-wrapper">
-              <!-- Reel 1 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DVq-9vGjV8z/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_1.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 2 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/Dc4CFX2NJ5m/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_2.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 3 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/Dcyx_RUtKbh/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_3.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 4 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcrF0VUNf40/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_4.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 5 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcivIHONvGp/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_5.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 6 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcZFihyxZWi/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_6.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 7 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DVq-9vGjV8z/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_3.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 8 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/Dc4CFX2NJ5m/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_4.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 9 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/Dcyx_RUtKbh/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_5.mp4" muted loop playsinline preload="none"></video>
-                </div>
-              </div>
-
-              <!-- Reel 10 — @performerzacademy -->
-              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcivIHONvGp/" role="button" tabindex="0" aria-label="Watch Reel on Instagram">
-                <div class="reel-pure-card">
-                  <video src="/ig_reel_2.mp4" muted loop playsinline preload="none"></video>
-                </div>
+        <!-- Mobile/Tablet Native Touch Card Deck (< 1024px) -->
+        <div class="pillars-mobile-stage" aria-label="Our Four Pillars of Motion">
+          <header class="pillars-mobile-header">
+            <span class="pillars-mobile-eyebrow">[ OUR FOUR PILLARS OF MOTION &bull; KINETIC ATELIER ]</span>
+            <h2 class="pillars-mobile-title">The Four Architectural Pillars</h2>
+            <p class="pillars-mobile-subtitle">
+              Swipe through our core movement philosophies uniting gymnastic structural alignment with contemporary fluid expression.
+            </p>
+            <div class="pillars-mobile-counter-row">
+              <span class="pillars-mobile-counter">PILLAR <strong id="pillars-mobile-curr-num">01</strong> / 04</span>
+              <div class="pillars-mobile-dots" role="tablist" aria-label="Pillar Navigation Dots">
+                <button class="pillars-mobile-dot is-active" aria-label="Go to Pillar 01"></button>
+                <button class="pillars-mobile-dot" aria-label="Go to Pillar 02"></button>
+                <button class="pillars-mobile-dot" aria-label="Go to Pillar 03"></button>
+                <button class="pillars-mobile-dot" aria-label="Go to Pillar 04"></button>
               </div>
             </div>
-          </div>
+          </header>
 
-          <!-- Navigation Controls -->
-          <div class="carousel-nav-bar reveal">
-            <button class="carousel-btn reels-swiper-prev" aria-label="Previous Reel">&larr;</button>
-            <a href="https://www.instagram.com/performerzacademy/?hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-amber">
-              Follow @performerzacademy On Instagram &rarr;
-            </a>
-            <button class="carousel-btn reels-swiper-next" aria-label="Next Reel">&rarr;</button>
+          <div class="pillars-mobile-deck">
+            <!-- Card 1: Boundless Form -->
+            <article class="pillar-mobile-card">
+              <div>
+                <div class="pillar-mobile-card-header">
+                  <span class="pillar-mobile-badge">01 // BRAND PILLAR</span>
+                  <span class="pillar-mobile-tone">Architectural, sleek</span>
+                </div>
+                <h3 class="pillar-mobile-card-title">Boundless Form</h3>
+                <p class="pillar-mobile-card-body">
+                  We strip movement down to its purest elements: intention and release. Uniting the structural alignment of gymnastics with the fluid architecture of contemporary dance. The floor is both your anchor and your canvas.
+                </p>
+              </div>
+              <div class="pillar-mobile-card-footer">
+                <a href="/classes.html" class="pillar-mobile-cta">
+                  <span>Explore Disciplines</span>
+                  <span>&rarr;</span>
+                </a>
+                <span class="pillar-mobile-num-watermark">01</span>
+              </div>
+            </article>
+
+            <!-- Card 2: Fluid Power -->
+            <article class="pillar-mobile-card">
+              <div>
+                <div class="pillar-mobile-card-header">
+                  <span class="pillar-mobile-badge">02 // BRAND PILLAR</span>
+                  <span class="pillar-mobile-tone">Athletic, explosive</span>
+                </div>
+                <h3 class="pillar-mobile-card-title">Fluid Power</h3>
+                <p class="pillar-mobile-card-body">
+                  Power isn't rigid; it flows. Fluid Power captures the collision of dynamic tumbling, deep core control, and seamless choreographic transitions. Channel raw athletic grit into magnetic, effortless movement.
+                </p>
+              </div>
+              <div class="pillar-mobile-card-footer">
+                <a href="/classes.html" class="pillar-mobile-cta">
+                  <span>Explore Disciplines</span>
+                  <span>&rarr;</span>
+                </a>
+                <span class="pillar-mobile-num-watermark">02</span>
+              </div>
+            </article>
+
+            <!-- Card 3: Pure Gravity -->
+            <article class="pillar-mobile-card">
+              <div>
+                <div class="pillar-mobile-card-header">
+                  <span class="pillar-mobile-badge">03 // BRAND PILLAR</span>
+                  <span class="pillar-mobile-tone">Raw, grounded</span>
+                </div>
+                <h3 class="pillar-mobile-card-title">Pure Gravity</h3>
+                <p class="pillar-mobile-card-body">
+                  Every jump must land; every sweep begins on the floor. Pure Gravity honors the physics of human movement &mdash; teaching you how to fall safely, rise decisively, and command the space between the mat and the air.
+                </p>
+              </div>
+              <div class="pillar-mobile-card-footer">
+                <a href="/classes.html" class="pillar-mobile-cta">
+                  <span>Explore Disciplines</span>
+                  <span>&rarr;</span>
+                </a>
+                <span class="pillar-mobile-num-watermark">03</span>
+              </div>
+            </article>
+
+            <!-- Card 4: Disciplined Flow -->
+            <article class="pillar-mobile-card">
+              <div>
+                <div class="pillar-mobile-card-header">
+                  <span class="pillar-mobile-badge">04 // BRAND PILLAR</span>
+                  <span class="pillar-mobile-tone">Precise, expressive</span>
+                </div>
+                <h3 class="pillar-mobile-card-title">Disciplined Flow</h3>
+                <p class="pillar-mobile-card-body">
+                  Artistry without technique is chaos; technique without art is mechanics. Disciplined Flow instills the meticulous drills of gymnastic mechanics so your contemporary expression can move without constraint.
+                </p>
+              </div>
+              <div class="pillar-mobile-card-footer">
+                <a href="/classes.html" class="pillar-mobile-cta">
+                  <span>Explore Disciplines</span>
+                  <span>&rarr;</span>
+                </a>
+                <span class="pillar-mobile-num-watermark">04</span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -777,7 +793,115 @@
       </section>
 
       <!-- ==========================================================================
-           SECTION 09: TESTIMONIALS SLIDER DELUXE
+           SECTION 09: 3D COVERFLOW REELS CAROUSEL (STATIC THUMBNAILS PREVIEWS)
+           Zero video preloading: fetches/streams only on user interaction
+           ========================================================================== -->
+      <section class="social-reels-section" id="social-reels">
+        <div class="container">
+          <div class="social-reels-header reveal">
+            <span class="meta-bracket">09 // INSTAGRAM REELS &bull; @PERFORMERZACADEMY</span>
+            <h2 class="social-reels-headline">
+              Selected and popular<br>
+              posts on the social <span class="serif-italic">right now</span>
+            </h2>
+          </div>
+
+          <!-- Swiper 3D Coverflow Container with Static Image Thumbnails -->
+          <div class="swiper swiper-top-reels reveal">
+            <div class="swiper-wrapper">
+              <!-- Reel 1 -->
+              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DVq-9vGjV8z/" role="button" tabindex="0" aria-label="Watch Reel 01 on Instagram">
+                <div class="reel-pure-card">
+                  <img src="/ig_reel_1_thumb.webp" alt="The Performerz Academy Dance Reel 01" class="reel-poster-img" loading="lazy" decoding="async" />
+                  <div class="reel-play-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="reel-badge-pill">
+                    <span>✦ @performerzacademy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reel 2 -->
+              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/Dc4CFX2NJ5m/" role="button" tabindex="0" aria-label="Watch Reel 02 on Instagram">
+                <div class="reel-pure-card">
+                  <img src="/ig_reel_2_thumb.webp" alt="The Performerz Academy Dance Reel 02" class="reel-poster-img" loading="lazy" decoding="async" />
+                  <div class="reel-play-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="reel-badge-pill">
+                    <span>✦ @performerzacademy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reel 3 -->
+              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/Dcyx_RUtKbh/" role="button" tabindex="0" aria-label="Watch Reel 03 on Instagram">
+                <div class="reel-pure-card">
+                  <img src="/ig_reel_3_thumb.webp" alt="The Performerz Academy Dance Reel 03" class="reel-poster-img" loading="lazy" decoding="async" />
+                  <div class="reel-play-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="reel-badge-pill">
+                    <span>✦ @performerzacademy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reel 4 -->
+              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcrF0VUNf40/" role="button" tabindex="0" aria-label="Watch Reel 04 on Instagram">
+                <div class="reel-pure-card">
+                  <img src="/ig_reel_4_thumb.webp" alt="The Performerz Academy Dance Reel 04" class="reel-poster-img" loading="lazy" decoding="async" />
+                  <div class="reel-play-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="reel-badge-pill">
+                    <span>✦ @performerzacademy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reel 5 -->
+              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcivIHONvGp/" role="button" tabindex="0" aria-label="Watch Reel 05 on Instagram">
+                <div class="reel-pure-card">
+                  <img src="/ig_reel_5_thumb.webp" alt="The Performerz Academy Dance Reel 05" class="reel-poster-img" loading="lazy" decoding="async" />
+                  <div class="reel-play-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="reel-badge-pill">
+                    <span>✦ @performerzacademy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reel 6 -->
+              <div class="swiper-slide reel-coverflow-slide" data-reel-url="https://www.instagram.com/reel/DcZFihyxZWi/" role="button" tabindex="0" aria-label="Watch Reel 06 on Instagram">
+                <div class="reel-pure-card">
+                  <img src="/ig_reel_6_thumb.webp" alt="The Performerz Academy Dance Reel 06" class="reel-poster-img" loading="lazy" decoding="async" />
+                  <div class="reel-play-indicator" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="reel-badge-pill">
+                    <span>✦ @performerzacademy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Controls -->
+          <div class="carousel-nav-bar reveal">
+            <button class="carousel-btn reels-swiper-prev" aria-label="Previous Reel">&larr;</button>
+            <a href="https://www.instagram.com/performerzacademy/?hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-amber">
+              Follow @performerzacademy On Instagram &rarr;
+            </a>
+            <button class="carousel-btn reels-swiper-next" aria-label="Next Reel">&rarr;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 10: TESTIMONIALS SLIDER DELUXE
            ========================================================================== -->
       <section class="testimonials-section-deluxe section-divider" id="testimonials">
         <div class="container reveal">
@@ -992,6 +1116,57 @@
         </div>
       </section>
     </main>
+
+    <!-- Mobile Floating Sticky Lead Bar (< 1024px) -->
+    <aside class="mobile-sticky-lead-bar" id="mobile-sticky-lead" aria-label="Quick Admissions Bar">
+      <div class="mobile-lead-info">
+        <span class="mobile-lead-tag">✦ ADMISSIONS PASS</span>
+        <span class="mobile-lead-desc">Complimentary Demo Trial Class</span>
+      </div>
+      <button type="button" class="mobile-lead-btn" id="mobile-lead-btn">
+        <span>Book Trial Class</span>
+        <span>&rarr;</span>
+      </button>
+    </aside>
+
+    <!-- Focused 3-Field Lead Modal / Bottom Sheet -->
+    <div class="lead-sheet-backdrop" id="lead-sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="lead-sheet-title">
+      <div class="lead-sheet-card">
+        <div class="lead-sheet-header">
+          <div>
+            <span class="lead-sheet-eyebrow">✦ ATELIER ADMISSIONS PASS</span>
+            <h3 class="lead-sheet-title" id="lead-sheet-title">Book Your Trial Class</h3>
+          </div>
+          <button type="button" class="lead-sheet-close" id="lead-sheet-close-btn" aria-label="Close modal">&times;</button>
+        </div>
+        <form class="lead-sheet-form" id="lead-quick-form">
+          <div class="lead-field-group">
+            <label for="quick-lead-name" class="lead-field-label">Your Name / Parent Name *</label>
+            <input type="text" id="quick-lead-name" required placeholder="e.g. Maya Sharma" class="lead-field-input" />
+          </div>
+          <div class="lead-field-group">
+            <label for="quick-lead-phone" class="lead-field-label">WhatsApp / Phone Number *</label>
+            <input type="tel" id="quick-lead-phone" required placeholder="e.g. +91 98765 43210" class="lead-field-input" />
+          </div>
+          <div class="lead-field-group">
+            <label for="quick-lead-discipline" class="lead-field-label">Preferred Dance Style *</label>
+            <select id="quick-lead-discipline" class="lead-field-select" required>
+              <option value="Contemporary Release">Contemporary Dance</option>
+              <option value="Gymnastics & Tumbling">Gymnastics &amp; Tumbling</option>
+              <option value="Aerial Silk & Poise">Aerial Silk &amp; Poise</option>
+              <option value="General Consultation">Open / Custom Program Consultation</option>
+            </select>
+          </div>
+          <button type="submit" class="lead-sheet-submit">
+            <span>Confirm Demo Pass On WhatsApp</span>
+            <span>✦</span>
+          </button>
+          <div class="lead-sheet-alt-link" id="lead-sheet-alt-scroll">
+            Prefer standard form? Scroll to full contact section &darr;
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- Haute-Couture Footer -->
     <footer class="footer-editorial">

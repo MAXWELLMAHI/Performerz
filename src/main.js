@@ -15,41 +15,41 @@ import { initPillarsCanvas } from './pillars-canvas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
-     0. HAUTE PRELOADER CALIBRATION & REVEAL
+     0. HAUTE PRELOADER CALIBRATION & REVEAL (NON-BLOCKING)
      ========================================================================== */
   const preloader = document.getElementById('site-preloader');
   if (preloader) {
     const bar = document.getElementById('preloader-bar');
     const counter = document.getElementById('preloader-counter');
     let progress = 0;
-    
-    const updateProgress = () => {
-      progress += Math.floor(Math.random() * 18) + 12;
-      if (progress > 100) progress = 100;
-      if (bar) bar.style.width = `${progress}%`;
-      if (counter) counter.textContent = `${String(progress).padStart(2, '0')}%`;
-      
-      if (progress < 100) {
-        setTimeout(updateProgress, 50);
-      } else {
-        setTimeout(() => {
-          preloader.classList.add('loaded');
-          setTimeout(() => {
-            try { preloader.remove(); } catch (_) {}
-          }, 850);
-        }, 200);
-      }
-    };
-    
-    updateProgress();
-    
-    window.addEventListener('load', () => {
+    let isDismissed = false;
+
+    const dismissPreloader = () => {
+      if (isDismissed) return;
+      isDismissed = true;
       if (bar) bar.style.width = '100%';
       if (counter) counter.textContent = '100%';
+      preloader.classList.add('loaded');
       setTimeout(() => {
-        preloader?.classList.add('loaded');
-      }, 180);
-    }, { once: true });
+        try { preloader.remove(); } catch (_) {}
+      }, 750);
+    };
+
+    const updateProgress = () => {
+      if (isDismissed) return;
+      progress += Math.floor(Math.random() * 28) + 22;
+      if (progress >= 100) {
+        dismissPreloader();
+      } else {
+        if (bar) bar.style.width = `${progress}%`;
+        if (counter) counter.textContent = `${String(progress).padStart(2, '0')}%`;
+        setTimeout(updateProgress, 35);
+      }
+    };
+
+    updateProgress();
+    // Non-blocking hard guarantee: preloader never blocks beyond 400ms
+    setTimeout(dismissPreloader, 400);
   }
 
   /* ==========================================================================
@@ -131,128 +131,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ==========================================================================
      3. 3D COVERFLOW SWIPER REEL CAROUSEL (TOP 10 INSTAGRAM REELS)
-        • Optimized on-demand buffering: active + adjacent slides preload
-        • Light initial page render without freezing network thread
+        • Static thumbnail previews for zero network bloat on initial page load
+        • Click to open direct verified Instagram Reel
      ========================================================================== */
   const swiperElement = document.querySelector('.swiper-top-reels');
   if (swiperElement) {
-
-    const getAllReelVideos = () => Array.from(swiperElement.querySelectorAll('video'));
-
-    const pauseAllReels = () => {
-      getAllReelVideos().forEach(v => { if (!v.paused) v.pause(); });
-    };
-
-    const playActiveReel = () => {
-      const activeSlide = swiperElement.querySelector('.swiper-slide-active');
-      if (!activeSlide) return;
-      const video = activeSlide.querySelector('video');
-      if (!video) return;
-      video.preload = 'auto';
-      const p = video.play();
-      if (p !== undefined) {
-        p.catch(() => {
-          // Unlock on first user gesture (browser autoplay policy)
-          const unlock = () => {
-            video.play().catch(() => {});
-            document.removeEventListener('click', unlock);
-            document.removeEventListener('touchstart', unlock);
-            document.removeEventListener('scroll', unlock);
-          };
-          document.addEventListener('click', unlock, { once: true, passive: true });
-          document.addEventListener('touchstart', unlock, { once: true, passive: true });
-          document.addEventListener('scroll', unlock, { once: true, passive: true });
-        });
-      }
-
-      // Preload adjacent slides on demand for seamless swipe
-      const nextSlide = swiperElement.querySelector('.swiper-slide-next');
-      const prevSlide = swiperElement.querySelector('.swiper-slide-prev');
-      const nextVideo = nextSlide?.querySelector('video');
-      const prevVideo = prevSlide?.querySelector('video');
-      if (nextVideo && nextVideo.preload !== 'auto') { nextVideo.preload = 'auto'; }
-      if (prevVideo && prevVideo.preload !== 'auto') { prevVideo.preload = 'auto'; }
-    };
-
-    const updateReelPlayback = () => {
-      pauseAllReels();
-      playActiveReel();
-    };
-
-    // ── Init Swiper ────────────────────────────────────────────────────────
     const swiper = new Swiper('.swiper-top-reels', {
       modules: [EffectCoverflow, Navigation],
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides: true,
       slidesPerView: 'auto',
-      initialSlide: 4,
+      initialSlide: 3,
       loop: true,
-      speed: 550,
+      speed: 450,
       coverflowEffect: {
         rotate: 12,
         stretch: 0,
-        depth: 120,
+        depth: 100,
         modifier: 1,
-        scale: 0.9,
+        scale: 0.92,
         slideShadows: false,
       },
       navigation: {
         nextEl: '.reels-swiper-next',
         prevEl: '.reels-swiper-prev',
       },
-      on: {
-        init() {
-          requestAnimationFrame(() => setTimeout(updateReelPlayback, 80));
-        },
-      },
     });
-
-    swiper.on('slideChange', updateReelPlayback);
-    swiper.on('touchEnd', updateReelPlayback);
-    swiper.on('transitionEnd', updateReelPlayback);
-
-    window.addEventListener('load', updateReelPlayback, { once: true });
   }
 
-  // Smooth scroll to contact for demo/trial buttons
-  document.querySelectorAll('.btn-try-pill, .btn-claim-pass').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const target = document.getElementById('contact');
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-        const nameInput = document.getElementById('demo-name') || document.querySelector('.subscribe-input');
-        if (nameInput) {
-          setTimeout(() => nameInput.focus(), 350);
-        }
+  /* ==========================================================================
+     4. UNIVERSAL SMOOTH ANCHOR LINK NAVIGATION (Zero Hash Jitter / Reset)
+     ========================================================================== */
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (!anchor) return;
+    const hash = anchor.getAttribute('href');
+    if (!hash || hash === '#' || hash.length < 2) return;
+    const target = document.querySelector(hash);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (history.pushState) {
+        history.pushState(null, '', hash);
       }
-    });
+    }
   });
 
   /* ==========================================================================
-     STORYTELLING PARALLAX SCROLL ENGINE & NARRATIVE PROGRESS TRACKER
+     5. HERO BACKGROUND VIDEO CONDITIONAL RENDERING (Single Source Loading)
      ========================================================================== */
   const heroVideo = document.getElementById('hero-bg-video');
-  const heroVideoMobile = document.getElementById('hero-bg-video-mobile');
-  [heroVideo, heroVideoMobile].forEach(v => {
-    if (v) v.play().catch(() => {});
-  });
+  if (heroVideo) {
+    const isDesktop = window.innerWidth >= 1024;
+    const targetSrc = isDesktop ? '/hero_desktop_opt.mp4' : '/hero_mobile_opt.mp4';
+    if (!heroVideo.src || !heroVideo.src.endsWith(targetSrc)) {
+      heroVideo.src = targetSrc;
+    }
+    heroVideo.play().catch(() => {});
+  }
+
+  /* ==========================================================================
+     6. STORYTELLING CHAPTER RAIL (NARRATIVE FLOW)
+     ========================================================================== */
   const storyPips = document.querySelectorAll('.story-pip');
   const storySections = [
     'overture',
     'marquee',
     'about',
-    'pillars',
-    'social-reels',
     'disciplines',
+    'pillars',
     'coaches',
     'honors',
     'stage',
+    'social-reels',
+    'testimonials',
     'contact'
   ].map(id => document.getElementById(id)).filter(Boolean);
 
-  // Smooth click scroll on story pips
   storyPips.forEach(pip => {
     pip.addEventListener('click', (e) => {
       const targetId = pip.getAttribute('data-target');
@@ -507,6 +463,61 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
+  });
+
+  /* ==========================================================================
+     11.5 FOCUSED 3-FIELD MOBILE LEAD BOTTOM SHEET & WHATSAPP DIRECT ACTION
+     ========================================================================== */
+  const leadBackdrop = document.getElementById('lead-sheet-backdrop');
+  const leadCloseBtn = document.getElementById('lead-sheet-close-btn');
+  const leadQuickForm = document.getElementById('lead-quick-form');
+  const mobileLeadBtn = document.getElementById('mobile-lead-btn');
+  const leadAltScroll = document.getElementById('lead-sheet-alt-scroll');
+
+  const openLeadSheet = () => {
+    if (!leadBackdrop) return;
+    leadBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLeadSheet = () => {
+    if (!leadBackdrop) return;
+    leadBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  mobileLeadBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openLeadSheet();
+  });
+
+  leadCloseBtn?.addEventListener('click', closeLeadSheet);
+  leadBackdrop?.addEventListener('click', (e) => {
+    if (e.target === leadBackdrop) closeLeadSheet();
+  });
+
+  leadAltScroll?.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeLeadSheet();
+    const contactSec = document.getElementById('contact');
+    if (contactSec) {
+      contactSec.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  leadQuickForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = sanitizeText(document.getElementById('quick-lead-name')?.value || '', 80);
+    const phone = sanitizeText(document.getElementById('quick-lead-phone')?.value || '', 40);
+    const discipline = sanitizeText(document.getElementById('quick-lead-discipline')?.value || '', 60);
+
+    if (!name || !phone) return;
+
+    const formattedMessage = `Hello The Performerz Academy!\nI would like to book a trial class via mobile pass.\n\n✦ Name: ${name}\n✦ WhatsApp: ${phone}\n✦ Preferred Discipline: ${discipline}`;
+    const whatsappUrl = `https://wa.me/918169729704?text=${encodeURIComponent(formattedMessage)}`;
+
+    closeLeadSheet();
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   });
 
   const form = document.getElementById('newsletter-form');
